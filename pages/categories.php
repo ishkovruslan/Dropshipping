@@ -5,8 +5,6 @@ require_once('../php/mysql.php'); // Підключення до бази дан
 require_once('../php/output.php'); // Модуль виведення категорій, списку товарів, товарів
 ?>
 
-<div class="main-block"> <!-- Сторінка з категоріями -->
-    <?php $categories->displayCategories(); ?>
-</div>
+<?php $categories->displayCategories(); ?>
 
 <?php require_once('../php/footer.php'); ?>

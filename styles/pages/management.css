@@ -18,7 +18,7 @@ select {
     text-align: center;
 }
 
-.main-block img {
+main img {
     max-width: 100%;
     aspect-ratio: 16/9;
 }
