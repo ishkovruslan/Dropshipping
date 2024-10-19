@@ -1,0 +1,15 @@
+.main-block {
+    margin-top: 50px;
+}
+
+@media (min-width: 1500px) {
+    .main-block {
+        margin-top: 75px;
+    }
+}
+
+@media (min-width: 2000px) {
+    .main-block {
+        margin-top: 100px;
+    }
+}
