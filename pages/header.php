@@ -35,9 +35,6 @@ require_once('../php/access.php'); /* Перевірка рівня доступ
         <p class="line">
             <a href="../index.php">Головна</a>
         </p>
-        <p class="line">
-            <a href="categories.php">Категорії</a>
-        </p>
         <?php
         /* Перевірка авторизації користувача */
         if (isset($_SESSION['loggedin']) === true) {
@@ -50,16 +47,19 @@ require_once('../php/access.php'); /* Перевірка рівня доступ
                 <p class="line">
                     <a href="newcategory.php">Створити категорію</a>
                 </p>
-            <?php } ?>
-            <?php
-            /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування та створення товарів */
-            if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
-                ?>
                 <p class="line">
                     <a href="management.php">Сторінка керування</a>
                 </p>
                 <p class="line">
                     <a href="newproduct.php">Створити товар</a>
+                </p>
+            <?php } ?>
+            <?php
+            /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
+            if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
+                ?>
+                <p class="line">
+                    <a href="account.php">Керування обліковим записом</a>
                 </p>
             <?php } ?>
             <p class="line"> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
@@ -90,23 +90,23 @@ require_once('../php/access.php'); /* Перевірка рівня доступ
 </body>
 
 <script>
-        // Функція для оновлення URL з параметрами запиту та новою темою
-        function updateUrlWithTheme(newTheme) {
-            var urlParams = new URLSearchParams(window.location.search);
-            // Видаляємо всі параметри теми з URL
-            urlParams.delete('theme');
-            // Додаємо новий параметр теми
-            urlParams.set('theme', newTheme);
-            // Оновлюємо адресу сторінки з новим параметром теми та параметрами запиту
-            window.location.search = urlParams.toString();
-        }
-        // Обробник подій для кнопки зміни теми
-        var themeButton = document.getElementById('themeButton');
-        themeButton.addEventListener('click', function () {
-            var currentTheme = "<?php echo $theme; ?>";
-            var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            updateUrlWithTheme(newTheme);
-        });
-    </script>
+    // Функція для оновлення URL з параметрами запиту та новою темою
+    function updateUrlWithTheme(newTheme) {
+        var urlParams = new URLSearchParams(window.location.search);
+        // Видаляємо всі параметри теми з URL
+        urlParams.delete('theme');
+        // Додаємо новий параметр теми
+        urlParams.set('theme', newTheme);
+        // Оновлюємо адресу сторінки з новим параметром теми та параметрами запиту
+        window.location.search = urlParams.toString();
+    }
+    // Обробник подій для кнопки зміни теми
+    var themeButton = document.getElementById('themeButton');
+    themeButton.addEventListener('click', function () {
+        var currentTheme = "<?php echo $theme; ?>";
+        var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        updateUrlWithTheme(newTheme);
+    });
+</script>
 
 <main>

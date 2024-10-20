@@ -1,5 +1,5 @@
 <?php /* Модуль безпеки */
-require_once ('mysql.php'); // Підключення до бази
+require_once('mysql.php'); // Підключення до бази
 
 $roles = [/* Цифрове значення ролей */
     'user' => 0,
@@ -94,16 +94,91 @@ class Authentication
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $data = [$login, $hashedPassword];
             $this->db->write('users', ['login', 'password'], $data, 'ss');
-            $dataUserList = [$login, 'user'];
-            $this->db->write('userlist', ['login', 'role'], $dataUserList, 'ss');
+            $microtime = microtime(true);
+            $timeInNanoseconds = (int) ($microtime * 1e9);
+            $dataUserList = [$login, 'user', $timeInNanoseconds, 0];
+            $this->db->write('userlist', ['login', 'role', 'registration_time', 'unique_key'], $dataUserList, 'ssii');
             $this->authenticate($login, $password);
             return array('success' => true);
         }
     }
 }
 
+class RemoteAccess
+{
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    // Функція генерації 64-бітного числа
+    public function generateUniqueKey()
+    {
+        return random_int(0, PHP_INT_MAX);
+    }
+
+    // Записуємо або оновлюємо унікальний ключ користувача у базі
+    public function setUniqueKey($login, $key)
+    {
+        $conditions = ['login' => $login];
+        $data = ['unique_key' => $key];
+
+        // Оновлюємо поле unique_key у користувача
+        $this->db->update('userlist', $data, $conditions, 'i');
+    }
+
+    // Отримуємо registration_time і unique_key з бази
+    public function getUserData($login)
+    {
+        $conditions = ['login' => $login];
+        return $this->db->read('userlist', ['registration_time', 'unique_key'], $conditions);
+    }
+
+    // Функція для побітового XOR чисел
+    public function xorKeys($key1, $key2)
+    {
+        return $key1 ^ $key2;
+    }
+
+    // Керування віддаленим доступом (інтерфейс)
+    public function manageRemoteAccess($login)
+    {
+        // Отримуємо registration_time та unique_key з бази даних
+        $userData = $this->getUserData($login);
+
+        if (isset($userData[0]['registration_time'])) {
+            $registrationTime = (int) $userData[0]['registration_time'];
+            $uniqueKey = $userData[0]['unique_key'];
+
+            // Якщо ключ не згенеровано (у базі null або 0)
+            if ($uniqueKey == 0) {
+                // Виводимо повідомлення, що ключ ще не згенеровано
+                if (!isset($_POST['generate_key'])) {
+                    return "Ключ ще не згенеровано.";
+                }
+
+                // Якщо користувач натиснув на кнопку "Згенерувати ключ"
+                if (isset($_POST['generate_key'])) {
+                    // Генеруємо новий ключ
+                    $newKey = $this->generateUniqueKey();
+                    $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
+                    $uniqueKey = $newKey; // Оновлюємо значення для відображення
+                }
+            }
+
+            // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
+            return $this->xorKeys($registrationTime, (int) $uniqueKey);
+        }
+
+        return "Помилка: дані користувача не знайдено!";
+    }
+}
+
 $accessControl = new AccessControl($db, $roles);
 $authentication = new Authentication($db);
+$remoteAccess = new RemoteAccess($db);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['login_submit'])) {

@@ -2,10 +2,10 @@
 session_start(); /* Початок сессії */
 require_once('header.php'); /* Верхня частина сайту */
 ?>
-<h1>Форма авторизації</h1>
+
+<h2>Форма авторизації</h2>
 <?php /* Якщо користувач вже авторизований -> відправити на index.php */
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    echo "<p>Ви вже авторизовані</p>";
     header("location: ../index.php");
 } else { /* В протилежному випадку запропонувати авторизуватись */
     if (isset($errorMessage)) {

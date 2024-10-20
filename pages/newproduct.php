@@ -1,7 +1,7 @@
 <?php
 session_start(); /* Початок сесії */
 require_once('header.php'); /* Верхня частина сайту */
-$accessControl->checkAccess(1); /* Доступ у адміністраторів та продавців */
+$accessControl->checkAccess(2); /* Доступ у адміністраторів */
 require_once('../php/mysql.php'); /* Підключення до бази даних */
 require_once('../php/crud.php'); /* Підключення до бази даних */
 
@@ -30,7 +30,7 @@ $categories = $product->getCategories();
     </div>
     <div class="form-group">
         <label for="price">Ціна:</label>
-        <input type="number" id="price" name="price" min="0" step="0.01" required>
+        <input type="number" id="price" name="price" min="0" step="1" required>
     </div>
     <div id="characteristics" class="form-group">
     </div>

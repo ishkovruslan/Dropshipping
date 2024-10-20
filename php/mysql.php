@@ -158,7 +158,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
     $servername = "localhost:3306";
     $username = "root";
     $password = "Kharkiv2024";
-    $dbname = "courseproject";
+    $dbname = "bacalavr";
 
     $db = new Database($servername, $username, $password, $dbname);
 }

@@ -1,44 +1,5 @@
 <?php
 /* Модуль виведення */
-class Categories
-{
-    private $db;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-    }
-
-    private function generateCategoryHTML($row)
-    {/* Створення сторінки категорій */
-        $name = htmlspecialchars($row["category_name"]);
-        $imagePath = '../images/categories/' . htmlspecialchars($row["uploadPath"]);
-        $description = htmlspecialchars($row["category_description"]);
-        return "<a href='products.php?category=" . urlencode($name) . "'>
-                    <div class='category-box'>
-                        <img src='$imagePath' alt='$name' class='category-image'>
-                        <h3>$name</h3>
-                        <p>$description</p>
-                    </div>
-                </a>";
-    }
-
-    public function displayCategories()
-    {/* Виведення категорій */
-        $columns = ['category_name', 'uploadPath', 'category_description'];
-        $result = $this->db->read('categories', $columns);
-        if (count($result) > 0) {
-            foreach ($result as $row) {
-                echo $this->generateCategoryHTML($row);
-            }
-        } else {
-            echo "Категорії відсутні";
-        }
-    }
-}
-
-$categories = new Categories($db);
-
 class Products
 {
     private $db;

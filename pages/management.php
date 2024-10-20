@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('header.php'); /* Верхня частина сайту */
-$accessControl->checkAccess(1); /* Доступ лише у адміністраторів та продавців*/
+$accessControl->checkAccess(2); /* Доступ лише у адміністраторів*/
 require_once('../php/crud.php');  /* Необхідні функції */
 
 $userList = new UserList($db);
@@ -44,10 +44,10 @@ $filteredProducts = $selectedCategory ? array_filter($productsData, function ($p
                                         }
                                     }
                                     ?>
+                                    <option value="changekey">Зміна ключа</option>
                                     <option value="delete">Видалення</option>
                                 </select>
-                                <button type="submit" name="submit_action"
-                                    id="submit-button-<?php echo $user->getLogin(); ?>">Змінити</button>
+                                <button type="submit" name="submit_action" id="submit-button-<?php echo $user->getLogin(); ?>">Змінити</button>
                             </form>
                         </td>
                     </tr>
@@ -112,28 +112,17 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
         <h1>Список категорій</h1>
         <table>
             <tr>
-                <th width="20%">Зображення</th>
                 <th>Назва</th>
-                <th>Опис</th>
-                <th width="14%">Кількість товарів</th>
-                <th width="25%">Специфікації</th>
+                <th>Кількість товарів</th>
+                <th>Специфікації</th>
             </tr>
             <?php foreach ($categoriesData as $category): ?>
                 <tr>
-                    <td>
-                        <?php if ($accessControl->getUserLevel($_SESSION['login']) == 2) { ?><!-- Редагування по натисканню на зображення -->
-                            <img src="../images/categories/<?php echo $category['uploadPath']; ?>" alt="Категорія"
-                                onclick="openEditCategoryModal('<?php echo $category['id']; ?>', '<?php echo $category['uploadPath']; ?>', '<?php echo addslashes($category['category_name']); ?>', '<?php echo addslashes($category['category_description']); ?>', '<?php echo addslashes($category['specifications']); ?>')">
-                        <?php } elseif ($accessControl->getUserLevel($_SESSION['login']) == 1) { ?><!-- Звичайне зображення -->
-                            <img src="../images/categories/<?php echo $category['uploadPath']; ?>" alt="Категорія">
-                        <?php } ?>
-                    </td>
                     <td>
                         <a href="management.php?category=<?php echo $category['category_name']; ?>">
                             <?php echo $category['category_name']; ?>
                         </a>
                     </td>
-                    <td><?php echo $category['category_description']; ?></td>
                     <td><!-- По натисканню на категорію відкривається таблиця продуктів цієї категорії -->
                         <?php echo countAccessibleProductsByCategory($category['category_name'], $_SESSION['login'], $accessControl->getUserLevel($_SESSION['login']), $productsData); ?>
                     </td>
@@ -148,32 +137,6 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
                 </tr>
             <?php endforeach; ?>
         </table>
-        <div id="editCategoryModal" class="modal">
-            <div class="modal-content"><!-- Модальний контент керування записом -->
-                <span class="close" onclick="closeEditCategoryModal()">&times;</span>
-                <form id="editCategoryForm" method="post" action="../php/crud.php" enctype="multipart/form-data">
-                    <input type="hidden" name="entity" value="categories">
-                    <input type="hidden" name="id" id="category_id">
-                    <label for="category_image">Зображення:</label>
-                    <input type="file" name="uploadPath" id="uploadPath" placeholder="Зображення">
-                    <label for="category_name">Назва категорії:</label>
-                    <input type="text" name="category_name" id="category_name" placeholder="Назва категорії">
-                    <label for="category_description">Опис:</label>
-                    <textarea name="category_description" id="category_description" placeholder="Опис"></textarea>
-                    <label for="category_specifications">Специфікації:</label>
-                    <textarea type="text" name="category_specifications" id="category_specifications"
-                        placeholder="Специфікації"></textarea>
-                    <button type="submit">Зберегти</button>
-                </form><!-- Модальний контент видалення запису -->
-                <form id="deleteCategoryForm" method="post" action="../php/crud.php"
-                    onsubmit="return confirm('Ви впевнені, що хочете видалити цю категорію?');" style="margin-top: 10px;">
-                    <input type="hidden" name="entity" value="categories">
-                    <input type="hidden" name="id" id="delete_category_id">
-                    <input type="hidden" name="delete" value="1">
-                    <button type="submit" style="background-color: red; color: white;">Видалити</button>
-                </form>
-            </div>
-        </div>
     </div>
     <?php if ($selectedCategory != "") { ?><!-- Якщо категорія обрана -> вивести цей товар -->
         <div class="products"><!-- Таблицяя взаємодії з товарами певної категорії -->
@@ -275,23 +238,6 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
     }
     window.onclick = function (event) {
         var modal = document.getElementById('editModal');
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    function openEditCategoryModal(id, image, name, description, specifications) {
-        document.getElementById('category_id').value = id;
-        document.getElementById('delete_category_id').value = id;
-        document.getElementById('category_name').value = name;
-        document.getElementById('category_description').value = description;
-        document.getElementById('category_specifications').value = specifications;
-        document.getElementById('editCategoryModal').style.display = "block";
-    }
-    function closeEditCategoryModal() {
-        document.getElementById('editCategoryModal').style.display = "none";
-    }
-    window.onclick = function (event) {
-        var modal = document.getElementById('editCategoryModal');
         if (event.target == modal) {
             modal.style.display = "none";
         }

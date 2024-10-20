@@ -22,12 +22,6 @@ class User
         $this->role = $newRole;
     }
 
-    public function deleteItems()
-    {/* Видалення товарів користувача */
-        $conditions = ['login' => $this->login];
-        $this->db->remove('products', array_keys($conditions), array_values($conditions));
-    }
-
     public function deleteUser()
     {/* Видалення користувача */
         $this->deleteEntityWithImages('products', ['login' => $this->login], '../images/products/');
@@ -124,11 +118,11 @@ class Category
         $this->db = $db;
     }
 
-    public function create($name, $description, $imagePath, $specifications)
+    public function create($name, $specifications)
     {/* Створити категорію */
-        $columns = ['category_name', 'uploadPath', 'category_description', 'specifications'];
-        $values = [$name, $imagePath, $description, implode(",", $specifications)];
-        $types = 'ssss';
+        $columns = ['category_name', 'specifications'];
+        $values = [$name, implode(",", $specifications)];
+        $types = 'ss';
         $this->db->write('categories', $columns, $values, $types);
     }
 }
@@ -223,6 +217,7 @@ function handlePostRequest($db)
     }
 }
 
+
 function handleUserPostRequest($db)
 {/* POST запит для взаємодії з користувачем */
     $login = $_POST['login'];
@@ -230,13 +225,19 @@ function handleUserPostRequest($db)
     $userList->loadUsersFromDB();
     $user = $userList->getUserByLogin($login);
     if ($user) {
-        if (isset($_POST['change_role']) && $_POST['new_role'] !== 'delete') {
+        $remoteAccess = new RemoteAccess($db);
+        if (isset($_POST['change_role']) && $_POST['new_role'] !== 'delete' && $_POST['new_role'] !== 'changekey') {
             $new_role = $_POST['new_role'];
             $user->changeRole($new_role);
             if ($new_role === 'user') {
-                $user->deleteItems();
+                $remoteAccess->setUniqueKey($login, 0);
             }
-        } elseif (isset($_POST['delete_user'])) {
+        }
+        elseif ($_POST['new_role'] === 'changekey') {
+            $newKey = $remoteAccess->generateUniqueKey();
+            $remoteAccess->setUniqueKey($login, $newKey);
+        }
+        elseif (isset($_POST['delete_user'])) {
             $user->deleteUser();
             $userList->loadUsersFromDB();
         }
@@ -302,10 +303,8 @@ function handleCreateCategoryRequest($db)
 {/* POST запит створення категорії */
     $category = new Category($db);
     $name = $_POST['category_name'];
-    $description = $_POST['category_description'];
     $specifications = explode(",", $_POST['specifications']);
-    $imageFileName = uploadFile('uploadPath', "../images/categories/");
-    $category->create($name, $description, $imageFileName, $specifications);
+    $category->create($name, $specifications);
     header("Location: ../pages/newcategory.php");
 }
 
@@ -349,7 +348,6 @@ function populateDataArray($entity, &$data)
             break;
         case 'categories':
             $data['category_name'] = $_POST['category_name'];
-            $data['category_description'] = $_POST['category_description'];
             $data['specifications'] = $_POST['category_specifications'];
             break;
         default:
