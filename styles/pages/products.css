@@ -1,15 +1,25 @@
-.output {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
-}
-
 .product-box {
     padding: 5px;
     box-sizing: border-box;
 }
 
-.product-image {
-    width: 100%;
+main img {
+    max-width: 100%;
     aspect-ratio: 16/9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* Встановлюємо рівномірний розподіл ширини */
+}
+
+th,
+td {
+    text-align: center;
+    padding: 1%;
+    border: 1px solid black;
+    word-wrap: break-word;
+    /* Заворачуємо слова, якщо вони не поміщаються в колонці */
 }

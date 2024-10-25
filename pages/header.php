@@ -32,8 +32,11 @@ require_once('../php/access.php'); /* Перевірка рівня доступ
 
 <body>
     <header>
-        <p class="line">
+        <p>
             <a href="../index.php">Головна</a>
+        </p>
+        <p>
+            <a href="products.php">Товари</a>
         </p>
         <?php
         /* Перевірка авторизації користувача */
@@ -41,35 +44,35 @@ require_once('../php/access.php'); /* Перевірка рівня доступ
             /* Якщо це адміністратор - надати доступ до створення новин та категорій*/
             if ($accessControl->getUserLevel($_SESSION['login']) == 2) {
                 ?>
-                <p class="line">
+                <p>
                     <a href="newnews.php">Додати новину</a>
                 </p>
-                <p class="line">
+                <p>
                     <a href="newcategory.php">Створити категорію</a>
                 </p>
-                <p class="line">
-                    <a href="management.php">Сторінка керування</a>
-                </p>
-                <p class="line">
+                <p>
                     <a href="newproduct.php">Створити товар</a>
+                </p>
+                <p>
+                    <a href="management.php">Сторінка керування</a>
                 </p>
             <?php } ?>
             <?php
             /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
             if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
                 ?>
-                <p class="line">
+                <p>
                     <a href="account.php">Керування обліковим записом</a>
                 </p>
             <?php } ?>
-            <p class="line"> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
+            <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
                 <a href="../php/logout.php">Вийти</a>
             </p>
         <?php } else { /* Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації */ ?>
-            <p class="line">
+            <p>
                 <a href="authorization.php">Авторизація</a>
             </p>
-            <p class="line">
+            <p>
                 <a href="registration.php">Реєстрація</a>
             </p>
         <?php } ?>

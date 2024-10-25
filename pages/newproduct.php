@@ -29,6 +29,10 @@ $categories = $product->getCategories();
         <input type="text" id="name" name="name" required>
     </div>
     <div class="form-group">
+        <label for="count">Кількість:</label>
+        <input type="number" id="count" name="count" required>
+    </div>
+    <div class="form-group">
         <label for="price">Ціна:</label>
         <input type="number" id="price" name="price" min="0" step="1" required>
     </div>

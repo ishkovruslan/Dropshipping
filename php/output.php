@@ -11,40 +11,50 @@ class Products
         $this->accessControl = $accessControl;
     }
 
-    private function generateProductHTML($row)
-    {/* Створення сторінки товарів */
+    private function generateProductHTML($row) {
+        // Отримання даних товару з рядка
         $id = htmlspecialchars($row["id"]);
-        $owner = htmlspecialchars($row["login"]);
+        $category = htmlspecialchars($row["category"]);
         $itemName = htmlspecialchars($row["product_name"]);
+        $count = htmlspecialchars($row["count"]);
         $price = htmlspecialchars($row["price"]);
         $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
-        if ($this->accessControl->getUserLevel($owner) == 2) {
-            $owner = "Магазин";
+        
+        // Розбиття характеристик
+        $characteristics = explode(',', $row['characteristics']);
+        $specificationsResult = $this->db->read('categories', ['specifications'], ['category_name' => $row['category']]);
+        $specifications = explode(',', $specificationsResult[0]["specifications"]);
+    
+        // Формування HTML з характеристиками
+        $characteristicsHTML = '';
+        foreach ($characteristics as $key => $value) {
+            if ($value !== "-" && $value !== "") {
+                $characteristicsHTML .= htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value) . "<br>";
+            }
         }
-        return "<a href='product.php?id=$id'>
-                    <div class='product-box'>
-                        <img src='$imagePath' alt='$itemName' class='product-image'>
-                        <h3>$itemName</h3>
-                        <p>Власник: $owner</p>
-                        <p>Ціна: $price</p>
-                    </div>
-                </a>";
-    }
+    
+        // Повернення HTML рядка таблиці
+        return "<tr>
+                    <!-- Редагування по натисканню на зображення -->
+                    <td>
+                        <img src='$imagePath' alt='$itemName' onclick=\"openEditProductModal('$id', '$imagePath', '$category', '$itemName', '$count', '$price', '" . addslashes($row['characteristics']) . "')\">
+                    </td>
+                    <td>$category</td>
+                    <td>
+                        <a href='product.php?id=$id'>$itemName</a>
+                    </td>
+                    <td>$count</td>
+                    <td>$price</td>
+                    <td>$characteristicsHTML</td>
+                </tr>";
+    }        
 
-    public function displayProducts($category, $owner, $minPrice, $maxPrice, $sort)
+    public function displayProducts($minPrice, $maxPrice, $sort)
     {/* Виведення товарів */
-        $defaultCategory = 'defaultCategory';
         $defaultSort = 'asc';
         $conditions = [];
         /* Значення за замовчуванням */
-        $category = $category ?? $defaultCategory;
         $sort = $sort ?? $defaultSort;
-        if ($category !== null) {
-            $conditions['category'] = $category;
-        }
-        if ($owner !== null) {
-            $conditions['login'] = $owner;
-        }
         if ($minPrice !== null) {
             $conditions['price >='] = $minPrice;
         }
@@ -53,22 +63,31 @@ class Products
         }
         $orderBy = $sort !== null ? ['price' => ($sort == 'asc' ? 'ASC' : 'DESC')] : [];
         $result = $this->db->readWithSort('products', ['*'], $conditions, $orderBy);
+        ?>
+        <tr><table>
+            <th width="20%">Зображення</th>
+            <th width="18%">Категорія</th>
+            <th>Назва товару</th>
+            <th>Кількість товару</th>
+            <th width="10%">Ціна</th>
+            <th width="25%">Характеристики</th>
+        </tr>
+        <?php
         if (count($result) > 0) {
             foreach ($result as $row) {
                 echo $this->generateProductHTML($row);
             }
+            ?></table><?php
         } else {
             echo "Товари відсутні";
         }
     }
 }
 
-$category = $_GET['category'] ?? 'defaultCategory';
 $roleFilter = $_GET['roleFilter'] ?? 'anyone';
 $minPrice = !empty($_GET['minPrice']) ? $_GET['minPrice'] : null;
 $maxPrice = !empty($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
 $sort = !empty($_GET['sort']) ? $_GET['sort'] : null;
-$owner = !empty($_GET['owner']) ? $_GET['owner'] : null;
 
 $accessControl = new AccessControl($db, $roles);
 $products = new Products($db, $accessControl);
@@ -86,20 +105,17 @@ class Product
 
     private function generateProductDetailHTML($row, $specifications)
     {/* Створення сторінки товару */
-        $owner = htmlspecialchars($row["login"]);
         $itemName = htmlspecialchars($row["product_name"]);
         $price = htmlspecialchars($row["price"]);
+        $count = htmlspecialchars($row["count"]);
         $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
         $characteristics = explode(',', $row["characteristics"]);
-        if ($this->accessControl->getUserLevel($owner) == 2) {
-            $owner = "Магазин";
-        }
         $html = "<div class='main-block'>
                     <div class='product-container'>
                         <img src='$imagePath' alt='$itemName' class='product-image'>
                         <div class='product-details'>
                             <h2>$itemName</h2>
-                            <p>Продавець: $owner</p>
+                            <p>Кількість: $count</p>
                             <p>Ціна: $price</p>
                             <h3>Характеристики:</h3>
                             <ul>";

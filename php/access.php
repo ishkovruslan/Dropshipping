@@ -144,36 +144,33 @@ class RemoteAccess
 
     // Керування віддаленим доступом (інтерфейс)
     public function manageRemoteAccess($login)
-    {
-        // Отримуємо registration_time та unique_key з бази даних
-        $userData = $this->getUserData($login);
+{
+    // Отримуємо registration_time та unique_key з бази даних
+    $userData = $this->getUserData($login);
 
-        if (isset($userData[0]['registration_time'])) {
-            $registrationTime = (int) $userData[0]['registration_time'];
-            $uniqueKey = $userData[0]['unique_key'];
+    if (isset($userData[0]['registration_time'])) {
+        $registrationTime = (int) $userData[0]['registration_time'];
+        $uniqueKey = $userData[0]['unique_key'];
 
-            // Якщо ключ не згенеровано (у базі null або 0)
-            if ($uniqueKey == 0) {
-                // Виводимо повідомлення, що ключ ще не згенеровано
-                if (!isset($_POST['generate_key'])) {
-                    return "Ключ ще не згенеровано.";
-                }
-
-                // Якщо користувач натиснув на кнопку "Згенерувати ключ"
-                if (isset($_POST['generate_key'])) {
-                    // Генеруємо новий ключ
-                    $newKey = $this->generateUniqueKey();
-                    $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
-                    $uniqueKey = $newKey; // Оновлюємо значення для відображення
-                }
-            }
-
-            // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
-            return $this->xorKeys($registrationTime, (int) $uniqueKey);
+        // Якщо користувач натиснув на кнопку "Згенерувати ключ"
+        if (isset($_POST['generate_key'])) {
+            // Генеруємо новий ключ
+            $newKey = $this->generateUniqueKey();
+            $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
+            $uniqueKey = $newKey; // Оновлюємо значення для відображення
+        }elseif ($uniqueKey == 0) {
+            // Якщо ключ не згенеровано, виводимо повідомлення, що ключ ще не згенеровано
+            return "Ключ ще не згенеровано.";
         }
 
-        return "Помилка: дані користувача не знайдено!";
+        // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
+        return $this->xorKeys($registrationTime, (int) $uniqueKey);
     }
+
+    return "Помилка: дані користувача не знайдено!";
+}
+
+
 }
 
 $accessControl = new AccessControl($db, $roles);

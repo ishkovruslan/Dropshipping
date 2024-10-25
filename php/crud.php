@@ -136,18 +136,18 @@ class Product
         $this->db = $db;
     }
 
-    public function create($category, $name, $price, $image, $characteristics)
+    public function create($category, $name, $count, $price, $image, $characteristics)
     {/* Створити товар */
         session_start();
-        $columns = ['category', 'login', 'product_name', 'price', 'uploadPath', 'characteristics'];
+        $columns = ['category', 'product_name', 'count', 'price', 'uploadPath', 'characteristics'];
         if (!is_array($characteristics)) {
             $characteristics = [$characteristics];
         }
         if (is_array($image)) {
             $image = implode(",", $image);
         }
-        $values = [$category, $_SESSION['login'], $name, $price, $image, implode(",", $characteristics)];
-        $types = 'sssiss';
+        $values = [$category, $name, $count, $price, $image, implode(",", $characteristics)];
+        $types = 'ssiiss';
         $this->db->write('products', $columns, $values, $types);
     }
 
@@ -234,8 +234,7 @@ function handleUserPostRequest($db)
             }
         }
         elseif ($_POST['new_role'] === 'changekey') {
-            $newKey = $remoteAccess->generateUniqueKey();
-            $remoteAccess->setUniqueKey($login, $newKey);
+                $remoteAccess->setUniqueKey($login, 0);
         }
         elseif (isset($_POST['delete_user'])) {
             $user->deleteUser();
@@ -312,11 +311,12 @@ function handleCreateProductRequest($db)
 {/* POST запит створення товару */
     $product = new Product($db);
     $name = $_POST['name'];
+    $count = $_POST['count'];
     $category = $_POST['category'];
     $price = $_POST['price'];
     $characteristics = $_POST['characteristics'];
     $imageFileName = uploadFile('uploadPath', "../images/products/");
-    $product->create($category, $name, $price, $imageFileName, $characteristics);
+    $product->create($category, $name, $count, $price, $imageFileName, $characteristics);
     header("Location: ../pages/newproduct.php");
 }
 
@@ -343,6 +343,7 @@ function populateDataArray($entity, &$data)
         case 'products':
             $data['category'] = $_POST['category'];
             $data['product_name'] = $_POST['product_name'];
+            $data['coutn'] = $_POST['count'];
             $data['price'] = $_POST['price'];
             $data['characteristics'] = $_POST['characteristics'];
             break;

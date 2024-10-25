@@ -113,7 +113,7 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
         <table>
             <tr>
                 <th>Назва</th>
-                <th>Кількість товарів</th>
+                <th>Кількість пропозицій</th>
                 <th>Специфікації</th>
             </tr>
             <?php foreach ($categoriesData as $category): ?>
@@ -132,7 +132,7 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
                         foreach ($specifications as $spec):
                             if ($spec != ""): ?>
                                 <br><?php echo htmlspecialchars($spec); ?></b>
-                            <?php endif; endforeach; ?>j
+                            <?php endif; endforeach; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -147,8 +147,8 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
                 <tr>
                     <th width="20%">Зображення</th>
                     <th width="18%">Категорія</th>
-                    <th>Власник</th>
                     <th>Назва товару</th>
+                    <th>Кількість товару</th>
                     <th width="10%">Ціна</th>
                     <th width="25%">Характеристики</th>
                 </tr>
@@ -156,15 +156,15 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
                     <?php if ($accessControl->getUserLevel($_SESSION['login']) == 2 || $_SESSION['login'] == $product['login']): ?>
                         <tr><!-- Редагування по натисканню на зображення -->
                             <td><img src="../images/products/<?php echo $product['uploadPath']; ?>" alt="Товар"
-                                    onclick="openEditProductModal('<?php echo $product['id']; ?>', '<?php echo $product['uploadPath']; ?>', '<?php echo addslashes($product['category']); ?>', '<?php echo addslashes($product['product_name']); ?>', '<?php echo $product['price']; ?>', '<?php echo addslashes($product['characteristics']); ?>')">
+                                    onclick="openEditProductModal('<?php echo $product['id']; ?>', '<?php echo $product['uploadPath']; ?>', '<?php echo addslashes($product['category']); ?>', '<?php echo addslashes($product['product_name']); ?>', '<?php echo $product['count']; ?>', '<?php echo $product['price']; ?>', '<?php echo addslashes($product['characteristics']); ?>')">
                             </td>
                             <td>
                                 <a href="product.php?id=<?php echo $product['id']; ?>">
                                     <?php echo $product['category']; ?>
                                 </a>
                             </td>
-                            <td><?php echo $product['login']; ?></td>
                             <td><?php echo $product['product_name']; ?></td>
+                            <td><?php echo $product['count']; ?></td>
                             <td><?php echo $product['price']; ?></td>
                             <td>
                                 <?php
@@ -192,6 +192,8 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
                         <input type="text" name="category" id="category" placeholder="Категорія">
                         <label for="product_name">Назва товару:</label>
                         <input type="text" name="product_name" id="product_name" placeholder="Назва товару">
+                        <label for="count">Кількість:</label>
+                        <input type="text" name="count" id="count" placeholder="Кількість">
                         <label for="price">Ціна:</label>
                         <input type="text" name="price" id="price" placeholder="Ціна">
                         <label for="characteristics">Характеристики:</label>
@@ -242,11 +244,12 @@ if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { ?>
             modal.style.display = "none";
         }
     }
-    function openEditProductModal(id, image, category, name, price, characteristics) {
+    function openEditProductModal(id, image, category, name, count, price, characteristics) {
         document.getElementById('product_id').value = id;
         document.getElementById('delete_product_id').value = id;
         document.getElementById('category').value = category;
         document.getElementById('product_name').value = name;
+        document.getElementById('product_count').value = count;
         document.getElementById('price').value = price;
         document.getElementById('characteristics').value = characteristics;
         document.getElementById('editProductModal').style.display = "block";
