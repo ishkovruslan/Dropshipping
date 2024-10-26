@@ -1,350 +1,950 @@
-Процесор,AMD,39962,blue.png,5.3Ghz,2,True
-Процесор,Intel,14289,green.png,3.7Ghz,12,False
-Процесор,Intel,41859,blue.png,5.0Ghz,4,True
-Процесор,Intel,36874,red.png,4.6Ghz,8,True
-Процесор,Intel,27810,green.png,4.8Ghz,8,True
-Процесор,Intel,39371,blue.png,4.6Ghz,2,True
-Процесор,Intel,41256,red.png,4.2Ghz,12,True
-Процесор,AMD,9738,red.png,3.3Ghz,10,True
-Процесор,AMD,16801,blue.png,4.9Ghz,16,True
-Процесор,Intel,28693,green.png,3.6Ghz,10,False
-Процесор,Intel,15019,red.png,5.5Ghz,20,True
-Процесор,Intel,31413,green.png,4.2Ghz,8,False
-Процесор,Intel,22240,red.png,4.1Ghz,6,True
-Процесор,AMD,44411,red.png,3.2Ghz,16,False
-Процесор,AMD,38350,green.png,3.5Ghz,12,True
-Процесор,Intel,33915,green.png,5.9Ghz,32,False
-Процесор,Intel,29069,green.png,4.2Ghz,32,True
-Процесор,Intel,40553,red.png,5.9Ghz,20,True
-Процесор,Intel,17512,red.png,3.6Ghz,12,True
-Процесор,Intel,17482,red.png,4.4Ghz,2,True
-Процесор,AMD,14448,red.png,4.4Ghz,12,True
-Процесор,Intel,29885,blue.png,3.2Ghz,16,True
-Процесор,Intel,48863,red.png,5.4Ghz,10,True
-Процесор,AMD,32740,blue.png,4.5Ghz,8,True
-Процесор,AMD,36420,blue.png,4.6Ghz,20,False
-Процесор,AMD,37515,green.png,5.9Ghz,20,True
-Процесор,AMD,21178,green.png,3.2Ghz,10,False
-Процесор,Intel,44924,red.png,3.9Ghz,10,True
-Процесор,AMD,30069,blue.png,4.1Ghz,12,False
-Процесор,AMD,29540,blue.png,6.0Ghz,24,True
-Процесор,AMD,40980,green.png,4.7Ghz,24,True
-Процесор,AMD,34992,blue.png,5.8Ghz,4,False
-Процесор,AMD,25361,green.png,5.0Ghz,6,False
-Процесор,Intel,42214,green.png,5.7Ghz,4,True
-Процесор,AMD,49102,red.png,6.0Ghz,16,True
-Процесор,Intel,24428,red.png,4.5Ghz,6,True
-Процесор,Intel,29662,blue.png,3.6Ghz,10,True
-Процесор,Intel,49588,blue.png,3.1Ghz,6,False
-Процесор,Intel,14775,blue.png,4.5Ghz,16,True
-Процесор,Intel,12741,green.png,4.7Ghz,6,True
-Процесор,AMD,19345,green.png,3.2Ghz,2,True
-Процесор,Intel,13868,blue.png,4.7Ghz,2,True
-Процесор,Intel,5699,blue.png,5.0Ghz,24,True
-Процесор,Intel,48556,green.png,5.9Ghz,6,True
-Процесор,AMD,17017,green.png,4.2Ghz,8,True
-Процесор,Intel,34679,blue.png,4.7Ghz,8,True
-Процесор,Intel,31609,green.png,4.2Ghz,16,True
-Процесор,AMD,18365,green.png,5.3Ghz,4,False
-Процесор,Intel,39329,red.png,3.4Ghz,4,True
-Процесор,Intel,30384,green.png,3.9Ghz,2,True
-Материнська плата,Gigabyte,46735,blue.png,ATX,LGA,1,DDR5,6.0
-Материнська плата,Asus,18893,red.png,ATX,PGA,8,DDR4,5.0
-Материнська плата,Asus,42143,blue.png,EATX,PGA,4,DDR4,5.0
-Материнська плата,MSI,9507,red.png,M-ATX,PGA,4,DDR5,5.0
-Материнська плата,Gigabyte,10117,blue.png,EATX,LGA,2,DDR4,4.0
-Материнська плата,Asus,26735,red.png,M-ATX,LGA,8,DDR5,5.0
-Материнська плата,Asus,6278,green.png,ATX,PGA,1,DDR5,4.0
-Материнська плата,Gigabyte,43077,green.png,EATX,LGA,1,DDR4,4.0
-Материнська плата,Gigabyte,12187,blue.png,ATX,LGA,2,DDR5,4.0
-Материнська плата,Gigabyte,27438,green.png,M-ATX,PGA,4,DDR5,4.0
-Материнська плата,Asus,15670,red.png,M-ATX,LGA,8,DDR5,4.0
-Материнська плата,MSI,18937,red.png,M-ATX,PGA,4,DDR5,6.0
-Материнська плата,MSI,20971,red.png,EATX,PGA,1,DDR4,5.0
-Материнська плата,Gigabyte,16275,red.png,M-ATX,PGA,2,DDR4,4.0
-Материнська плата,MSI,29698,green.png,ATX,PGA,2,DDR5,4.0
-Материнська плата,Asus,11625,red.png,M-ATX,PGA,4,DDR5,6.0
-Материнська плата,Gigabyte,24952,red.png,M-ATX,LGA,4,DDR5,4.0
-Материнська плата,Asus,38605,blue.png,M-ATX,LGA,8,DDR4,6.0
-Материнська плата,MSI,23188,blue.png,ATX,LGA,2,DDR5,4.0
-Материнська плата,Asus,32791,green.png,ATX,LGA,8,DDR5,4.0
-Материнська плата,MSI,16146,blue.png,EATX,PGA,1,DDR4,5.0
-Материнська плата,MSI,10401,blue.png,ATX,PGA,4,DDR4,6.0
-Материнська плата,Asus,30657,red.png,M-ATX,LGA,1,DDR5,5.0
-Материнська плата,MSI,12613,red.png,M-ATX,LGA,2,DDR5,5.0
-Материнська плата,Gigabyte,25118,blue.png,ATX,PGA,8,DDR5,5.0
-Материнська плата,Asus,23919,red.png,M-ATX,PGA,8,DDR5,6.0
-Материнська плата,Asus,30602,green.png,EATX,LGA,8,DDR4,5.0
-Материнська плата,Asus,43518,red.png,M-ATX,PGA,8,DDR4,6.0
-Материнська плата,MSI,28522,red.png,ATX,PGA,8,DDR5,5.0
-Материнська плата,MSI,34611,red.png,ATX,PGA,1,DDR5,6.0
-Материнська плата,Gigabyte,48739,green.png,EATX,LGA,4,DDR5,6.0
-Материнська плата,MSI,18450,blue.png,EATX,LGA,8,DDR4,6.0
-Материнська плата,Asus,19152,blue.png,ATX,LGA,4,DDR5,6.0
-Материнська плата,MSI,35282,blue.png,EATX,PGA,4,DDR5,6.0
-Материнська плата,MSI,34861,red.png,EATX,PGA,4,DDR5,6.0
-Материнська плата,MSI,48183,blue.png,EATX,LGA,2,DDR4,4.0
-Материнська плата,Asus,20367,red.png,EATX,LGA,4,DDR5,6.0
-Материнська плата,MSI,48797,blue.png,ATX,LGA,8,DDR5,4.0
-Материнська плата,Gigabyte,11745,green.png,EATX,LGA,2,DDR5,6.0
-Материнська плата,Gigabyte,10488,blue.png,M-ATX,LGA,4,DDR5,6.0
-Материнська плата,Asus,23476,green.png,ATX,PGA,4,DDR5,6.0
-Материнська плата,MSI,23850,blue.png,ATX,LGA,8,DDR5,6.0
-Материнська плата,MSI,41658,green.png,M-ATX,PGA,8,DDR5,6.0
-Материнська плата,MSI,10468,green.png,M-ATX,LGA,1,DDR5,6.0
-Материнська плата,Asus,49051,green.png,M-ATX,PGA,4,DDR5,4.0
-Материнська плата,Asus,40848,blue.png,M-ATX,PGA,2,DDR5,4.0
-Материнська плата,Asus,29198,blue.png,EATX,PGA,1,DDR5,4.0
-Материнська плата,Asus,43740,blue.png,ATX,LGA,4,DDR5,4.0
-Материнська плата,Asus,46431,red.png,ATX,PGA,2,DDR5,6.0
-Материнська плата,MSI,35898,red.png,ATX,LGA,1,DDR5,6.0
-Оперативна пам'ять,Samsung,27854,blue.png,DDR5,32GB,7467Mhz
-Оперативна пам'ять,Samsung,26912,green.png,DDR5,32GB,4000Mhz
-Оперативна пам'ять,Crucial,49973,blue.png,DDR5,32GB,5467Mhz
-Оперативна пам'ять,ADATA,12228,blue.png,DDR5,32GB,4400Mhz
-Оперативна пам'ять,Apacer,43686,red.png,DDR4,32GB,5067Mhz
-Оперативна пам'ять,ADATA,35154,green.png,DDR4,32GB,4933Mhz
-Оперативна пам'ять,Corsair,42873,blue.png,DDR4,32GB,6800Mhz
-Оперативна пам'ять,ADATA,24143,red.png,DDR4,32GB,4267Mhz
-Оперативна пам'ять,Crucial,8098,blue.png,DDR5,16GB,4933Mhz
-Оперативна пам'ять,Crucial,11207,green.png,DDR5,32GB,3867Mhz
-Оперативна пам'ять,ADATA,24718,blue.png,DDR5,16GB,7467Mhz
-Оперативна пам'ять,Corsair,37903,blue.png,DDR5,32GB,6667Mhz
-Оперативна пам'ять,ADATA,17518,green.png,DDR4,32GB,4933Mhz
-Оперативна пам'ять,ADATA,47651,blue.png,DDR5,32GB,3333Mhz
-Оперативна пам'ять,Kingston,32376,blue.png,DDR5,32GB,4800Mhz
-Оперативна пам'ять,Corsair,13872,green.png,DDR5,32GB,6133Mhz
-Оперативна пам'ять,Samsung,21674,red.png,DDR5,32GB,7067Mhz
-Оперативна пам'ять,Corsair,20256,blue.png,DDR5,32GB,5733Mhz
-Оперативна пам'ять,Corsair,18835,green.png,DDR5,32GB,5600Mhz
-Оперативна пам'ять,Samsung,15332,green.png,DDR4,32GB,6667Mhz
-Оперативна пам'ять,Kingston,45477,green.png,DDR5,32GB,4400Mhz
-Оперативна пам'ять,ADATA,19010,blue.png,DDR5,16GB,7200Mhz
-Оперативна пам'ять,Kingston,23795,blue.png,DDR4,32GB,3200Mhz
-Оперативна пам'ять,Crucial,28401,green.png,DDR5,16GB,4267Mhz
-Оперативна пам'ять,Corsair,6250,green.png,DDR5,32GB,6667Mhz
-Оперативна пам'ять,Crucial,18757,red.png,DDR4,16GB,6133Mhz
-Оперативна пам'ять,Corsair,12267,blue.png,DDR4,32GB,7867Mhz
-Оперативна пам'ять,Kingston,5972,blue.png,DDR5,16GB,5333Mhz
-Оперативна пам'ять,ADATA,44387,red.png,DDR4,32GB,6400Mhz
-Оперативна пам'ять,Kingston,11836,blue.png,DDR4,32GB,6667Mhz
-Оперативна пам'ять,Crucial,32776,green.png,DDR5,32GB,3333Mhz
-Оперативна пам'ять,Kingston,36838,red.png,DDR4,32GB,5867Mhz
-Оперативна пам'ять,Corsair,14146,red.png,DDR5,16GB,6400Mhz
-Оперативна пам'ять,ADATA,23627,blue.png,DDR5,32GB,4800Mhz
-Оперативна пам'ять,Corsair,27376,blue.png,DDR5,32GB,5067Mhz
-Оперативна пам'ять,Kingston,38473,blue.png,DDR4,32GB,5467Mhz
-Оперативна пам'ять,ADATA,45090,red.png,DDR5,16GB,4133Mhz
-Оперативна пам'ять,Kingston,33443,blue.png,DDR4,16GB,5333Mhz
-Оперативна пам'ять,Kingston,19734,green.png,DDR4,16GB,4400Mhz
-Оперативна пам'ять,Apacer,45164,green.png,DDR5,32GB,5733Mhz
-Оперативна пам'ять,Apacer,12306,green.png,DDR5,32GB,4133Mhz
-Оперативна пам'ять,Crucial,44776,red.png,DDR4,32GB,4400Mhz
-Оперативна пам'ять,Kingston,15414,green.png,DDR4,32GB,3733Mhz
-Оперативна пам'ять,Kingston,47972,green.png,DDR4,32GB,4667Mhz
-Оперативна пам'ять,Kingston,10271,blue.png,DDR4,32GB,3600Mhz
-Оперативна пам'ять,Corsair,38022,blue.png,DDR5,32GB,4800Mhz
-Оперативна пам'ять,ADATA,18399,red.png,DDR5,16GB,5200Mhz
-Оперативна пам'ять,Corsair,26160,red.png,DDR5,32GB,5200Mhz
-Оперативна пам'ять,Corsair,24807,red.png,DDR5,32GB,6667Mhz
-Оперативна пам'ять,Samsung,41779,green.png,DDR5,32GB,4133Mhz
-Накопичувачі,Apacer,17174,blue.png,NVME,256GB,7300Mbps,73TBW
-Накопичувачі,Samsung,37887,blue.png,NVME,512GB,1000Mbps,11TBW
-Накопичувачі,Corsair,47703,green.png,NVME,256GB,2500Mbps,40TBW
-Накопичувачі,Apacer,46836,red.png,NVME,1TB,4800Mbps,17TBW
-Накопичувачі,ADATA,17361,blue.png,NVME,256GB,3900Mbps,8TBW
-Накопичувачі,Crucial,19646,green.png,SATA3,1TB,3400Mbps,58TBW
-Накопичувачі,Corsair,5227,blue.png,NVME,2TB,1300Mbps,66TBW
-Накопичувачі,Corsair,25909,red.png,NVME,512GB,4600Mbps,73TBW
-Накопичувачі,Apacer,31096,green.png,NVME,1TB,6900Mbps,68TBW
-Накопичувачі,Kingston,11795,blue.png,SATA3,2TB,800Mbps,18TBW
-Накопичувачі,Corsair,12285,green.png,SATA3,512GB,4100Mbps,15TBW
-Накопичувачі,Crucial,26311,blue.png,NVME,256GB,2800Mbps,48TBW
-Накопичувачі,Apacer,36391,blue.png,NVME,512GB,4500Mbps,13TBW
-Накопичувачі,Kingston,32334,red.png,NVME,1TB,1500Mbps,43TBW
-Накопичувачі,Samsung,19511,green.png,NVME,256GB,6100Mbps,20TBW
-Накопичувачі,Apacer,5962,green.png,NVME,256GB,4000Mbps,42TBW
-Накопичувачі,Crucial,15100,red.png,NVME,1TB,3800Mbps,51TBW
-Накопичувачі,Corsair,12395,green.png,NVME,512GB,3800Mbps,38TBW
-Накопичувачі,Kingston,32926,blue.png,NVME,2TB,5400Mbps,39TBW
-Накопичувачі,Apacer,7440,green.png,NVME,1TB,6100Mbps,60TBW
-Накопичувачі,Crucial,36934,blue.png,SATA3,256GB,6000Mbps,69TBW
-Накопичувачі,Crucial,45144,green.png,NVME,512GB,6800Mbps,18TBW
-Накопичувачі,Crucial,43955,green.png,SATA3,256GB,5500Mbps,22TBW
-Накопичувачі,Kingston,11554,green.png,NVME,256GB,2400Mbps,33TBW
-Накопичувачі,Apacer,40403,blue.png,NVME,2TB,4300Mbps,38TBW
-Накопичувачі,ADATA,22697,green.png,SATA3,512GB,7800Mbps,62TBW
-Накопичувачі,ADATA,23228,blue.png,NVME,2TB,6000Mbps,43TBW
-Накопичувачі,Apacer,34694,blue.png,NVME,2TB,700Mbps,9TBW
-Накопичувачі,Kingston,11606,red.png,NVME,512GB,700Mbps,75TBW
-Накопичувачі,Corsair,7033,green.png,NVME,256GB,1200Mbps,65TBW
-Накопичувачі,Corsair,32016,blue.png,SATA3,512GB,6400Mbps,40TBW
-Накопичувачі,Samsung,41038,blue.png,NVME,512GB,5600Mbps,69TBW
-Накопичувачі,Crucial,37876,red.png,NVME,512GB,7100Mbps,54TBW
-Накопичувачі,ADATA,27976,red.png,SATA3,2TB,7200Mbps,11TBW
-Накопичувачі,ADATA,22196,blue.png,NVME,512GB,7000Mbps,71TBW
-Накопичувачі,ADATA,30830,blue.png,NVME,256GB,3000Mbps,13TBW
-Накопичувачі,Samsung,28428,blue.png,SATA3,2TB,3900Mbps,27TBW
-Накопичувачі,Samsung,7788,green.png,SATA3,512GB,1000Mbps,69TBW
-Накопичувачі,ADATA,15875,red.png,NVME,256GB,6000Mbps,52TBW
-Накопичувачі,ADATA,28607,green.png,SATA3,256GB,3600Mbps,70TBW
-Накопичувачі,ADATA,44110,blue.png,NVME,1TB,7600Mbps,72TBW
-Накопичувачі,ADATA,6599,red.png,NVME,256GB,7100Mbps,52TBW
-Накопичувачі,Crucial,19563,red.png,NVME,256GB,1600Mbps,35TBW
-Накопичувачі,Samsung,8485,red.png,SATA3,512GB,3100Mbps,38TBW
-Накопичувачі,Apacer,24433,blue.png,NVME,512GB,3100Mbps,24TBW
-Накопичувачі,Crucial,25300,green.png,NVME,256GB,3800Mbps,49TBW
-Накопичувачі,Crucial,48058,green.png,NVME,1TB,6500Mbps,23TBW
-Накопичувачі,ADATA,37378,green.png,SATA3,512GB,1800Mbps,7TBW
-Накопичувачі,Apacer,34313,red.png,NVME,512GB,4600Mbps,49TBW
-Накопичувачі,Corsair,31718,green.png,NVME,1TB,4300Mbps,74TBW
-Відеокарти,Gigabyte,16629,blue.png,RTX,8GB,GDDR6,3.0
-Відеокарти,MSI,10275,green.png,RTX,12GB,GDDR7,4.0
-Відеокарти,Gigabyte,29924,blue.png,RTX,8GB,GDDR7,4.0
-Відеокарти,Gigabyte,6460,red.png,RTX,6GB,GDDR5,3.0
-Відеокарти,MSI,29653,blue.png,GTX,4GB,GDDR5,4.0
-Відеокарти,Gigabyte,31429,blue.png,GTX,12GB,GDDR5,4.0
-Відеокарти,MSI,40433,blue.png,GTX,4GB,GDDR5,4.0
-Відеокарти,MSI,15504,green.png,RTX,4GB,GDDR5,4.0
-Відеокарти,Asus,29991,blue.png,RTX,4GB,GDDR6,3.0
-Відеокарти,Gigabyte,6757,red.png,RTX,8GB,GDDR7,4.0
-Відеокарти,Gigabyte,20726,red.png,GTX,8GB,GDDR5,3.0
-Відеокарти,Asus,45514,red.png,RTX,4GB,GDDR7,4.0
-Відеокарти,MSI,29702,blue.png,RTX,4GB,GDDR6,4.0
-Відеокарти,Asus,26600,blue.png,RTX,4GB,GDDR7,4.0
-Відеокарти,Gigabyte,24739,green.png,RTX,8GB,GDDR7,3.0
-Відеокарти,MSI,7133,red.png,RTX,8GB,GDDR7,3.0
-Відеокарти,MSI,11051,blue.png,GTX,4GB,GDDR5,3.0
-Відеокарти,Asus,17945,green.png,RTX,6GB,GDDR7,4.0
-Відеокарти,Gigabyte,29713,blue.png,GTX,8GB,GDDR6,3.0
-Відеокарти,Asus,11767,green.png,GTX,4GB,GDDR5,3.0
-Відеокарти,Gigabyte,16341,blue.png,RTX,4GB,GDDR6,3.0
-Відеокарти,MSI,37814,green.png,RTX,12GB,GDDR7,4.0
-Відеокарти,MSI,20092,blue.png,GTX,4GB,GDDR7,4.0
-Відеокарти,MSI,45319,blue.png,GTX,12GB,GDDR7,3.0
-Відеокарти,Asus,12681,red.png,RTX,6GB,GDDR5,3.0
-Відеокарти,Gigabyte,18555,blue.png,RTX,4GB,GDDR7,4.0
-Відеокарти,Asus,10061,blue.png,GTX,4GB,GDDR7,4.0
-Відеокарти,Gigabyte,28297,blue.png,RTX,4GB,GDDR7,3.0
-Відеокарти,Asus,22221,red.png,RTX,6GB,GDDR7,3.0
-Відеокарти,Gigabyte,9674,blue.png,RTX,4GB,GDDR5,4.0
-Відеокарти,Gigabyte,26264,green.png,RTX,12GB,GDDR7,3.0
-Відеокарти,Gigabyte,24653,red.png,GTX,6GB,GDDR7,4.0
-Відеокарти,Asus,22554,blue.png,RTX,8GB,GDDR7,4.0
-Відеокарти,MSI,45188,red.png,RTX,8GB,GDDR7,3.0
-Відеокарти,MSI,6527,green.png,RTX,12GB,GDDR7,4.0
-Відеокарти,Gigabyte,24091,green.png,RTX,4GB,GDDR7,4.0
-Відеокарти,Gigabyte,44135,green.png,RTX,6GB,GDDR5,3.0
-Відеокарти,MSI,26017,green.png,GTX,6GB,GDDR5,4.0
-Відеокарти,Asus,20501,green.png,GTX,4GB,GDDR7,4.0
-Відеокарти,MSI,7275,green.png,RTX,6GB,GDDR7,4.0
-Відеокарти,MSI,27817,red.png,RTX,4GB,GDDR7,3.0
-Відеокарти,MSI,35620,green.png,RTX,6GB,GDDR5,4.0
-Відеокарти,Asus,26044,red.png,RTX,6GB,GDDR6,3.0
-Відеокарти,Gigabyte,20694,red.png,RTX,8GB,GDDR7,4.0
-Відеокарти,Asus,49829,blue.png,GTX,8GB,GDDR6,3.0
-Відеокарти,Asus,45091,red.png,GTX,12GB,GDDR7,4.0
-Відеокарти,Asus,36237,green.png,GTX,6GB,GDDR6,3.0
-Відеокарти,MSI,32219,green.png,RTX,6GB,GDDR7,3.0
-Відеокарти,Asus,6683,blue.png,RTX,8GB,GDDR7,4.0
-Відеокарти,Gigabyte,24960,green.png,RTX,8GB,GDDR5,4.0
-Блок живлення,Cooler Master,15276,blue.png,450W,Platinum
-Блок живлення,Chieftec,33132,green.png,550W,Titanium
-Блок живлення,ASUS,30759,red.png,1050W,Titanium
-Блок живлення,Chieftec,34606,red.png,850W,Titanium
-Блок живлення,be quiet!,41871,red.png,700W,Titanium
-Блок живлення,be quiet!,32793,red.png,550W,Silver
-Блок живлення,Cooler Master,5421,blue.png,1000W,Silver
-Блок живлення,Cooler Master,30729,red.png,700W,Bronze
-Блок живлення,Chieftec,38538,blue.png,800W,Silver
-Блок живлення,Cooler Master,19954,green.png,600W,Silver
-Блок живлення,Cooler Master,21364,blue.png,850W,Bronze
-Блок живлення,Cooler Master,11951,blue.png,750W,Titanium
-Блок живлення,Chieftec,32697,green.png,800W,Silver
-Блок живлення,ASUS,6799,blue.png,550W,Bronze
-Блок живлення,Gigabyte,9368,blue.png,750W,Platinum
-Блок живлення,Cooler Master,38275,blue.png,650W,Platinum
-Блок живлення,Gigabyte,40655,red.png,850W,Gold
-Блок живлення,ASUS,21437,red.png,850W,Titanium
-Блок живлення,ASUS,6256,green.png,900W,Gold
-Блок живлення,ASUS,48855,green.png,1000W,Platinum
-Блок живлення,Cooler Master,29164,green.png,700W,Gold
-Блок живлення,Cooler Master,17970,green.png,650W,Titanium
-Блок живлення,be quiet!,13696,red.png,950W,Titanium
-Блок живлення,Gigabyte,40490,blue.png,550W,Platinum
-Блок живлення,Gigabyte,9915,blue.png,800W,Gold
-Блок живлення,ASUS,36536,red.png,700W,Titanium
-Блок живлення,Cooler Master,9844,blue.png,1050W,Bronze
-Блок живлення,Cooler Master,5461,red.png,450W,Gold
-Блок живлення,Chieftec,11316,blue.png,750W,Platinum
-Блок живлення,Cooler Master,5184,blue.png,950W,Platinum
-Блок живлення,Cooler Master,7171,blue.png,600W,Platinum
-Блок живлення,Chieftec,33755,blue.png,650W,Platinum
-Блок живлення,be quiet!,25826,blue.png,850W,Bronze
-Блок живлення,ASUS,18449,green.png,850W,Silver
-Блок живлення,Chieftec,17973,blue.png,900W,Titanium
-Блок живлення,be quiet!,39034,blue.png,550W,Bronze
-Блок живлення,Cooler Master,23005,blue.png,600W,Titanium
-Блок живлення,Cooler Master,16825,red.png,1000W,Platinum
-Блок живлення,Chieftec,49351,red.png,500W,Platinum
-Блок живлення,Chieftec,34172,blue.png,750W,Gold
-Блок живлення,Gigabyte,43275,red.png,750W,Platinum
-Блок живлення,Cooler Master,38766,red.png,900W,Titanium
-Блок живлення,ASUS,8250,blue.png,750W,Gold
-Блок живлення,Gigabyte,20783,blue.png,750W,Titanium
-Блок живлення,Cooler Master,45118,green.png,600W,Gold
-Блок живлення,Chieftec,8484,green.png,950W,Bronze
-Блок живлення,Gigabyte,19841,green.png,550W,Platinum
-Блок живлення,be quiet!,9405,blue.png,500W,Titanium
-Блок живлення,ASUS,47476,green.png,950W,Gold
-Блок живлення,Cooler Master,11613,red.png,650W,Gold
-Система охолодження,ASUS,35194,blue.png,Повітряне,Intel LGA
-Система охолодження,Chieftec,30722,blue.png,Повітряне,Intel PGA
-Система охолодження,be quiet!,12487,green.png,Рідинне,All
-Система охолодження,Cooler Master,21066,green.png,Повітряне,Intel LGA
-Система охолодження,ASUS,47491,green.png,Повітряне,Intel LGA
-Система охолодження,Cooler Master,44891,red.png,Рідинне,AMD LGA
-Система охолодження,be quiet!,22095,red.png,Повітряне,AMD PGA
-Система охолодження,be quiet!,45133,red.png,Рідинне,AMD LGA
-Система охолодження,be quiet!,11290,blue.png,Рідинне,Intel LGA
-Система охолодження,Gigabyte,11706,red.png,Рідинне,AMD PGA
-Система охолодження,Cooler Master,33213,green.png,Рідинне,AMD LGA
-Система охолодження,Gigabyte,15555,green.png,Рідинне,AMD LGA
-Система охолодження,ASUS,26775,red.png,Повітряне,AMD LGA
-Система охолодження,ASUS,7856,blue.png,Рідинне,AMD PGA
-Система охолодження,Gigabyte,17804,blue.png,Рідинне,AMD LGA
-Система охолодження,be quiet!,17860,red.png,Повітряне,AMD LGA
-Система охолодження,be quiet!,21194,red.png,Рідинне,AMD PGA
-Система охолодження,ASUS,22819,green.png,Рідинне,Intel LGA
-Система охолодження,Cooler Master,6437,red.png,Повітряне,Intel LGA
-Система охолодження,be quiet!,18842,blue.png,Рідинне,Intel PGA
-Система охолодження,Gigabyte,16034,blue.png,Рідинне,Intel LGA
-Система охолодження,Chieftec,48784,blue.png,Рідинне,Intel PGA
-Система охолодження,Cooler Master,45580,red.png,Рідинне,Intel LGA
-Система охолодження,Chieftec,6638,green.png,Рідинне,Intel LGA
-Система охолодження,ASUS,38517,green.png,Повітряне,AMD PGA
-Система охолодження,ASUS,13515,red.png,Повітряне,All
-Система охолодження,Gigabyte,29472,blue.png,Рідинне,Intel LGA
-Система охолодження,Chieftec,29085,blue.png,Повітряне,AMD PGA
-Система охолодження,Cooler Master,27244,blue.png,Рідинне,Intel PGA
-Система охолодження,Gigabyte,32665,blue.png,Рідинне,AMD PGA
-Система охолодження,Cooler Master,17327,red.png,Повітряне,All
-Система охолодження,Gigabyte,9805,green.png,Рідинне,Intel PGA
-Система охолодження,ASUS,21795,green.png,Рідинне,AMD LGA
-Система охолодження,Chieftec,43065,red.png,Рідинне,Intel PGA
-Система охолодження,Gigabyte,48703,blue.png,Рідинне,Intel LGA
-Система охолодження,Cooler Master,32187,green.png,Рідинне,Intel PGA
-Система охолодження,Cooler Master,37898,red.png,Рідинне,AMD LGA
-Система охолодження,Chieftec,18229,blue.png,Рідинне,Intel LGA
-Система охолодження,Chieftec,9426,green.png,Рідинне,Intel PGA
-Система охолодження,Gigabyte,46412,blue.png,Повітряне,Intel PGA
-Система охолодження,ASUS,28805,blue.png,Рідинне,AMD PGA
-Система охолодження,be quiet!,44485,red.png,Повітряне,AMD PGA
-Система охолодження,Gigabyte,24205,blue.png,Рідинне,Intel PGA
-Система охолодження,Cooler Master,14966,blue.png,Повітряне,All
-Система охолодження,Cooler Master,24741,green.png,Рідинне,AMD PGA
-Система охолодження,Chieftec,44389,green.png,Повітряне,All
-Система охолодження,Chieftec,24440,blue.png,Повітряне,Intel LGA
-Система охолодження,Cooler Master,25027,red.png,Рідинне,AMD LGA
-Система охолодження,ASUS,8366,red.png,Рідинне,AMD PGA
-Система охолодження,Chieftec,25950,red.png,Рідинне,Intel LGA
+Процесор,AMD Ryzen 9,44,25298,blue.png,4.5 GHz,11,Так
+Процесор,Intel Core i9,21,71197,blue.png,3.6 GHz,11,Так
+Процесор,Intel Core i5,29,96738,green.png,4.93 GHz,7,Так
+Процесор,Intel Core i7,45,98544,green.png,2.01 GHz,4,Так
+Процесор,AMD Ryzen 9,28,14465,red.png,3.27 GHz,8,Так
+Процесор,AMD Ryzen 9,58,14239,blue.png,4.72 GHz,15,Ні
+Процесор,Intel Core i9,4,15923,green.png,2.98 GHz,15,Так
+Процесор,AMD Ryzen 9,5,30555,blue.png,3.87 GHz,5,Ні
+Процесор,Intel Core i5,10,83370,green.png,4.26 GHz,16,Ні
+Процесор,Intel Core i5,63,85134,blue.png,4.95 GHz,8,Так
+Процесор,AMD Ryzen 9,83,65427,white.png,3.73 GHz,10,Так
+Процесор,AMD Ryzen 7,24,25552,white.png,4.21 GHz,5,Так
+Процесор,Intel Core i7,15,68158,green.png,2.46 GHz,12,Ні
+Процесор,Intel Core i5,65,84931,red.png,2.91 GHz,13,Ні
+Процесор,Intel Core i5,28,81340,red.png,3.29 GHz,5,Так
+Процесор,Intel Core i7,99,68544,red.png,4.18 GHz,4,Ні
+Процесор,Intel Core i9,25,93986,white.png,3.27 GHz,5,Так
+Процесор,AMD Ryzen 7,17,66328,white.png,4.9 GHz,9,Ні
+Процесор,Intel Core i9,86,83913,green.png,4.08 GHz,8,Так
+Процесор,AMD Ryzen 9,100,88069,red.png,2.08 GHz,14,Так
+Процесор,Intel Core i9,73,88661,red.png,3.73 GHz,5,Ні
+Процесор,AMD Ryzen 9,29,68064,blue.png,4.38 GHz,9,Ні
+Процесор,Intel Core i5,65,13146,blue.png,4.77 GHz,14,Так
+Процесор,Intel Core i7,70,93350,green.png,3.16 GHz,15,Так
+Процесор,Intel Core i7,85,22239,green.png,2.02 GHz,14,Ні
+Процесор,AMD Ryzen 7,33,27252,white.png,2.08 GHz,16,Так
+Процесор,AMD Ryzen 7,19,76857,blue.png,4.23 GHz,9,Ні
+Процесор,AMD Ryzen 7,57,47188,blue.png,4.89 GHz,9,Ні
+Процесор,AMD Ryzen 7,84,60886,red.png,2.9 GHz,9,Так
+Процесор,AMD Ryzen 9,19,47189,blue.png,2.42 GHz,15,Ні
+Процесор,AMD Ryzen 9,44,32009,white.png,2.13 GHz,8,Так
+Процесор,Intel Core i5,56,53914,red.png,3.32 GHz,13,Ні
+Процесор,Intel Core i7,86,49107,blue.png,2.09 GHz,4,Так
+Процесор,AMD Ryzen 7,63,86750,blue.png,3.87 GHz,11,Ні
+Процесор,Intel Core i5,21,51410,green.png,2.1 GHz,16,Ні
+Процесор,AMD Ryzen 7,57,44968,white.png,2.36 GHz,14,Ні
+Процесор,AMD Ryzen 9,37,48809,red.png,2.03 GHz,11,Ні
+Процесор,Intel Core i7,81,25535,white.png,4.08 GHz,9,Ні
+Процесор,Intel Core i9,29,94715,blue.png,3.62 GHz,13,Ні
+Процесор,Intel Core i9,69,13732,red.png,3.74 GHz,12,Так
+Процесор,AMD Ryzen 9,20,75902,blue.png,4.21 GHz,9,Ні
+Процесор,AMD Ryzen 7,29,50856,blue.png,4.42 GHz,11,Так
+Процесор,Intel Core i9,39,43067,white.png,3.85 GHz,16,Ні
+Процесор,AMD Ryzen 7,14,34938,blue.png,3.92 GHz,15,Ні
+Процесор,Intel Core i7,15,82605,blue.png,3.25 GHz,9,Так
+Процесор,Intel Core i9,33,27921,green.png,3.4 GHz,12,Ні
+Процесор,AMD Ryzen 7,25,60246,green.png,4.35 GHz,16,Так
+Процесор,Intel Core i7,10,71993,blue.png,2.66 GHz,12,Так
+Процесор,Intel Core i7,28,47166,red.png,4.18 GHz,15,Ні
+Процесор,AMD Ryzen 9,46,93766,green.png,4.86 GHz,10,Так
+Процесор,AMD Ryzen 7,53,14530,green.png,2.45 GHz,11,Так
+Процесор,Intel Core i5,91,30888,blue.png,2.19 GHz,5,Ні
+Процесор,AMD Ryzen 7,4,60064,red.png,2.25 GHz,5,Ні
+Процесор,Intel Core i5,33,84340,green.png,3.61 GHz,5,Так
+Процесор,AMD Ryzen 7,32,52500,white.png,3.75 GHz,11,Ні
+Процесор,AMD Ryzen 9,6,11098,green.png,3.49 GHz,10,Так
+Процесор,AMD Ryzen 9,6,96133,red.png,4.88 GHz,13,Так
+Процесор,AMD Ryzen 9,74,93366,green.png,3.67 GHz,12,Ні
+Процесор,Intel Core i5,80,47765,blue.png,4.34 GHz,15,Так
+Процесор,Intel Core i7,3,42573,white.png,3.28 GHz,4,Ні
+Процесор,Intel Core i9,83,46957,green.png,3.19 GHz,9,Ні
+Процесор,Intel Core i7,98,17998,white.png,4.92 GHz,4,Ні
+Процесор,Intel Core i9,93,87404,green.png,3.09 GHz,8,Ні
+Процесор,Intel Core i9,42,36515,blue.png,4.91 GHz,10,Ні
+Процесор,Intel Core i9,97,65474,red.png,3.77 GHz,5,Так
+Процесор,AMD Ryzen 9,56,71782,green.png,3.05 GHz,9,Ні
+Процесор,AMD Ryzen 7,14,75184,green.png,3.72 GHz,11,Так
+Процесор,Intel Core i7,83,79909,red.png,2.46 GHz,12,Так
+Процесор,AMD Ryzen 9,80,74683,blue.png,3.8 GHz,10,Ні
+Процесор,Intel Core i9,25,36516,green.png,3.26 GHz,11,Так
+Процесор,AMD Ryzen 7,16,24368,blue.png,4.86 GHz,11,Так
+Процесор,Intel Core i7,28,26467,red.png,3.96 GHz,16,Так
+Процесор,AMD Ryzen 7,98,67137,blue.png,3.52 GHz,6,Ні
+Процесор,Intel Core i5,96,35182,red.png,3.72 GHz,7,Так
+Процесор,AMD Ryzen 7,19,49644,red.png,3.6 GHz,15,Ні
+Процесор,AMD Ryzen 7,69,36448,red.png,2.49 GHz,8,Так
+Процесор,Intel Core i5,43,84047,red.png,3.62 GHz,12,Ні
+Процесор,AMD Ryzen 7,20,91010,red.png,2.53 GHz,15,Ні
+Процесор,AMD Ryzen 7,62,88840,green.png,4.06 GHz,5,Так
+Процесор,Intel Core i7,27,11931,blue.png,4.93 GHz,14,Так
+Процесор,AMD Ryzen 9,38,76444,green.png,4.81 GHz,4,Так
+Процесор,AMD Ryzen 9,43,51032,blue.png,4.86 GHz,12,Так
+Процесор,Intel Core i7,42,33394,green.png,2.77 GHz,7,Ні
+Процесор,Intel Core i9,20,13411,white.png,4.83 GHz,13,Так
+Процесор,Intel Core i7,94,48467,blue.png,4.33 GHz,5,Ні
+Процесор,Intel Core i7,75,77202,green.png,2.27 GHz,13,Так
+Процесор,Intel Core i5,58,95098,white.png,3.67 GHz,12,Так
+Процесор,Intel Core i7,0,74103,green.png,2.94 GHz,5,Так
+Процесор,Intel Core i7,71,13215,red.png,4.12 GHz,11,Ні
+Процесор,AMD Ryzen 7,32,57779,blue.png,3.97 GHz,15,Так
+Процесор,Intel Core i9,92,26673,green.png,4.82 GHz,4,Ні
+Процесор,Intel Core i5,15,46447,blue.png,3.24 GHz,7,Так
+Процесор,AMD Ryzen 7,70,97313,white.png,2.35 GHz,15,Ні
+Процесор,AMD Ryzen 9,97,56999,green.png,3.4 GHz,12,Так
+Процесор,AMD Ryzen 7,40,86264,blue.png,2.69 GHz,6,Ні
+Процесор,AMD Ryzen 7,91,16106,green.png,3.43 GHz,12,Ні
+Процесор,Intel Core i7,89,80058,blue.png,4.49 GHz,7,Так
+Процесор,AMD Ryzen 9,84,41571,blue.png,2.15 GHz,5,Так
+Процесор,AMD Ryzen 7,46,36328,red.png,3.83 GHz,15,Ні
+Процесор,AMD Ryzen 9,0,73899,green.png,3.15 GHz,7,Так
+Процесор,AMD Ryzen 9,25,24926,blue.png,3.59 GHz,6,Так
+Процесор,AMD Ryzen 9,38,46004,white.png,2.73 GHz,10,Ні
+Процесор,AMD Ryzen 9,16,68654,white.png,4.64 GHz,9,Ні
+Процесор,Intel Core i5,74,27198,blue.png,3.5 GHz,10,Ні
+Процесор,AMD Ryzen 9,12,46686,green.png,3.78 GHz,11,Так
+Процесор,AMD Ryzen 9,26,80793,blue.png,2.37 GHz,9,Так
+Процесор,Intel Core i7,66,91277,white.png,3.65 GHz,11,Ні
+Процесор,AMD Ryzen 9,80,16979,green.png,3.31 GHz,10,Ні
+Процесор,Intel Core i9,6,66915,green.png,4.76 GHz,5,Ні
+Процесор,Intel Core i5,30,35714,white.png,2.02 GHz,8,Ні
+Процесор,Intel Core i7,7,96999,white.png,4.65 GHz,14,Так
+Процесор,AMD Ryzen 9,55,29054,white.png,4.52 GHz,10,Так
+Процесор,AMD Ryzen 9,8,73483,green.png,2.61 GHz,8,Ні
+Процесор,Intel Core i5,97,24563,blue.png,2.39 GHz,10,Так
+Процесор,Intel Core i7,82,21136,blue.png,3.97 GHz,9,Ні
+Процесор,Intel Core i5,82,61448,red.png,2.23 GHz,4,Так
+Процесор,AMD Ryzen 7,27,44345,red.png,4.11 GHz,15,Так
+Процесор,AMD Ryzen 9,87,52875,white.png,2.89 GHz,14,Ні
+Процесор,Intel Core i5,62,82824,white.png,3.86 GHz,16,Так
+Процесор,Intel Core i9,31,53921,white.png,3.54 GHz,8,Ні
+Процесор,Intel Core i9,61,60326,red.png,4.57 GHz,14,Так
+Процесор,AMD Ryzen 9,64,32873,blue.png,2.62 GHz,13,Так
+Процесор,Intel Core i5,23,54121,red.png,4.57 GHz,8,Ні
+Процесор,AMD Ryzen 9,59,59194,white.png,2.44 GHz,16,Ні
+Процесор,AMD Ryzen 9,100,40532,blue.png,2.37 GHz,15,Так
+Процесор,AMD Ryzen 9,94,49050,white.png,4.11 GHz,4,Ні
+Процесор,Intel Core i9,12,21790,white.png,3.01 GHz,15,Так
+Процесор,Intel Core i9,4,55807,blue.png,3.76 GHz,12,Так
+Процесор,AMD Ryzen 9,42,97006,blue.png,2.81 GHz,12,Ні
+Процесор,AMD Ryzen 9,60,61461,red.png,2.09 GHz,6,Ні
+Процесор,Intel Core i9,99,26169,blue.png,4.13 GHz,4,Так
+Процесор,AMD Ryzen 9,57,86892,green.png,2.22 GHz,9,Ні
+Процесор,AMD Ryzen 7,21,40138,green.png,2.8 GHz,13,Так
+Процесор,AMD Ryzen 7,21,59480,red.png,3.32 GHz,9,Ні
+Процесор,Intel Core i7,60,61328,green.png,4.51 GHz,6,Ні
+Процесор,AMD Ryzen 9,75,17659,red.png,4.21 GHz,11,Так
+Процесор,AMD Ryzen 7,72,67572,green.png,3.54 GHz,4,Ні
+Процесор,Intel Core i9,45,42069,red.png,3.79 GHz,8,Ні
+Процесор,Intel Core i9,5,62994,blue.png,2.27 GHz,11,Так
+Процесор,Intel Core i9,1,47759,green.png,4.12 GHz,4,Ні
+Процесор,Intel Core i5,91,60932,blue.png,2.24 GHz,16,Так
+Процесор,Intel Core i5,41,21319,white.png,2.42 GHz,6,Ні
+Процесор,Intel Core i5,40,84418,blue.png,2.75 GHz,13,Ні
+Процесор,AMD Ryzen 9,29,22144,green.png,3.88 GHz,12,Так
+Процесор,Intel Core i5,54,65183,white.png,4.7 GHz,14,Ні
+Процесор,Intel Core i7,97,41902,green.png,3.47 GHz,7,Ні
+Процесор,Intel Core i7,93,15147,red.png,4.76 GHz,15,Ні
+Процесор,AMD Ryzen 7,4,69956,green.png,3.39 GHz,13,Так
+Процесор,Intel Core i9,4,32695,green.png,2.91 GHz,8,Так
+Процесор,AMD Ryzen 9,74,58107,blue.png,4.37 GHz,7,Так
+Процесор,Intel Core i5,28,80119,white.png,2.25 GHz,7,Так
+Процесор,AMD Ryzen 9,45,20986,white.png,3.63 GHz,15,Так
+Процесор,Intel Core i5,34,16096,blue.png,4.46 GHz,8,Ні
+Процесор,Intel Core i7,92,37830,blue.png,2.36 GHz,15,Ні
+Процесор,Intel Core i5,2,25550,blue.png,2.66 GHz,5,Так
+Процесор,AMD Ryzen 9,65,67954,blue.png,2.15 GHz,4,Ні
+Процесор,Intel Core i5,28,52376,green.png,3.43 GHz,6,Так
+Процесор,AMD Ryzen 9,31,85785,white.png,3.9 GHz,4,Так
+Процесор,AMD Ryzen 7,77,80387,white.png,3.45 GHz,7,Ні
+Процесор,AMD Ryzen 7,57,72108,red.png,2.95 GHz,12,Так
+Процесор,Intel Core i9,56,73293,green.png,4.74 GHz,9,Так
+Процесор,AMD Ryzen 9,69,17831,white.png,3.87 GHz,7,Так
+Процесор,AMD Ryzen 7,30,58736,green.png,3.36 GHz,8,Так
+Процесор,AMD Ryzen 9,100,61091,green.png,3.88 GHz,8,Ні
+Процесор,Intel Core i9,13,84333,green.png,2.11 GHz,5,Так
+Процесор,AMD Ryzen 7,63,70966,green.png,2.28 GHz,4,Так
+Процесор,Intel Core i5,19,41931,red.png,5.0 GHz,11,Так
+Процесор,Intel Core i5,67,51102,red.png,3.39 GHz,8,Ні
+Процесор,Intel Core i9,17,55977,green.png,2.95 GHz,8,Ні
+Материнська плата,Gigabyte AORUS,58,16802,blue.png,Mini-ITX,AMD,AM4,4,DDR4,1
+Материнська плата,Biostar Racing,2,55473,blue.png,ATX,Intel,LGA 1200,2,DDR5,2
+Материнська плата,Biostar Racing,69,76282,blue.png,Mini-ITX,AMD,LGA 1200,3,DDR5,1
+Материнська плата,ASRock Phantom,89,76563,white.png,Mini-ITX,AMD,AM4,6,DDR5,1
+Материнська плата,ASRock Phantom,37,88145,green.png,Mini-ITX,AMD,LGA 1200,8,DDR5,1
+Материнська плата,ASRock Phantom,16,86601,white.png,Micro-ATX,AMD,AM4,2,DDR5,1
+Материнська плата,MSI MAG,59,46734,green.png,Mini-ITX,AMD,AM4,7,DDR4,3
+Материнська плата,MSI MAG,74,99000,red.png,ATX,Intel,LGA 1200,5,DDR5,4
+Материнська плата,ASUS ROG,9,74746,white.png,Mini-ITX,Intel,LGA 1200,2,DDR5,2
+Материнська плата,ASUS ROG,73,83520,green.png,Micro-ATX,Intel,LGA 1200,3,DDR5,4
+Материнська плата,ASUS ROG,8,73585,blue.png,Micro-ATX,Intel,LGA 1200,7,DDR5,2
+Материнська плата,ASRock Phantom,63,88153,blue.png,Mini-ITX,Intel,LGA 1200,7,DDR4,1
+Материнська плата,ASUS ROG,75,39969,green.png,Mini-ITX,Intel,AM4,2,DDR5,3
+Материнська плата,MSI MAG,85,44320,blue.png,ATX,AMD,LGA 1200,6,DDR5,4
+Материнська плата,ASRock Phantom,17,76368,red.png,Mini-ITX,Intel,LGA 1200,6,DDR5,1
+Материнська плата,Biostar Racing,80,93466,white.png,ATX,Intel,AM4,8,DDR5,4
+Материнська плата,Gigabyte AORUS,70,69828,white.png,Mini-ITX,Intel,AM4,6,DDR5,4
+Материнська плата,ASRock Phantom,74,89358,red.png,ATX,AMD,LGA 1200,7,DDR4,2
+Материнська плата,Gigabyte AORUS,25,98528,green.png,Micro-ATX,AMD,AM4,8,DDR4,1
+Материнська плата,Gigabyte AORUS,1,40990,red.png,Mini-ITX,Intel,LGA 1200,2,DDR4,1
+Материнська плата,Biostar Racing,99,75586,blue.png,ATX,Intel,AM4,4,DDR4,1
+Материнська плата,MSI MAG,97,81802,blue.png,ATX,AMD,AM4,7,DDR5,4
+Материнська плата,Biostar Racing,25,61173,red.png,Mini-ITX,AMD,AM4,5,DDR4,2
+Материнська плата,Gigabyte AORUS,55,70313,green.png,Micro-ATX,Intel,LGA 1200,2,DDR4,4
+Материнська плата,MSI MAG,8,53074,red.png,ATX,Intel,AM4,3,DDR4,3
+Материнська плата,Gigabyte AORUS,34,97498,red.png,Mini-ITX,AMD,AM4,2,DDR5,2
+Материнська плата,ASRock Phantom,61,89651,blue.png,ATX,AMD,LGA 1200,5,DDR5,3
+Материнська плата,MSI MAG,87,61146,red.png,Micro-ATX,AMD,LGA 1200,7,DDR5,2
+Материнська плата,ASUS ROG,18,15233,red.png,ATX,AMD,AM4,6,DDR4,3
+Материнська плата,ASRock Phantom,67,94940,red.png,Micro-ATX,AMD,LGA 1200,3,DDR5,2
+Материнська плата,ASUS ROG,87,55419,red.png,Micro-ATX,Intel,AM4,7,DDR5,1
+Материнська плата,ASUS ROG,85,14289,green.png,Mini-ITX,Intel,LGA 1200,5,DDR5,2
+Материнська плата,MSI MAG,60,10565,blue.png,Mini-ITX,AMD,LGA 1200,6,DDR5,2
+Материнська плата,Biostar Racing,54,76114,white.png,Mini-ITX,Intel,LGA 1200,5,DDR4,3
+Материнська плата,ASRock Phantom,17,56821,blue.png,ATX,Intel,LGA 1200,6,DDR4,2
+Материнська плата,ASUS ROG,45,38068,blue.png,Mini-ITX,Intel,LGA 1200,8,DDR5,3
+Материнська плата,ASRock Phantom,63,62757,red.png,ATX,Intel,AM4,3,DDR5,1
+Материнська плата,ASUS ROG,83,74997,red.png,Micro-ATX,AMD,LGA 1200,6,DDR4,4
+Материнська плата,Gigabyte AORUS,57,44120,red.png,Micro-ATX,Intel,AM4,6,DDR5,3
+Материнська плата,Gigabyte AORUS,64,67415,red.png,ATX,Intel,LGA 1200,7,DDR5,1
+Материнська плата,ASUS ROG,94,16794,red.png,Micro-ATX,AMD,AM4,5,DDR4,4
+Материнська плата,ASRock Phantom,12,63393,red.png,Micro-ATX,AMD,AM4,7,DDR5,1
+Материнська плата,ASUS ROG,7,63221,blue.png,ATX,AMD,LGA 1200,3,DDR5,1
+Материнська плата,Biostar Racing,86,51627,white.png,Micro-ATX,AMD,AM4,4,DDR5,3
+Материнська плата,Biostar Racing,87,81354,blue.png,Micro-ATX,AMD,LGA 1200,2,DDR5,2
+Материнська плата,Gigabyte AORUS,24,86465,white.png,ATX,AMD,LGA 1200,5,DDR4,2
+Материнська плата,ASRock Phantom,61,31184,blue.png,Mini-ITX,AMD,LGA 1200,3,DDR5,2
+Материнська плата,ASRock Phantom,4,33995,white.png,Mini-ITX,AMD,LGA 1200,5,DDR4,3
+Материнська плата,Gigabyte AORUS,10,62279,white.png,Micro-ATX,AMD,AM4,5,DDR4,3
+Материнська плата,MSI MAG,80,45530,red.png,ATX,AMD,LGA 1200,8,DDR4,3
+Материнська плата,Gigabyte AORUS,60,98158,green.png,ATX,Intel,LGA 1200,7,DDR5,4
+Материнська плата,ASUS ROG,43,67879,red.png,ATX,AMD,AM4,4,DDR4,3
+Материнська плата,Gigabyte AORUS,33,49617,white.png,ATX,Intel,AM4,3,DDR5,1
+Материнська плата,ASUS ROG,66,56574,red.png,Micro-ATX,AMD,LGA 1200,7,DDR4,1
+Материнська плата,ASUS ROG,47,97594,blue.png,Mini-ITX,AMD,LGA 1200,3,DDR4,4
+Материнська плата,Gigabyte AORUS,24,16170,white.png,Mini-ITX,AMD,AM4,5,DDR5,1
+Материнська плата,Gigabyte AORUS,34,57955,red.png,Mini-ITX,AMD,AM4,2,DDR5,4
+Материнська плата,ASUS ROG,98,77537,blue.png,Micro-ATX,Intel,LGA 1200,5,DDR5,2
+Материнська плата,Gigabyte AORUS,55,68842,white.png,ATX,AMD,LGA 1200,8,DDR4,1
+Материнська плата,MSI MAG,42,83157,white.png,Mini-ITX,AMD,AM4,8,DDR5,2
+Материнська плата,Biostar Racing,42,14833,red.png,ATX,AMD,LGA 1200,3,DDR4,2
+Материнська плата,ASUS ROG,31,43964,blue.png,ATX,AMD,AM4,8,DDR4,3
+Материнська плата,ASRock Phantom,54,14058,green.png,Mini-ITX,Intel,AM4,5,DDR5,3
+Материнська плата,MSI MAG,20,69299,blue.png,Mini-ITX,AMD,LGA 1200,4,DDR4,3
+Материнська плата,Biostar Racing,84,80240,red.png,Micro-ATX,AMD,LGA 1200,3,DDR4,3
+Материнська плата,ASRock Phantom,53,40140,green.png,ATX,Intel,LGA 1200,2,DDR5,3
+Материнська плата,ASRock Phantom,6,48012,blue.png,Micro-ATX,Intel,LGA 1200,8,DDR5,2
+Материнська плата,Biostar Racing,49,83688,white.png,Mini-ITX,AMD,AM4,6,DDR4,4
+Материнська плата,MSI MAG,15,22391,white.png,Micro-ATX,Intel,AM4,2,DDR4,4
+Материнська плата,Biostar Racing,94,68990,red.png,ATX,AMD,LGA 1200,3,DDR5,3
+Материнська плата,Gigabyte AORUS,52,70533,green.png,Mini-ITX,AMD,AM4,4,DDR5,1
+Материнська плата,ASUS ROG,88,62707,green.png,ATX,Intel,LGA 1200,7,DDR5,3
+Материнська плата,Biostar Racing,94,24384,white.png,Mini-ITX,AMD,AM4,4,DDR4,1
+Материнська плата,ASUS ROG,57,57933,red.png,Mini-ITX,Intel,AM4,6,DDR4,3
+Материнська плата,MSI MAG,1,77215,white.png,Micro-ATX,AMD,LGA 1200,3,DDR4,4
+Материнська плата,ASUS ROG,63,60393,green.png,Mini-ITX,Intel,AM4,2,DDR4,4
+Материнська плата,Biostar Racing,31,88178,red.png,Mini-ITX,Intel,LGA 1200,4,DDR4,2
+Материнська плата,Gigabyte AORUS,89,28346,green.png,ATX,AMD,LGA 1200,4,DDR4,1
+Материнська плата,MSI MAG,11,37202,green.png,Micro-ATX,AMD,AM4,6,DDR4,4
+Материнська плата,Gigabyte AORUS,70,88569,blue.png,Mini-ITX,Intel,LGA 1200,6,DDR4,4
+Материнська плата,MSI MAG,18,91325,red.png,Mini-ITX,AMD,LGA 1200,8,DDR4,2
+Материнська плата,Biostar Racing,34,97955,white.png,Mini-ITX,Intel,AM4,8,DDR4,1
+Материнська плата,ASUS ROG,97,66378,blue.png,Micro-ATX,AMD,AM4,5,DDR5,2
+Материнська плата,Biostar Racing,55,48551,blue.png,Mini-ITX,Intel,AM4,3,DDR5,3
+Материнська плата,Biostar Racing,91,72001,white.png,Mini-ITX,AMD,AM4,7,DDR4,4
+Материнська плата,MSI MAG,76,82064,green.png,Micro-ATX,AMD,LGA 1200,4,DDR5,2
+Материнська плата,ASUS ROG,85,75922,blue.png,Micro-ATX,AMD,AM4,2,DDR4,1
+Материнська плата,MSI MAG,24,44140,red.png,Mini-ITX,Intel,AM4,5,DDR5,1
+Материнська плата,Biostar Racing,25,15691,green.png,Micro-ATX,Intel,AM4,6,DDR4,3
+Материнська плата,ASRock Phantom,70,90386,white.png,Mini-ITX,AMD,AM4,2,DDR5,3
+Материнська плата,ASUS ROG,8,28309,green.png,Mini-ITX,AMD,LGA 1200,6,DDR4,1
+Материнська плата,Gigabyte AORUS,40,65074,red.png,Mini-ITX,AMD,AM4,2,DDR5,1
+Материнська плата,ASUS ROG,25,43798,red.png,Mini-ITX,AMD,AM4,3,DDR4,3
+Материнська плата,ASRock Phantom,39,75525,red.png,Micro-ATX,AMD,AM4,8,DDR4,2
+Материнська плата,MSI MAG,81,74132,blue.png,ATX,AMD,LGA 1200,2,DDR4,1
+Материнська плата,ASRock Phantom,100,15862,green.png,ATX,Intel,LGA 1200,4,DDR4,2
+Материнська плата,Biostar Racing,32,52144,white.png,ATX,AMD,AM4,7,DDR4,3
+Материнська плата,Biostar Racing,26,29613,blue.png,Micro-ATX,Intel,LGA 1200,5,DDR5,2
+Материнська плата,ASUS ROG,88,40502,red.png,Mini-ITX,Intel,LGA 1200,6,DDR5,4
+Материнська плата,ASRock Phantom,92,54112,blue.png,ATX,AMD,AM4,4,DDR4,4
+Материнська плата,ASUS ROG,70,79485,red.png,ATX,Intel,LGA 1200,4,DDR4,4
+Материнська плата,Gigabyte AORUS,80,54119,red.png,Mini-ITX,Intel,LGA 1200,5,DDR4,4
+Материнська плата,Gigabyte AORUS,5,34627,red.png,ATX,Intel,LGA 1200,5,DDR4,4
+Материнська плата,ASRock Phantom,34,66975,white.png,ATX,AMD,LGA 1200,3,DDR5,1
+Материнська плата,MSI MAG,71,84467,red.png,Mini-ITX,Intel,AM4,7,DDR5,2
+Материнська плата,ASRock Phantom,79,37511,green.png,ATX,Intel,AM4,4,DDR5,1
+Материнська плата,ASRock Phantom,53,83949,green.png,Micro-ATX,AMD,LGA 1200,3,DDR4,1
+Материнська плата,ASUS ROG,42,26505,green.png,Micro-ATX,AMD,LGA 1200,8,DDR4,2
+Материнська плата,ASRock Phantom,14,98733,green.png,Micro-ATX,AMD,LGA 1200,6,DDR4,3
+Материнська плата,ASRock Phantom,76,24728,green.png,Mini-ITX,AMD,LGA 1200,4,DDR5,3
+Материнська плата,ASRock Phantom,98,69352,blue.png,ATX,Intel,LGA 1200,5,DDR5,3
+Материнська плата,Biostar Racing,51,74280,blue.png,Micro-ATX,Intel,AM4,3,DDR4,4
+Материнська плата,Biostar Racing,83,34053,blue.png,Micro-ATX,AMD,LGA 1200,8,DDR5,3
+Материнська плата,Gigabyte AORUS,38,26421,green.png,ATX,AMD,LGA 1200,5,DDR5,3
+Материнська плата,ASRock Phantom,37,72527,blue.png,Mini-ITX,AMD,LGA 1200,6,DDR5,1
+Материнська плата,MSI MAG,50,82120,red.png,Micro-ATX,Intel,AM4,6,DDR4,4
+Материнська плата,Gigabyte AORUS,13,52882,blue.png,Micro-ATX,AMD,LGA 1200,2,DDR4,3
+Материнська плата,MSI MAG,17,68601,blue.png,ATX,AMD,LGA 1200,7,DDR4,1
+Материнська плата,ASUS ROG,18,66918,green.png,Mini-ITX,AMD,AM4,8,DDR4,1
+Материнська плата,ASRock Phantom,94,20172,red.png,Mini-ITX,AMD,AM4,2,DDR5,3
+Материнська плата,ASUS ROG,46,77789,blue.png,ATX,AMD,LGA 1200,3,DDR4,4
+Материнська плата,Biostar Racing,7,33519,blue.png,ATX,Intel,AM4,6,DDR5,2
+Материнська плата,Biostar Racing,26,27290,white.png,Mini-ITX,Intel,LGA 1200,7,DDR5,1
+Материнська плата,MSI MAG,95,85111,green.png,Micro-ATX,Intel,AM4,2,DDR4,4
+Материнська плата,Gigabyte AORUS,95,15689,white.png,ATX,AMD,LGA 1200,8,DDR5,2
+Материнська плата,MSI MAG,33,15196,blue.png,ATX,Intel,AM4,8,DDR4,2
+Материнська плата,Biostar Racing,17,82485,white.png,Mini-ITX,AMD,AM4,2,DDR5,1
+Материнська плата,MSI MAG,23,16477,red.png,ATX,AMD,LGA 1200,2,DDR5,3
+Материнська плата,Biostar Racing,98,98485,red.png,ATX,AMD,AM4,4,DDR4,2
+Материнська плата,ASUS ROG,56,91011,blue.png,ATX,Intel,AM4,6,DDR4,4
+Материнська плата,ASUS ROG,77,51397,red.png,ATX,AMD,AM4,6,DDR4,1
+Материнська плата,MSI MAG,71,62541,red.png,Mini-ITX,Intel,AM4,8,DDR4,4
+Материнська плата,Biostar Racing,42,33481,red.png,ATX,Intel,LGA 1200,2,DDR4,1
+Материнська плата,Gigabyte AORUS,37,58117,green.png,Mini-ITX,Intel,LGA 1200,4,DDR4,2
+Материнська плата,Biostar Racing,74,20671,red.png,ATX,Intel,LGA 1200,7,DDR5,4
+Материнська плата,Biostar Racing,33,25653,red.png,ATX,AMD,LGA 1200,5,DDR4,1
+Материнська плата,ASRock Phantom,4,72452,white.png,Mini-ITX,AMD,LGA 1200,8,DDR5,1
+Материнська плата,Gigabyte AORUS,59,38268,red.png,ATX,Intel,AM4,5,DDR4,1
+Материнська плата,Gigabyte AORUS,6,72554,red.png,ATX,Intel,LGA 1200,2,DDR4,1
+Материнська плата,ASUS ROG,56,58340,red.png,Mini-ITX,Intel,AM4,6,DDR5,3
+Материнська плата,ASRock Phantom,49,16136,blue.png,Micro-ATX,AMD,AM4,4,DDR4,2
+Материнська плата,ASUS ROG,69,23290,green.png,Micro-ATX,AMD,LGA 1200,2,DDR4,3
+Материнська плата,ASRock Phantom,26,50167,blue.png,Mini-ITX,AMD,LGA 1200,5,DDR4,2
+Материнська плата,Biostar Racing,77,54801,green.png,ATX,AMD,AM4,2,DDR5,3
+Материнська плата,MSI MAG,58,67417,red.png,Micro-ATX,Intel,LGA 1200,7,DDR4,2
+Материнська плата,ASUS ROG,48,26039,blue.png,Mini-ITX,Intel,AM4,7,DDR5,1
+Материнська плата,Gigabyte AORUS,34,17946,white.png,Mini-ITX,Intel,AM4,4,DDR5,3
+Материнська плата,ASUS ROG,36,57997,red.png,Micro-ATX,Intel,LGA 1200,7,DDR5,4
+Материнська плата,ASRock Phantom,33,22173,blue.png,ATX,AMD,LGA 1200,4,DDR4,1
+Материнська плата,Gigabyte AORUS,12,65219,red.png,ATX,AMD,LGA 1200,2,DDR4,4
+Материнська плата,MSI MAG,20,25778,red.png,Micro-ATX,Intel,AM4,5,DDR4,1
+Материнська плата,Biostar Racing,57,41761,white.png,ATX,Intel,LGA 1200,2,DDR4,4
+Материнська плата,ASUS ROG,89,71454,blue.png,Mini-ITX,AMD,AM4,7,DDR5,2
+Материнська плата,MSI MAG,86,78199,red.png,Micro-ATX,AMD,AM4,7,DDR4,4
+Материнська плата,Biostar Racing,85,57312,white.png,Mini-ITX,Intel,AM4,7,DDR4,1
+Материнська плата,Gigabyte AORUS,30,45490,white.png,ATX,AMD,AM4,6,DDR5,1
+Материнська плата,Biostar Racing,91,37445,blue.png,ATX,Intel,LGA 1200,6,DDR4,4
+Материнська плата,ASUS ROG,86,49222,red.png,Mini-ITX,AMD,AM4,6,DDR4,2
+Материнська плата,ASRock Phantom,2,38594,white.png,Mini-ITX,Intel,LGA 1200,4,DDR5,2
+Материнська плата,Gigabyte AORUS,32,19260,white.png,Mini-ITX,Intel,AM4,4,DDR4,4
+Материнська плата,MSI MAG,17,53492,red.png,Mini-ITX,Intel,LGA 1200,7,DDR4,4
+Материнська плата,MSI MAG,54,86029,white.png,ATX,Intel,AM4,7,DDR5,1
+Материнська плата,ASRock Phantom,67,38502,blue.png,ATX,AMD,LGA 1200,8,DDR4,3
+Материнська плата,Gigabyte AORUS,53,97419,white.png,Micro-ATX,AMD,AM4,8,DDR5,4
+Материнська плата,Gigabyte AORUS,9,62109,red.png,ATX,Intel,LGA 1200,3,DDR4,4
+Материнська плата,ASRock Phantom,64,20606,white.png,ATX,AMD,LGA 1200,7,DDR4,1
+Материнська плата,ASRock Phantom,43,58634,white.png,Mini-ITX,Intel,AM4,8,DDR5,3
+Материнська плата,ASUS ROG,61,69135,white.png,Micro-ATX,Intel,AM4,8,DDR4,3
+Материнська плата,ASUS ROG,4,33100,green.png,Mini-ITX,Intel,LGA 1200,4,DDR5,3
+Материнська плата,ASRock Phantom,78,77081,red.png,ATX,Intel,AM4,3,DDR5,1
+Материнська плата,Biostar Racing,48,48539,red.png,Micro-ATX,AMD,LGA 1200,4,DDR5,2
+Материнська плата,ASUS ROG,64,35995,red.png,ATX,AMD,LGA 1200,5,DDR5,1
+Материнська плата,MSI MAG,99,49812,red.png,Micro-ATX,AMD,LGA 1200,3,DDR5,2
+Материнська плата,Gigabyte AORUS,37,38781,blue.png,ATX,AMD,LGA 1200,4,DDR5,1
+Материнська плата,ASUS ROG,43,36065,green.png,Micro-ATX,AMD,LGA 1200,6,DDR5,1
+Материнська плата,ASRock Phantom,12,93984,red.png,Micro-ATX,Intel,AM4,8,DDR5,4
+Материнська плата,Biostar Racing,49,90681,green.png,Micro-ATX,Intel,LGA 1200,8,DDR5,4
+Материнська плата,ASRock Phantom,10,53411,white.png,Mini-ITX,AMD,AM4,7,DDR4,2
+Материнська плата,ASUS ROG,56,49462,blue.png,ATX,Intel,AM4,8,DDR5,1
+Материнська плата,Gigabyte AORUS,92,55006,red.png,Micro-ATX,AMD,LGA 1200,4,DDR5,3
+Материнська плата,MSI MAG,29,80574,red.png,Micro-ATX,Intel,LGA 1200,8,DDR4,2
+Оперативна пам'ять,Corsair Vengeance,1,87491,red.png,DDR5,26 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,0,17079,green.png,DDR4,16 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,33,15896,blue.png,DDR4,11 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,1,41828,white.png,DDR5,36 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,32,19834,red.png,DDR5,39 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,20,26014,green.png,DDR4,20 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,2,30821,green.png,DDR4,43 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,91,32308,green.png,DDR4,31 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,75,72141,blue.png,DDR4,44 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,59,73506,green.png,DDR4,19 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,64,50862,white.png,DDR4,11 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,98,73706,red.png,DDR4,43 GB,3600 MHz
+Оперативна пам'ять,Patriot Viper,60,41244,green.png,DDR5,58 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,11,82761,white.png,DDR5,6 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,98,17588,blue.png,DDR4,28 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,77,99343,red.png,DDR4,45 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,11,23612,green.png,DDR4,53 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,100,54209,green.png,DDR5,26 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,67,87635,red.png,DDR5,54 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,46,68506,green.png,DDR4,27 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,4,21892,green.png,DDR5,38 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,54,92187,white.png,DDR5,26 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,56,29501,red.png,DDR4,54 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,18,39132,green.png,DDR4,38 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,51,30539,white.png,DDR5,40 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,35,81239,red.png,DDR5,39 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,49,31229,red.png,DDR4,64 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,60,42813,blue.png,DDR4,20 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,54,68007,red.png,DDR5,24 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,94,26777,white.png,DDR5,31 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,21,48801,red.png,DDR4,16 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,50,38723,green.png,DDR5,48 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,25,13734,blue.png,DDR4,56 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,27,18449,red.png,DDR4,9 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,43,40473,blue.png,DDR4,23 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,50,16720,white.png,DDR5,26 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,93,14703,blue.png,DDR4,10 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,90,71207,white.png,DDR4,5 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,45,58279,red.png,DDR4,38 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,100,26787,green.png,DDR5,25 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,33,93279,white.png,DDR4,20 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,43,35468,green.png,DDR5,60 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,3,27962,red.png,DDR5,39 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,27,26199,green.png,DDR4,29 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,4,40149,red.png,DDR4,54 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,26,64108,green.png,DDR4,44 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,22,44920,red.png,DDR5,57 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,98,50026,white.png,DDR5,64 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,85,55758,white.png,DDR4,10 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,52,75490,white.png,DDR4,12 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,98,14349,white.png,DDR5,48 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,47,25988,green.png,DDR4,53 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,53,71033,blue.png,DDR4,32 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,49,77471,red.png,DDR5,60 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,92,24865,red.png,DDR5,16 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,36,34244,white.png,DDR5,9 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,82,12857,red.png,DDR5,8 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,3,33333,blue.png,DDR4,18 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,64,11726,white.png,DDR5,63 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,81,58415,red.png,DDR4,27 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,88,63507,blue.png,DDR4,14 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,33,95444,white.png,DDR4,60 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,7,90037,blue.png,DDR5,39 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,46,27561,blue.png,DDR5,50 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,14,12932,red.png,DDR5,64 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,51,66230,blue.png,DDR4,31 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,14,49245,blue.png,DDR4,55 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,23,56393,green.png,DDR4,33 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,12,82980,green.png,DDR5,58 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,4,94460,white.png,DDR4,12 GB,3600 MHz
+Оперативна пам'ять,Patriot Viper,14,84302,blue.png,DDR4,14 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,44,11398,blue.png,DDR4,53 GB,3600 MHz
+Оперативна пам'ять,Patriot Viper,0,39590,white.png,DDR4,46 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,95,61769,green.png,DDR4,31 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,10,88440,white.png,DDR5,22 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,28,83937,green.png,DDR5,37 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,71,46167,green.png,DDR5,56 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,58,54361,green.png,DDR4,4 GB,2400 MHz
+Оперативна пам'ять,Patriot Viper,62,29689,blue.png,DDR4,46 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,65,45511,white.png,DDR4,25 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,82,59592,green.png,DDR5,50 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,73,49737,green.png,DDR4,22 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,67,53586,red.png,DDR4,38 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,25,57035,blue.png,DDR4,63 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,65,20534,blue.png,DDR5,48 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,53,77522,red.png,DDR4,22 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,52,27258,blue.png,DDR4,29 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,22,53428,blue.png,DDR4,35 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,29,77837,white.png,DDR4,63 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,12,92482,red.png,DDR5,63 GB,3600 MHz
+Оперативна пам'ять,Patriot Viper,69,63323,red.png,DDR4,52 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,89,49835,red.png,DDR4,25 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,0,66366,green.png,DDR5,14 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,20,53250,blue.png,DDR4,35 GB,3600 MHz
+Оперативна пам'ять,Patriot Viper,73,91597,green.png,DDR4,51 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,30,77223,green.png,DDR5,31 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,24,73554,blue.png,DDR5,55 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,32,77277,blue.png,DDR5,45 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,81,30340,green.png,DDR5,61 GB,3600 MHz
+Оперативна пам'ять,G.Skill Ripjaws,90,40408,green.png,DDR4,58 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,33,91724,red.png,DDR4,24 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,30,36310,green.png,DDR5,28 GB,2400 MHz
+Оперативна пам'ять,G.Skill Ripjaws,89,67461,red.png,DDR5,34 GB,3200 MHz
+Оперативна пам'ять,Patriot Viper,25,74846,blue.png,DDR4,43 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,53,57700,red.png,DDR5,53 GB,3600 MHz
+Оперативна пам'ять,Corsair Vengeance,79,81111,white.png,DDR5,36 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,95,35293,white.png,DDR5,22 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,59,68889,green.png,DDR4,50 GB,2400 MHz
+Оперативна пам'ять,Crucial Ballistix,82,88705,white.png,DDR5,28 GB,3600 MHz
+Оперативна пам'ять,Kingston HyperX,40,96364,green.png,DDR5,41 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,16,36972,blue.png,DDR5,21 GB,3600 MHz
+Оперативна пам'ять,Crucial Ballistix,30,31313,red.png,DDR4,4 GB,3200 MHz
+Оперативна пам'ять,Corsair Vengeance,3,75909,red.png,DDR5,18 GB,3200 MHz
+Оперативна пам'ять,Kingston HyperX,83,12816,white.png,DDR5,34 GB,3200 MHz
+Оперативна пам'ять,G.Skill Ripjaws,37,29836,green.png,DDR5,7 GB,3200 MHz
+Оперативна пам'ять,Crucial Ballistix,45,58607,blue.png,DDR4,47 GB,2400 MHz
+Оперативна пам'ять,Corsair Vengeance,93,51668,red.png,DDR5,19 GB,2400 MHz
+Оперативна пам'ять,Kingston HyperX,4,36522,white.png,DDR5,25 GB,3200 MHz
+Накопичувачі,Seagate FireCuda,30,71179,green.png,SSD,1623 GB,1000 MB/s,4772 TBW
+Накопичувачі,WD Black SN750,25,23199,blue.png,HDD,1020 GB,2000 MB/s,3505 TBW
+Накопичувачі,Seagate FireCuda,84,85972,red.png,HDD,752 GB,2000 MB/s,4418 TBW
+Накопичувачі,Kingston A2000,10,76390,blue.png,HDD,900 GB,2000 MB/s,2891 TBW
+Накопичувачі,Samsung 970 EVO,80,89683,white.png,HDD,1026 GB,2000 MB/s,3999 TBW
+Накопичувачі,Kingston A2000,54,80688,red.png,HDD,837 GB,1000 MB/s,4762 TBW
+Накопичувачі,Kingston A2000,34,95076,white.png,HDD,420 GB,2000 MB/s,3012 TBW
+Накопичувачі,WD Black SN750,11,48516,red.png,SSD,1621 GB,500 MB/s,3356 TBW
+Накопичувачі,Seagate FireCuda,64,71891,red.png,SSD,415 GB,500 MB/s,3681 TBW
+Накопичувачі,Samsung 970 EVO,1,79768,red.png,SSD,1976 GB,2000 MB/s,3029 TBW
+Накопичувачі,Samsung 970 EVO,100,34028,red.png,SSD,657 GB,2000 MB/s,3205 TBW
+Накопичувачі,Crucial P5,50,82218,white.png,SSD,1249 GB,500 MB/s,3635 TBW
+Накопичувачі,WD Black SN750,35,62901,red.png,HDD,1142 GB,2000 MB/s,4965 TBW
+Накопичувачі,Seagate FireCuda,72,77524,red.png,SSD,1558 GB,2000 MB/s,2940 TBW
+Накопичувачі,Samsung 970 EVO,83,98984,red.png,SSD,1955 GB,500 MB/s,2596 TBW
+Накопичувачі,WD Black SN750,89,64121,red.png,HDD,1555 GB,1000 MB/s,1142 TBW
+Накопичувачі,Kingston A2000,74,51808,white.png,SSD,354 GB,2000 MB/s,1358 TBW
+Накопичувачі,Seagate FireCuda,52,86921,white.png,HDD,1624 GB,2000 MB/s,2983 TBW
+Накопичувачі,Kingston A2000,51,75334,white.png,SSD,525 GB,2000 MB/s,4306 TBW
+Накопичувачі,Crucial P5,67,70289,white.png,HDD,710 GB,2000 MB/s,4196 TBW
+Накопичувачі,Crucial P5,78,41353,white.png,HDD,418 GB,1000 MB/s,4241 TBW
+Накопичувачі,Samsung 970 EVO,37,45708,white.png,SSD,507 GB,1000 MB/s,3904 TBW
+Накопичувачі,WD Black SN750,77,37065,white.png,HDD,884 GB,1000 MB/s,4173 TBW
+Накопичувачі,Kingston A2000,41,23554,red.png,HDD,612 GB,1000 MB/s,4507 TBW
+Накопичувачі,Crucial P5,46,98726,red.png,SSD,914 GB,1000 MB/s,3117 TBW
+Накопичувачі,Seagate FireCuda,10,95933,red.png,SSD,335 GB,500 MB/s,2653 TBW
+Накопичувачі,WD Black SN750,47,74084,white.png,HDD,1457 GB,2000 MB/s,2989 TBW
+Накопичувачі,WD Black SN750,99,75288,blue.png,HDD,1309 GB,500 MB/s,2870 TBW
+Накопичувачі,Samsung 970 EVO,10,62774,green.png,SSD,1593 GB,500 MB/s,3532 TBW
+Накопичувачі,Crucial P5,5,94583,green.png,HDD,1436 GB,2000 MB/s,4111 TBW
+Накопичувачі,Kingston A2000,17,14943,blue.png,HDD,1177 GB,1000 MB/s,3944 TBW
+Накопичувачі,Kingston A2000,67,60928,red.png,HDD,947 GB,2000 MB/s,3393 TBW
+Накопичувачі,Seagate FireCuda,44,23986,green.png,HDD,1240 GB,1000 MB/s,2932 TBW
+Накопичувачі,Samsung 970 EVO,4,61143,green.png,SSD,1350 GB,1000 MB/s,2655 TBW
+Накопичувачі,Seagate FireCuda,67,82195,blue.png,HDD,1115 GB,500 MB/s,2348 TBW
+Накопичувачі,WD Black SN750,58,59469,green.png,HDD,1727 GB,500 MB/s,3342 TBW
+Накопичувачі,Samsung 970 EVO,95,92428,white.png,SSD,1049 GB,500 MB/s,1937 TBW
+Накопичувачі,Seagate FireCuda,29,60915,white.png,SSD,1899 GB,2000 MB/s,3809 TBW
+Накопичувачі,WD Black SN750,63,67654,white.png,HDD,777 GB,1000 MB/s,3133 TBW
+Накопичувачі,Kingston A2000,79,62113,white.png,SSD,1327 GB,500 MB/s,2138 TBW
+Накопичувачі,Kingston A2000,61,81716,blue.png,SSD,1586 GB,2000 MB/s,2271 TBW
+Накопичувачі,Kingston A2000,49,60751,white.png,SSD,1100 GB,1000 MB/s,4286 TBW
+Накопичувачі,Kingston A2000,47,30389,green.png,SSD,1434 GB,1000 MB/s,4064 TBW
+Накопичувачі,Kingston A2000,66,10533,white.png,HDD,408 GB,500 MB/s,2038 TBW
+Накопичувачі,Crucial P5,69,96698,white.png,HDD,957 GB,1000 MB/s,2450 TBW
+Накопичувачі,Samsung 970 EVO,66,64122,green.png,HDD,1268 GB,2000 MB/s,3941 TBW
+Накопичувачі,Seagate FireCuda,2,29260,blue.png,HDD,1368 GB,1000 MB/s,2209 TBW
+Накопичувачі,Crucial P5,98,65709,white.png,HDD,470 GB,1000 MB/s,2465 TBW
+Накопичувачі,Samsung 970 EVO,11,87038,white.png,SSD,1279 GB,2000 MB/s,1745 TBW
+Накопичувачі,Crucial P5,57,83376,blue.png,HDD,1841 GB,1000 MB/s,3719 TBW
+Накопичувачі,Crucial P5,74,36041,blue.png,HDD,1417 GB,1000 MB/s,2670 TBW
+Накопичувачі,Kingston A2000,3,39196,green.png,HDD,1715 GB,1000 MB/s,2703 TBW
+Накопичувачі,Crucial P5,66,64339,green.png,SSD,1763 GB,2000 MB/s,4073 TBW
+Накопичувачі,Crucial P5,1,88381,white.png,HDD,986 GB,2000 MB/s,3855 TBW
+Накопичувачі,Crucial P5,52,75264,white.png,HDD,800 GB,2000 MB/s,2545 TBW
+Накопичувачі,WD Black SN750,19,77709,green.png,SSD,1600 GB,1000 MB/s,1168 TBW
+Накопичувачі,Crucial P5,62,95236,blue.png,SSD,1611 GB,2000 MB/s,3679 TBW
+Накопичувачі,Seagate FireCuda,49,74611,blue.png,HDD,971 GB,2000 MB/s,3041 TBW
+Накопичувачі,WD Black SN750,39,31612,red.png,HDD,685 GB,1000 MB/s,1181 TBW
+Накопичувачі,Samsung 970 EVO,58,12590,red.png,SSD,902 GB,1000 MB/s,1329 TBW
+Відеокарта,AMD RX 6800,80,53143,blue.png,AMD RX 6800,13 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,99,45058,red.png,NVIDIA RTX 3080,7 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,9,35641,red.png,NVIDIA RTX 3070,7 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,33,64286,green.png,AMD RX 6700,5 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,12,78605,blue.png,AMD RX 6700,12 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,5,63572,red.png,NVIDIA RTX 3080,9 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,74,39750,blue.png,NVIDIA RTX 3070,16 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,97,82082,green.png,NVIDIA RTX 3080,7 GB,GDDR7,3.0
+Відеокарта,AMD RX 6800,80,30928,white.png,AMD RX 6800,11 GB,GDDR6,3.0
+Відеокарта,AMD RX 6800,64,81982,blue.png,AMD RX 6800,11 GB,GDDR5,4.0
+Відеокарта,AMD RX 6800,67,13770,white.png,AMD RX 6800,15 GB,GDDR5,3.0
+Відеокарта,AMD RX 6700,77,47908,white.png,AMD RX 6700,9 GB,GDDR5,3.0
+Відеокарта,AMD RX 6800,10,54139,blue.png,AMD RX 6800,6 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,79,15719,green.png,NVIDIA RTX 3080,10 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3080,68,68497,blue.png,NVIDIA RTX 3080,16 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3080,68,96581,white.png,NVIDIA RTX 3080,5 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,73,92148,white.png,NVIDIA GTX 1660,6 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,100,52925,white.png,AMD RX 6700,12 GB,GDDR7,3.0
+Відеокарта,AMD RX 6800,8,66731,red.png,AMD RX 6800,16 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3070,90,65692,blue.png,NVIDIA RTX 3070,12 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,85,53451,blue.png,NVIDIA RTX 3070,7 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,20,55029,blue.png,NVIDIA RTX 3080,16 GB,GDDR6,4.0
+Відеокарта,AMD RX 6700,93,83110,white.png,AMD RX 6700,7 GB,GDDR7,4.0
+Відеокарта,NVIDIA GTX 1660,68,21180,white.png,NVIDIA GTX 1660,8 GB,GDDR5,3.0
+Відеокарта,NVIDIA GTX 1660,47,25832,red.png,NVIDIA GTX 1660,9 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3070,40,87504,green.png,NVIDIA RTX 3070,10 GB,GDDR5,4.0
+Відеокарта,NVIDIA GTX 1660,43,81057,white.png,NVIDIA GTX 1660,9 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,40,78468,white.png,NVIDIA GTX 1660,12 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,24,52091,red.png,NVIDIA RTX 3070,15 GB,GDDR5,3.0
+Відеокарта,NVIDIA GTX 1660,43,81912,green.png,NVIDIA GTX 1660,4 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,51,31610,green.png,NVIDIA RTX 3070,14 GB,GDDR7,3.0
+Відеокарта,AMD RX 6700,28,56063,red.png,AMD RX 6700,7 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,97,55849,green.png,AMD RX 6800,12 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,17,25785,blue.png,NVIDIA GTX 1660,13 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,0,90881,red.png,AMD RX 6700,5 GB,GDDR5,4.0
+Відеокарта,AMD RX 6800,17,73228,blue.png,AMD RX 6800,9 GB,GDDR5,4.0
+Відеокарта,NVIDIA GTX 1660,16,87644,white.png,NVIDIA GTX 1660,11 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,7,54594,red.png,NVIDIA RTX 3070,11 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3080,43,69508,blue.png,NVIDIA RTX 3080,10 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,71,30928,green.png,AMD RX 6800,16 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,20,72440,green.png,NVIDIA RTX 3070,12 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,27,92938,blue.png,NVIDIA RTX 3080,13 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,90,94553,green.png,NVIDIA RTX 3070,5 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,79,26966,white.png,AMD RX 6800,16 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,78,47491,white.png,AMD RX 6800,8 GB,GDDR6,4.0
+Відеокарта,AMD RX 6700,69,29379,green.png,AMD RX 6700,14 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,90,55349,white.png,NVIDIA RTX 3080,10 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3070,77,38264,white.png,NVIDIA RTX 3070,11 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3080,98,34698,blue.png,NVIDIA RTX 3080,12 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,68,72962,white.png,AMD RX 6700,4 GB,GDDR6,4.0
+Відеокарта,AMD RX 6700,91,76793,blue.png,AMD RX 6700,14 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,53,24122,green.png,AMD RX 6700,7 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,98,30959,blue.png,AMD RX 6700,14 GB,GDDR7,3.0
+Відеокарта,NVIDIA GTX 1660,64,13270,green.png,NVIDIA GTX 1660,9 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,96,40975,blue.png,NVIDIA RTX 3080,9 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,54,16541,blue.png,NVIDIA RTX 3070,12 GB,GDDR5,3.0
+Відеокарта,AMD RX 6700,52,89418,green.png,AMD RX 6700,12 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,55,38309,green.png,AMD RX 6700,13 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,39,22388,green.png,NVIDIA RTX 3080,13 GB,GDDR6,4.0
+Відеокарта,AMD RX 6800,89,18865,green.png,AMD RX 6800,14 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,97,60394,green.png,AMD RX 6700,14 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,48,93108,red.png,AMD RX 6700,10 GB,GDDR6,4.0
+Відеокарта,AMD RX 6800,87,45514,white.png,AMD RX 6800,12 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,36,34119,red.png,AMD RX 6800,11 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,80,59629,blue.png,AMD RX 6800,16 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,57,95974,red.png,NVIDIA GTX 1660,6 GB,GDDR5,3.0
+Відеокарта,AMD RX 6700,64,70939,blue.png,AMD RX 6700,4 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,82,57661,green.png,AMD RX 6700,4 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,21,76772,red.png,NVIDIA RTX 3080,14 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,94,64948,green.png,NVIDIA GTX 1660,4 GB,GDDR6,4.0
+Відеокарта,AMD RX 6700,40,54387,red.png,AMD RX 6700,10 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,53,24769,red.png,NVIDIA RTX 3080,12 GB,GDDR7,4.0
+Відеокарта,AMD RX 6700,27,53738,white.png,AMD RX 6700,8 GB,GDDR7,3.0
+Відеокарта,AMD RX 6700,30,99259,green.png,AMD RX 6700,6 GB,GDDR7,4.0
+Відеокарта,NVIDIA GTX 1660,41,52250,green.png,NVIDIA GTX 1660,7 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,61,22012,red.png,NVIDIA RTX 3070,10 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,35,56443,red.png,NVIDIA RTX 3080,15 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,26,49835,white.png,NVIDIA GTX 1660,6 GB,GDDR7,4.0
+Відеокарта,NVIDIA GTX 1660,39,30688,red.png,NVIDIA GTX 1660,8 GB,GDDR7,3.0
+Відеокарта,AMD RX 6700,51,61263,white.png,AMD RX 6700,11 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3080,62,83286,red.png,NVIDIA RTX 3080,10 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,69,10130,red.png,NVIDIA GTX 1660,8 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,81,38106,white.png,NVIDIA RTX 3070,13 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,97,82778,green.png,NVIDIA RTX 3080,8 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3070,1,54611,blue.png,NVIDIA RTX 3070,12 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,64,90463,red.png,NVIDIA RTX 3080,14 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,85,81303,white.png,NVIDIA RTX 3070,5 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,16,66655,blue.png,NVIDIA RTX 3070,5 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,14,17829,white.png,NVIDIA RTX 3070,14 GB,GDDR6,4.0
+Відеокарта,NVIDIA GTX 1660,16,73094,blue.png,NVIDIA GTX 1660,13 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3070,69,48999,red.png,NVIDIA RTX 3070,9 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3080,67,18849,red.png,NVIDIA RTX 3080,16 GB,GDDR6,4.0
+Відеокарта,AMD RX 6800,72,60357,white.png,AMD RX 6800,13 GB,GDDR7,4.0
+Відеокарта,NVIDIA GTX 1660,82,50145,blue.png,NVIDIA GTX 1660,5 GB,GDDR7,3.0
+Відеокарта,NVIDIA GTX 1660,12,62921,green.png,NVIDIA GTX 1660,16 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,100,28212,white.png,NVIDIA RTX 3070,14 GB,GDDR5,3.0
+Відеокарта,NVIDIA GTX 1660,91,28988,blue.png,NVIDIA GTX 1660,16 GB,GDDR6,4.0
+Відеокарта,AMD RX 6800,22,65459,green.png,AMD RX 6800,11 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,73,94013,blue.png,NVIDIA RTX 3070,12 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,94,68594,blue.png,NVIDIA RTX 3070,12 GB,GDDR5,3.0
+Відеокарта,AMD RX 6800,88,44929,white.png,AMD RX 6800,4 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3070,46,82200,green.png,NVIDIA RTX 3070,8 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,82,75931,blue.png,NVIDIA RTX 3080,7 GB,GDDR6,3.0
+Відеокарта,NVIDIA RTX 3080,62,96300,red.png,NVIDIA RTX 3080,8 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,87,41833,white.png,AMD RX 6700,14 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,70,55412,blue.png,NVIDIA RTX 3080,15 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3070,78,36235,white.png,NVIDIA RTX 3070,9 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,31,64914,red.png,NVIDIA RTX 3080,14 GB,GDDR7,3.0
+Відеокарта,NVIDIA GTX 1660,83,65632,red.png,NVIDIA GTX 1660,11 GB,GDDR5,3.0
+Відеокарта,AMD RX 6800,24,27648,red.png,AMD RX 6800,14 GB,GDDR6,3.0
+Відеокарта,AMD RX 6700,47,30950,red.png,AMD RX 6700,14 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3080,28,97908,red.png,NVIDIA RTX 3080,13 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,89,66289,white.png,NVIDIA RTX 3070,9 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,52,38854,white.png,NVIDIA RTX 3070,15 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,97,63777,blue.png,NVIDIA RTX 3080,5 GB,GDDR5,3.0
+Відеокарта,NVIDIA GTX 1660,31,72401,blue.png,NVIDIA GTX 1660,6 GB,GDDR5,4.0
+Відеокарта,AMD RX 6800,91,53318,green.png,AMD RX 6800,11 GB,GDDR7,3.0
+Відеокарта,NVIDIA GTX 1660,100,79568,blue.png,NVIDIA GTX 1660,15 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3070,33,82282,green.png,NVIDIA RTX 3070,5 GB,GDDR5,4.0
+Відеокарта,AMD RX 6700,90,99395,blue.png,AMD RX 6700,16 GB,GDDR7,3.0
+Відеокарта,AMD RX 6800,28,69502,green.png,AMD RX 6800,14 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3070,50,37974,green.png,NVIDIA RTX 3070,7 GB,GDDR6,4.0
+Відеокарта,AMD RX 6800,86,66923,red.png,AMD RX 6800,12 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,37,41441,green.png,NVIDIA RTX 3070,14 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,57,55518,green.png,NVIDIA RTX 3080,5 GB,GDDR7,4.0
+Відеокарта,NVIDIA RTX 3080,57,77219,blue.png,NVIDIA RTX 3080,6 GB,GDDR7,3.0
+Відеокарта,NVIDIA RTX 3080,0,44101,red.png,NVIDIA RTX 3080,9 GB,GDDR7,4.0
+Відеокарта,AMD RX 6800,80,86546,white.png,AMD RX 6800,5 GB,GDDR7,3.0
+Відеокарта,AMD RX 6700,80,39240,green.png,AMD RX 6700,11 GB,GDDR6,4.0
+Відеокарта,NVIDIA RTX 3080,30,93601,blue.png,NVIDIA RTX 3080,15 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3080,65,80048,blue.png,NVIDIA RTX 3080,11 GB,GDDR5,3.0
+Відеокарта,NVIDIA RTX 3080,34,96780,white.png,NVIDIA RTX 3080,16 GB,GDDR5,4.0
+Відеокарта,NVIDIA RTX 3070,18,81106,white.png,NVIDIA RTX 3070,6 GB,GDDR7,4.0
+Блок живлення,Cooler Master V,78,66615,green.png,1175 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,36,16989,white.png,739 W,80 Plus Bronze
+Блок живлення,Cooler Master V,43,44503,red.png,781 W,80 Plus Bronze
+Блок живлення,Corsair RM750,7,29753,red.png,669 W,80 Plus Gold
+Блок живлення,Corsair RM750,63,30512,blue.png,701 W,80 Plus Silver
+Блок живлення,Cooler Master V,47,75543,red.png,938 W,80 Plus Silver
+Блок живлення,Seasonic Focus,9,24353,green.png,1044 W,80 Plus Gold
+Блок живлення,Seasonic Focus,69,76008,green.png,1126 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,98,65182,white.png,1188 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,90,65476,red.png,869 W,80 Plus Silver
+Блок живлення,Cooler Master V,61,95979,blue.png,403 W,80 Plus Silver
+Блок живлення,Cooler Master V,25,88787,red.png,738 W,80 Plus Silver
+Блок живлення,Corsair RM750,21,93036,red.png,584 W,80 Plus Gold
+Блок живлення,Cooler Master V,88,69210,green.png,548 W,80 Plus Gold
+Блок живлення,Cooler Master V,84,38360,white.png,532 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,0,87083,white.png,1072 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,52,56196,white.png,1167 W,80 Plus Silver
+Блок живлення,Cooler Master V,78,99932,green.png,936 W,80 Plus Gold
+Блок живлення,Corsair RM750,38,60271,white.png,1005 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,62,54367,green.png,1167 W,80 Plus Silver
+Блок живлення,Cooler Master V,0,59185,white.png,738 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,53,79979,white.png,670 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,74,26934,blue.png,987 W,80 Plus Silver
+Блок живлення,Corsair RM750,98,55774,white.png,993 W,80 Plus Gold
+Блок живлення,Seasonic Focus,80,60601,white.png,815 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,14,92620,white.png,861 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,8,82079,blue.png,739 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,27,14808,green.png,955 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,73,45308,white.png,491 W,80 Plus Bronze
+Блок живлення,Cooler Master V,21,33347,red.png,1012 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,34,63377,red.png,998 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,79,28122,red.png,1113 W,80 Plus Silver
+Блок живлення,Corsair RM750,63,61723,red.png,1071 W,80 Plus Silver
+Блок живлення,Cooler Master V,80,36964,blue.png,770 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,72,13239,white.png,516 W,80 Plus Gold
+Блок живлення,Seasonic Focus,43,49978,green.png,489 W,80 Plus Silver
+Блок живлення,Corsair RM750,34,62821,white.png,830 W,80 Plus Bronze
+Блок живлення,Cooler Master V,60,66867,white.png,702 W,80 Plus Gold
+Блок живлення,Seasonic Focus,54,28901,white.png,645 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,46,46323,green.png,747 W,80 Plus Gold
+Блок живлення,Cooler Master V,63,42464,red.png,931 W,80 Plus Gold
+Блок живлення,Cooler Master V,8,61283,white.png,497 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,12,96919,green.png,600 W,80 Plus Silver
+Блок живлення,Seasonic Focus,75,26690,white.png,826 W,80 Plus Silver
+Блок живлення,Corsair RM750,10,34715,green.png,1102 W,80 Plus Bronze
+Блок живлення,Cooler Master V,1,19045,red.png,1081 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,8,34213,white.png,688 W,80 Plus Bronze
+Блок живлення,Corsair RM750,4,67612,green.png,739 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,23,70083,white.png,1179 W,80 Plus Bronze
+Блок живлення,Cooler Master V,35,50579,white.png,975 W,80 Plus Bronze
+Блок живлення,Cooler Master V,38,61412,blue.png,563 W,80 Plus Bronze
+Блок живлення,Cooler Master V,38,35926,white.png,693 W,80 Plus Bronze
+Блок живлення,Corsair RM750,58,90175,green.png,934 W,80 Plus Silver
+Блок живлення,Seasonic Focus,25,38485,blue.png,985 W,80 Plus Silver
+Блок живлення,Corsair RM750,26,83872,green.png,621 W,80 Plus Gold
+Блок живлення,Seasonic Focus,15,39058,red.png,1048 W,80 Plus Bronze
+Блок живлення,Corsair RM750,72,62141,white.png,1017 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,21,90891,green.png,789 W,80 Plus Silver
+Блок живлення,Corsair RM750,80,44723,white.png,900 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,16,97643,blue.png,799 W,80 Plus Silver
+Блок живлення,Cooler Master V,28,73405,blue.png,847 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,39,84281,green.png,698 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,40,62680,red.png,559 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,68,17215,red.png,781 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,19,73813,blue.png,508 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,50,85203,green.png,572 W,80 Plus Bronze
+Блок живлення,Cooler Master V,88,54852,green.png,539 W,80 Plus Gold
+Блок живлення,Cooler Master V,87,22478,blue.png,614 W,80 Plus Bronze
+Блок живлення,Corsair RM750,41,43696,red.png,736 W,80 Plus Gold
+Блок живлення,Cooler Master V,96,38994,white.png,923 W,80 Plus Bronze
+Блок живлення,Cooler Master V,92,96983,blue.png,848 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,19,19363,green.png,913 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,74,53896,white.png,418 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,79,40180,red.png,761 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,80,20837,white.png,730 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,100,28779,green.png,1097 W,80 Plus Silver
+Блок живлення,Seasonic Focus,54,48404,green.png,1095 W,80 Plus Gold
+Блок живлення,Cooler Master V,46,93102,red.png,969 W,80 Plus Silver
+Блок живлення,Seasonic Focus,45,99227,green.png,669 W,80 Plus Bronze
+Блок живлення,Corsair RM750,49,79715,blue.png,816 W,80 Plus Bronze
+Блок живлення,Cooler Master V,4,56017,green.png,653 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,1,94616,red.png,961 W,80 Plus Silver
+Блок живлення,Seasonic Focus,38,46877,white.png,655 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,12,75421,blue.png,1061 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,23,40725,red.png,909 W,80 Plus Gold
+Блок живлення,Cooler Master V,32,26736,green.png,550 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,9,18781,green.png,1005 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,84,96722,blue.png,709 W,80 Plus Bronze
+Блок живлення,Cooler Master V,12,33391,blue.png,1189 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,47,57926,green.png,1076 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,63,46738,white.png,672 W,80 Plus Bronze
+Блок живлення,Corsair RM750,99,75427,blue.png,741 W,80 Plus Bronze
+Блок живлення,Corsair RM750,20,69627,green.png,807 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,67,86514,white.png,486 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,57,93403,blue.png,987 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,25,17698,white.png,1143 W,80 Plus Bronze
+Блок живлення,Cooler Master V,60,88235,red.png,805 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,72,51618,blue.png,844 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,80,55722,blue.png,492 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,25,21875,red.png,582 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,63,37756,white.png,513 W,80 Plus Bronze
+Блок живлення,Corsair RM750,49,34599,green.png,1056 W,80 Plus Silver
+Блок живлення,Corsair RM750,83,68289,green.png,1131 W,80 Plus Gold
+Блок живлення,Seasonic Focus,10,80089,blue.png,667 W,80 Plus Gold
+Блок живлення,Corsair RM750,54,15515,blue.png,735 W,80 Plus Silver
+Блок живлення,Cooler Master V,38,42578,blue.png,854 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,46,97338,green.png,861 W,80 Plus Silver
+Блок живлення,Corsair RM750,72,79176,red.png,1064 W,80 Plus Silver
+Блок живлення,Seasonic Focus,46,17377,white.png,620 W,80 Plus Silver
+Блок живлення,Cooler Master V,92,17739,green.png,531 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,62,50716,red.png,967 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,53,78530,red.png,467 W,80 Plus Gold
+Блок живлення,Corsair RM750,19,63242,red.png,887 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,35,10404,white.png,928 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,9,95574,white.png,768 W,80 Plus Bronze
+Блок живлення,Corsair RM750,72,44256,blue.png,898 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,34,15107,white.png,1168 W,80 Plus Bronze
+Блок живлення,Corsair RM750,25,55019,white.png,822 W,80 Plus Silver
+Блок живлення,Corsair RM750,36,22503,blue.png,949 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,54,26151,blue.png,490 W,80 Plus Silver
+Блок живлення,Seasonic Focus,89,61605,green.png,1026 W,80 Plus Bronze
+Блок живлення,Corsair RM750,17,38923,blue.png,552 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,61,83000,red.png,1004 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,53,95204,blue.png,1036 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,95,46367,green.png,726 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,16,22757,white.png,840 W,80 Plus Silver
+Блок живлення,Corsair RM750,43,81383,red.png,1083 W,80 Plus Silver
+Блок живлення,Seasonic Focus,22,66929,green.png,978 W,80 Plus Gold
+Блок живлення,Corsair RM750,34,86311,blue.png,766 W,80 Plus Gold
+Блок живлення,Seasonic Focus,70,60639,blue.png,1040 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,38,18432,green.png,752 W,80 Plus Gold
+Блок живлення,Seasonic Focus,76,89953,green.png,1113 W,80 Plus Gold
+Блок живлення,Corsair RM750,75,16039,white.png,478 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,67,46865,green.png,752 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,30,63169,red.png,1010 W,80 Plus Bronze
+Блок живлення,Corsair RM750,85,18494,red.png,1198 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,54,20695,white.png,993 W,80 Plus Silver
+Блок живлення,Seasonic Focus,0,11476,blue.png,1013 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,98,64084,green.png,493 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,81,88385,green.png,1155 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,3,88432,white.png,1060 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,5,28868,green.png,502 W,80 Plus Gold
+Блок живлення,Seasonic Focus,81,53611,white.png,581 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,41,72745,white.png,784 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,7,55924,blue.png,674 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,62,39978,green.png,1167 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,73,98425,green.png,855 W,80 Plus Silver
+Блок живлення,Seasonic Focus,1,90190,blue.png,998 W,80 Plus Bronze
+Блок живлення,Cooler Master V,30,79098,red.png,835 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,100,41781,green.png,1151 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,48,44307,white.png,721 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,95,93790,green.png,1125 W,80 Plus Gold
+Блок живлення,Cooler Master V,17,35220,red.png,415 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,74,50846,green.png,941 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,89,20946,red.png,629 W,80 Plus Silver
+Блок живлення,Cooler Master V,25,28916,blue.png,785 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,19,47115,blue.png,575 W,80 Plus Gold
+Блок живлення,Cooler Master V,43,37672,red.png,1081 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,87,27366,white.png,711 W,80 Plus Silver
+Блок живлення,Cooler Master V,39,90996,blue.png,1117 W,80 Plus Gold
+Блок живлення,Seasonic Focus,35,70705,white.png,496 W,80 Plus Gold
+Блок живлення,Corsair RM750,32,36870,white.png,836 W,80 Plus Silver
+Блок живлення,Cooler Master V,69,77811,red.png,887 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,30,10052,white.png,1065 W,80 Plus Gold
+Блок живлення,Thermaltake Toughpower,37,95337,blue.png,994 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,80,11585,red.png,1050 W,80 Plus Silver
+Блок живлення,Cooler Master V,25,70727,white.png,1018 W,80 Plus Bronze
+Блок живлення,EVGA SuperNOVA,6,52473,red.png,491 W,80 Plus Silver
+Блок живлення,Seasonic Focus,96,78346,green.png,1155 W,80 Plus Silver
+Блок живлення,Cooler Master V,91,62040,red.png,967 W,80 Plus Gold
+Блок живлення,Seasonic Focus,25,39446,red.png,1149 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,29,92992,green.png,752 W,80 Plus Bronze
+Блок живлення,Cooler Master V,66,94942,green.png,1087 W,80 Plus Gold
+Блок живлення,EVGA SuperNOVA,32,21105,white.png,802 W,80 Plus Silver
+Блок живлення,Cooler Master V,37,69740,white.png,532 W,80 Plus Silver
+Блок живлення,Seasonic Focus,79,94481,red.png,1029 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,20,96570,green.png,702 W,80 Plus Bronze
+Блок живлення,Thermaltake Toughpower,9,95166,red.png,446 W,80 Plus Silver
+Блок живлення,EVGA SuperNOVA,45,13873,blue.png,692 W,80 Plus Bronze
+Блок живлення,Cooler Master V,42,17206,white.png,994 W,80 Plus Gold
+Блок живлення,Cooler Master V,1,20331,blue.png,1149 W,80 Plus Gold
+Блок живлення,Seasonic Focus,22,11455,green.png,731 W,80 Plus Silver
+Блок живлення,Thermaltake Toughpower,47,14645,green.png,622 W,80 Plus Bronze
+Блок живлення,Corsair RM750,86,69915,white.png,515 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,45,10633,white.png,1014 W,80 Plus Silver
+Блок живлення,Corsair RM750,71,44208,red.png,701 W,80 Plus Bronze
+Блок живлення,Seasonic Focus,57,49116,white.png,613 W,80 Plus Gold
+Блок живлення,Corsair RM750,82,98953,white.png,448 W,80 Plus Bronze
+Система охолодження,Corsair H100i,38,83585,red.png,Повітряне,Intel LGA
+Система охолодження,be quiet! Dark Rock,67,23848,white.png,Рідинне,AMD AM4
+Система охолодження,be quiet! Dark Rock,98,87419,blue.png,Рідинне,Universal
+Система охолодження,NZXT Kraken,1,10559,white.png,Повітряне,Intel LGA
+Система охолодження,Cooler Master Hyper 212,10,45928,blue.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,9,74686,white.png,Повітряне,Intel LGA
+Система охолодження,Corsair H100i,87,62785,red.png,Повітряне,AMD AM4
+Система охолодження,Noctua NH-D15,48,17422,green.png,Рідинне,Universal
+Система охолодження,NZXT Kraken,27,16797,white.png,Рідинне,Universal
+Система охолодження,Corsair H100i,83,81470,white.png,Повітряне,Universal
+Система охолодження,Corsair H100i,69,63111,white.png,Повітряне,Universal
+Система охолодження,Cooler Master Hyper 212,89,42442,blue.png,Рідинне,Universal
+Система охолодження,be quiet! Dark Rock,82,47757,red.png,Рідинне,AMD AM4
+Система охолодження,be quiet! Dark Rock,22,47387,white.png,Повітряне,AMD AM4
+Система охолодження,NZXT Kraken,46,44344,white.png,Рідинне,Intel LGA
+Система охолодження,Noctua NH-D15,38,32896,blue.png,Рідинне,Universal
+Система охолодження,Corsair H100i,76,62831,blue.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,65,65875,red.png,Повітряне,AMD AM4
+Система охолодження,NZXT Kraken,35,42128,white.png,Рідинне,Universal
+Система охолодження,Noctua NH-D15,88,18522,red.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,6,63805,green.png,Повітряне,Universal
+Система охолодження,Corsair H100i,28,67853,white.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,69,15097,blue.png,Повітряне,Intel LGA
+Система охолодження,NZXT Kraken,73,46190,green.png,Рідинне,AMD AM4
+Система охолодження,Corsair H100i,65,40749,blue.png,Повітряне,Intel LGA
+Система охолодження,be quiet! Dark Rock,77,99622,red.png,Повітряне,AMD AM4
+Система охолодження,be quiet! Dark Rock,98,55705,blue.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,25,38681,red.png,Рідинне,Universal
+Система охолодження,be quiet! Dark Rock,69,20396,white.png,Рідинне,Universal
+Система охолодження,Corsair H100i,18,10852,red.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,70,46751,blue.png,Рідинне,Intel LGA
+Система охолодження,Corsair H100i,40,30580,white.png,Рідинне,Universal
+Система охолодження,be quiet! Dark Rock,7,33474,green.png,Рідинне,AMD AM4
+Система охолодження,Corsair H100i,56,21167,blue.png,Повітряне,Intel LGA
+Система охолодження,be quiet! Dark Rock,34,88436,white.png,Рідинне,AMD AM4
+Система охолодження,Noctua NH-D15,34,53396,white.png,Рідинне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,25,79462,white.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,27,69571,red.png,Рідинне,AMD AM4
+Система охолодження,Corsair H100i,26,20419,green.png,Рідинне,Universal
+Система охолодження,Corsair H100i,82,95448,red.png,Рідинне,AMD AM4
+Система охолодження,NZXT Kraken,15,77718,blue.png,Рідинне,Universal
+Система охолодження,NZXT Kraken,90,28066,blue.png,Рідинне,Intel LGA
+Система охолодження,Cooler Master Hyper 212,38,52958,white.png,Рідинне,AMD AM4
+Система охолодження,NZXT Kraken,7,70132,green.png,Повітряне,AMD AM4
+Система охолодження,Noctua NH-D15,53,31167,red.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,99,34910,blue.png,Рідинне,Intel LGA
+Система охолодження,Noctua NH-D15,0,50375,red.png,Повітряне,AMD AM4
+Система охолодження,Noctua NH-D15,97,80777,red.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,96,70761,white.png,Повітряне,Intel LGA
+Система охолодження,Noctua NH-D15,100,27897,blue.png,Рідинне,AMD AM4
+Система охолодження,Noctua NH-D15,9,81997,blue.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,16,52190,white.png,Рідинне,AMD AM4
+Система охолодження,NZXT Kraken,54,52404,red.png,Повітряне,AMD AM4
+Система охолодження,Corsair H100i,64,56191,white.png,Рідинне,AMD AM4
+Система охолодження,NZXT Kraken,3,25734,white.png,Повітряне,Intel LGA
+Система охолодження,NZXT Kraken,79,29260,red.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,76,49668,white.png,Рідинне,AMD AM4
+Система охолодження,be quiet! Dark Rock,60,31861,blue.png,Повітряне,Intel LGA
+Система охолодження,NZXT Kraken,21,52698,white.png,Рідинне,AMD AM4
+Система охолодження,NZXT Kraken,34,37006,green.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,85,87107,green.png,Рідинне,Universal
+Система охолодження,Noctua NH-D15,63,25316,green.png,Повітряне,Universal
+Система охолодження,Cooler Master Hyper 212,90,99696,red.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,7,75010,green.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,27,29406,red.png,Повітряне,Intel LGA
+Система охолодження,be quiet! Dark Rock,12,37445,blue.png,Рідинне,Intel LGA
+Система охолодження,Cooler Master Hyper 212,63,67889,blue.png,Повітряне,Intel LGA
+Система охолодження,Noctua NH-D15,46,93099,white.png,Повітряне,Intel LGA
+Система охолодження,NZXT Kraken,49,66149,red.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,44,18442,green.png,Рідинне,Intel LGA
+Система охолодження,Cooler Master Hyper 212,60,65653,white.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,7,68511,white.png,Повітряне,Intel LGA
+Система охолодження,Noctua NH-D15,1,13561,green.png,Повітряне,AMD AM4
+Система охолодження,Corsair H100i,79,92949,blue.png,Повітряне,Universal
+Система охолодження,Noctua NH-D15,23,26532,red.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,44,88459,green.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,98,25099,red.png,Повітряне,Universal
+Система охолодження,be quiet! Dark Rock,20,93297,red.png,Рідинне,AMD AM4
+Система охолодження,Corsair H100i,10,83102,green.png,Повітряне,Universal
+Система охолодження,NZXT Kraken,82,95633,red.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,13,72308,red.png,Повітряне,Intel LGA
+Система охолодження,be quiet! Dark Rock,3,41014,green.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,59,67454,green.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,96,98336,white.png,Рідинне,Intel LGA
+Система охолодження,NZXT Kraken,37,68134,blue.png,Рідинне,Intel LGA
+Система охолодження,Corsair H100i,52,71768,white.png,Рідинне,Universal
+Система охолодження,Cooler Master Hyper 212,60,40689,blue.png,Повітряне,Universal
+Система охолодження,Corsair H100i,43,35939,red.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,19,15744,white.png,Повітряне,Universal
+Система охолодження,Cooler Master Hyper 212,80,61187,green.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,90,49877,blue.png,Повітряне,AMD AM4
+Система охолодження,Noctua NH-D15,49,53025,green.png,Повітряне,Universal
+Система охолодження,Corsair H100i,52,28541,green.png,Рідинне,Intel LGA
+Система охолодження,Noctua NH-D15,0,56285,blue.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,9,90426,green.png,Рідинне,Intel LGA
+Система охолодження,be quiet! Dark Rock,85,56124,blue.png,Повітряне,Universal
+Система охолодження,NZXT Kraken,43,60190,green.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,92,16362,white.png,Рідинне,Intel LGA
+Система охолодження,Corsair H100i,15,49223,white.png,Повітряне,AMD AM4
+Система охолодження,Cooler Master Hyper 212,12,26364,green.png,Повітряне,Intel LGA
+Система охолодження,NZXT Kraken,14,85014,blue.png,Повітряне,Universal

@@ -66,10 +66,10 @@ class Products
         ?>
         <tr><table>
             <th width="20%">Зображення</th>
-            <th width="18%">Категорія</th>
+            <th width="15%">Категорія</th>
             <th>Назва товару</th>
-            <th>Кількість товару</th>
-            <th width="10%">Ціна</th>
+            <th width="10%">Кількість</th>
+            <th width="7.5%">Ціна</th>
             <th width="25%">Характеристики</th>
         </tr>
         <?php

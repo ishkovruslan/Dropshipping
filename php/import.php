@@ -4,7 +4,7 @@
 $servername = "localhost:3306";
 $username = "root";
 $password = "Kharkiv2024";
-$dbname = "courseproject";
+$dbname = "bacalavr";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -31,14 +31,14 @@ function insertDataFromCSV($conn, $filename, $tablename)
         $types = "";
         /* Обробка специфікацій для категорій та продуктів */
         if ($filename == "categories.csv") {
-            $data[3] = implode(",", array_slice($data, 3));
-            $data = array_slice($data, 0, 4);/* Все що йде після 3 значення сприймаємо як один масив */
-            $types = "ssssi"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
+            $data[1] = implode(",", array_slice($data, 1));
+            $data = array_slice($data, 0, 2);/* Все що йде після 1 значення сприймаємо як один масив */
+            $types = "ssi"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
             $data[] = NULL; /* Додаємо NULL в кінець масиву даних для стовпця id */
         } elseif ($filename == "products.csv") {
             $data[5] = implode(",", array_slice($data, 5));
             $data = array_slice($data, 0, 6);/* Все що йде після 5 значення сприймаємо як 1 масив */
-            $types = "sssissi"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
+            $types = "ssiissi"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
             $data[] = NULL; /* Додаємо NULL в кінець масиву даних для стовпця id */
         }
         /* Заповнення бази */
@@ -59,8 +59,8 @@ function insertDataFromCSV($conn, $filename, $tablename)
 }
 
 /* Виклик для кожного .csv файлу */
-insertDataFromCSV($conn, "users.csv", "users");
-insertDataFromCSV($conn, "userlist.csv", "userlist");
+/* insertDataFromCSV($conn, "users.csv", "users");
+insertDataFromCSV($conn, "userlist.csv", "userlist"); */
 insertDataFromCSV($conn, "news.csv", "news");
 insertDataFromCSV($conn, "categories.csv", "categories");
 insertDataFromCSV($conn, "products.csv", "products");
