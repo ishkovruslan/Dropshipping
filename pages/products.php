@@ -2,7 +2,7 @@
 session_start();
 require_once('header.php'); // Верхня частина сайту
 require_once('../php/mysql.php'); // Підключення до бази даних
-require_once('../php/output.php'); // Підключення до бази даних
+require_once('../php/output.php'); // Генерація сторінки
 ?>
 
 <div class="filters">
@@ -26,13 +26,3 @@ require_once('../php/output.php'); // Підключення до бази да�
 </div>
 
 <?php require_once('../php/footer.php'); ?>
-
-<script>
-    function resetFilters(event) {
-        event.preventDefault();
-        document.querySelector('input[name="minPrice"]').value = '';
-        document.querySelector('input[name="maxPrice"]').value = '';
-        document.querySelector('select[name="sort"]').value = 'asc';
-        window.location.href = 'products.php?category=' + encodeURIComponent(category);
-    }
-</script>
