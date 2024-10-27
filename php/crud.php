@@ -359,11 +359,11 @@ function populateDataArray($entity, &$data)
 /* Універсальний обробник POST запитів */
 handlePostRequest($db);
 
-function countAccessibleProductsByCategory($categoryName, $userLogin, $userLevel, $productsData)
+function countAccessibleProductsByCategory($categoryName, $productsData)
 {/* Лічильник товарів */
     $count = 0;
     foreach ($productsData as $product) {
-        if ($product['category'] == $categoryName && ($userLevel == 2 || $product['login'] == $userLogin)) {
+        if ($product['category'] == $categoryName) {
             $count++;
         }
     }
