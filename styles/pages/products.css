@@ -2,24 +2,3 @@
     padding: 5px;
     box-sizing: border-box;
 }
-
-main img {
-    max-width: 100%;
-    aspect-ratio: 16/9;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    /* Встановлюємо рівномірний розподіл ширини */
-}
-
-th,
-td {
-    text-align: center;
-    padding: 1%;
-    border: 1px solid black;
-    word-wrap: break-word;
-    /* Заворачуємо слова, якщо вони не поміщаються в колонці */
-}

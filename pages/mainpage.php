@@ -1,6 +1,7 @@
 <?php
 session_start(); /* Початок сессії */
 require_once('header.php'); /* Верхня частина сайту */
+$newsData = $db->readAll('news');
 ?>
 <p>
     Бакалаврська робота студента 545-а групи Ішкова Руслана Вікторовича.
@@ -19,4 +20,23 @@ require_once('header.php'); /* Верхня частина сайту */
 <p>
     Результатом роботи сайт який надає зручні можливості дропшопінга для продавців.
 </p>
+
+<table>
+    <?php 
+    $currentDate = date('Y-m-d'); // Отримуємо поточну дату у форматі 'YYYY-MM-DD'
+    foreach ($newsData as $news): 
+        // Перевіряємо, чи новина дійсна на сьогодні
+        if ($news['start_date'] <= $currentDate && $news['end_date'] >= $currentDate): ?>
+            <tr>
+                <td width="20%"><!-- Редагування по натисканню на зображення -->
+                    <img src="../images/news/<?php echo $news['uploadPath']; ?>">
+                </td>
+                <td width="20%"><?php echo $news['news_title']; ?></td>
+                <td><?php echo $news['news_description']; ?></td>
+            </tr>
+        <?php endif; 
+    endforeach; ?>
+</table>
+
+
 <?php require_once('../php/footer.php'); ?>

@@ -62,8 +62,8 @@ $filteredProducts = $selectedCategory ? array_filter($productsData, function ($p
                 <th width="20%">Зображення</th>
                 <th width="20%">Назва</th>
                 <th>Опис</th>
-                <th width="16%">Початкова дата</th>
-                <th width="16%">Кінцева дата</th>
+                <th width="12.5%">Початкова дата</th>
+                <th width="12.5%">Кінцева дата</th>
             </tr>
             <?php foreach ($newsData as $news): ?>
                 <tr>

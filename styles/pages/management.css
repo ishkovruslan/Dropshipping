@@ -1,26 +1,5 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    /* Встановлюємо рівномірний розподіл ширини */
-}
-
-th,
-td {
-    text-align: center;
-    padding: 1%;
-    border: 1px solid black;
-    word-wrap: break-word;
-    /* Заворачуємо слова, якщо вони не поміщаються в колонці */
-}
-
 select {
     text-align: center;
-}
-
-main img {
-    max-width: 100%;
-    aspect-ratio: 16/9;
 }
 
 td button{
