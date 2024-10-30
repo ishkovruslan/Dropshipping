@@ -14,35 +14,20 @@ class User
         $this->db = $db;
     }
 
-    public function changeRole($newRole)
-    {/* Зміна ролі користувача */
+    public function changeRole($newRole) {
         $data = ['role' => $newRole];
         $conditions = ['login' => $this->login];
         $this->db->update('userlist', $data, $conditions);
         $this->role = $newRole;
-    }
+        // Логування
+        logAction($this->db, 'Зміна ролі', $this->login, $_SERVER['REMOTE_ADDR']);
+    }    
 
-    public function deleteUser()
-    {/* Видалення користувача */
-        $this->deleteEntityWithImages('products', ['login' => $this->login], '../images/products/');
+    public function deleteUser() {
         $this->db->remove('userlist', ['login'], [$this->login]);
         $this->db->remove('users', ['login'], [$this->login]);
-    }
-
-    private function deleteEntityWithImages($table, $conditions, $imagePathPrefix)
-    {/* Видалення зображень товарів користувача */
-        $products = $this->db->read($table, ['uploadPath'], $conditions);
-        foreach ($products as $product) {
-            $this->deleteFile($imagePathPrefix . $product['uploadPath']);
-        }
-        $this->db->remove($table, array_keys($conditions), array_values($conditions));
-    }
-
-    private function deleteFile($filePath)
-    {/* Видалення файлу */
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        }
+        // Логування
+        logAction($this->db, 'Видалення користувача', $this->login, $_SERVER['REMOTE_ADDR']);
     }
 
     public function getLogin()
@@ -156,11 +141,13 @@ class Product
     }
 }
 
-function updateData($table, $data, $conditions, $db)
-{/* Оновлення категорії */
+function updateData($table, $data, $conditions, $db) {
     try {
         $db->update($table, $data, $conditions);
-        header("Location: ../pages/management.php"); // Перенаправлення назад до списку
+
+        // Логування
+        logAction($db, "Update $table", $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
+        header("Location: ../pages/management.php");
         exit();
     } catch (mysqli_sql_exception $e) {
         echo "Помилка: " . $e->getMessage();
@@ -286,8 +273,7 @@ function handleCreatePostRequest($db)
     }
 }
 
-function handleCreateNewsRequest($db)
-{/* POST запит створення новини */
+function handleCreateNewsRequest($db) {
     $news = new News($db);
     $name = $_POST['news_title'];
     $description = $_POST['news_description'];
@@ -295,6 +281,9 @@ function handleCreateNewsRequest($db)
     $end = $_POST['end_date'];
     $imageFileName = uploadFile('uploadPath', "../images/news/");
     $news->create($name, $imageFileName, $description, $start, $end);
+
+    // Логування
+    logAction($db, 'Створено новину', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
     header("Location: ../pages/newnews.php");
 }
 
@@ -304,6 +293,9 @@ function handleCreateCategoryRequest($db)
     $name = $_POST['category_name'];
     $specifications = explode(",", $_POST['specifications']);
     $category->create($name, $specifications);
+    
+    // Логування
+    logAction($db, 'Створено категорію', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
     header("Location: ../pages/newcategory.php");
 }
 
@@ -317,6 +309,9 @@ function handleCreateProductRequest($db)
     $characteristics = $_POST['characteristics'];
     $imageFileName = uploadFile('uploadPath', "../images/products/");
     $product->create($category, $name, $count, $price, $imageFileName, $characteristics);
+
+    // Логування
+    logAction($db, 'Створено товар', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
     header("Location: ../pages/newproduct.php");
 }
 
@@ -369,4 +364,25 @@ function countAccessibleProductsByCategory($categoryName, $productsData)
     }
     return $count;
 }
+
+function logAction($db, $operation, $login, $sourceIp, $sourceType = 'WEB', $sourceResult = 'Success') {
+    $sourceTime = round(microtime(true) * 1000); // Час у мс
+    $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
+    $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];
+    $types = 'ssssss';
+
+    $db->write('log', $columns, $values, $types);
+}
+
+function getLogEntries($db, $filter = null)
+{
+    return $filter ? $db->readFiltered('log', $filter) : $db->readAll('log');
+}
+
+$table = 'log';
+$columns = ['*'];
+
+$filter = $_GET['filter'] ?? null;
+$conditions = $filter ? ['login' => $filter] : ['login'];
+$logs = $db->read($table, $columns, $conditions);
 ?>

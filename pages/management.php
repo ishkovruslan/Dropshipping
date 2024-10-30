@@ -12,6 +12,7 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
             <li><a href="?table=users">Користувачі</a></li>
             <li><a href="?table=news">Новини</a></li>
             <li><a href="?table=categories">Категорії</a></li>
+            <li><a href="?table=log">Перегляд змін</a></li> <!-- Новий пункт меню -->
         </ul>
     </div>
     <?php
@@ -19,21 +20,12 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
     // Завантаження таблиці користувачів, новин, категорій або товарів за обраною категорією
     $table = $_GET['table'] ?? null;
     $selectedCategory = $_GET['category'] ?? null;
-    // Дані для таблиць користувачів, новин, категорій і продуктів
-    $userList = new UserList($db);
-    $userList->loadUsersFromDB();
-    $newsData = $db->readAll('news');
-    $categoriesData = $db->readAll('categories');
-    $productsData = $db->readAll('products');
-    // Фільтруємо продукти за вибраною категорією, якщо вона вказана
-    $filteredProducts = $selectedCategory
-        ? array_filter($productsData, fn($product) => $product['category'] === $selectedCategory)
-        : $productsData;
-
-    $roles = ["user" => "Користувач", "seller" => "Продавець"];
     // Відображення вибраної таблиці
     switch ($table) {
-        case 'users': ?>
+        case 'users':
+            $userList = new UserList($db);
+            $userList->loadUsersFromDB();
+            $roles = ["user" => "Користувач", "seller" => "Продавець"]; ?>
             <div class="userlist"><!-- Таблиця керування користувачами -->
                 <h1>Список користувачів</h1>
                 <table>
@@ -71,7 +63,34 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
                 </table>
             </div>
         <?php break;
-        case 'news': ?>
+        case 'log':
+            $logs = $db->readAll('log'); ?> <!-- Зчитуємо всі записи з таблиці log -->
+            <div class="log-table">
+                <h1>Перегляд змін</h1>
+                <table>
+                    <tr>
+                        <th>Операція</th>
+                        <th>Користувач</th>
+                        <th>IP</th>
+                        <th>Тип джерела</th>
+                        <th>Результат</th>
+                        <th>Час</th>
+                    </tr>
+                    <?php foreach ($logs as $log): ?>
+                        <tr>
+                            <td><?php echo $log['operation']; ?></td>
+                            <td><?php echo $log['login']; ?></td>
+                            <td><?php echo $log['source_ip']; ?></td>
+                            <td><?php echo $log['source_type']; ?></td>
+                            <td><?php echo $log['source_result']; ?></td>
+                            <td><?php echo date("Y-m-d H:i:s", substr($log['source_time'], 0, -3)); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        <?php break;
+        case 'news':
+            $newsData = $db->readAll('news'); ?>
             <div class="news"><!-- Таблиця взаємодії з новинами -->
                 <h1>Список новин</h1>
                 <table>
@@ -124,7 +143,9 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
                 </div>
             </div>
         <?php break;
-        case 'categories': ?>
+        case 'categories':
+            $categoriesData = $db->readAll('categories');
+            $productsData = $db->readAll('products'); ?>
             <div class="category"><!-- Таблиця взаємодії з категоріями -->
                 <h1>Список категорій</h1>
                 <table>
@@ -158,7 +179,10 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
             </div>
         <?php break;
     }
-    if ($selectedCategory) { ?>
+    if ($selectedCategory) {
+        $categoriesData = $db->readAll('categories');
+        $productsData = $db->readAll('products');
+        $filteredProducts = $selectedCategory ? array_filter($productsData, fn($product) => $product['category'] === $selectedCategory) : $productsData; ?>
         <div class="products"><!-- Таблиця товарів вибраної категорії -->
             <h1>Список товарів
                 <?php echo $selectedCategory ? 'категорії "' . htmlspecialchars($selectedCategory) . '"' : ''; ?>
