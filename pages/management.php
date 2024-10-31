@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('header.php'); // Верхня частина сайту
 $accessControl->checkAccess(2); // Доступ лише у адміністраторів
 require_once('../php/crud.php'); // Необхідні функції

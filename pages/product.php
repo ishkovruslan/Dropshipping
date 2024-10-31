@@ -1,14 +1,11 @@
 <?php
-session_start();
 require_once('header.php');
 require_once('../php/mysql.php');
 // Отримання id товару з параметра URL
 $id = $_GET['id'] ?? null;
-
 if ($id) {
     // Отримання даних товару з бази
     $result = $db->read('products', ['*'], ['id' => $id]);
-
     if (count($result)) {
         $row = $result[0];
         $itemName = htmlspecialchars($row["product_name"]);
@@ -40,12 +37,33 @@ if ($id) {
                     </div>
                 </div>
             </div>";
+        // Додавання товару до сесії
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+            $quantity = $_POST['quantity'] ?? 1; // Кількість товару, за замовчуванням 1
+            if (!isset($_SESSION['cart'])) {
+                $_SESSION['cart'] = []; // Ініціалізація масиву сесії, якщо він ще не існує
+            }
+            // Додавання товару до сесії
+            if (isset($_SESSION['cart'][$id])) {
+                $_SESSION['cart'][$id]['quantity'] += $quantity; // Збільшення кількості, якщо товар вже в сесії
+            } else {
+                $_SESSION['cart'][$id] = ['quantity' => $quantity, 'price' => $price];
+            }
+            echo "<p>Товар додано до кошика!</p>";
+        }
+        if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) >= 1) {
+            // Форма для додавання товару до кошика
+            echo "<form method='POST'>
+                    <label for='quantity'>Кількість:</label>
+                    <input type='number' name='quantity' value='1' min='1'>
+                    <button type='submit' name='add_to_cart'>Додати до кошика</button>
+                    </form>";
+        }
     } else {
         echo "Товар не знайдено";
     }
 } else {
     echo "Невірний запит";
 }
-
 require_once('../php/footer.php');
 ?>

@@ -1,5 +1,4 @@
 <?php
-session_start(); /* Початок сесії */
 require_once('header.php'); /* Верхня частина сайту */
 $accessControl->checkAccess(2); /* Доступ у адміністраторів */
 require_once('../php/mysql.php'); /* Підключення до бази даних */

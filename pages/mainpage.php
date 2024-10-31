@@ -1,5 +1,4 @@
 <?php
-session_start(); /* Початок сессії */
 require_once('header.php'); /* Верхня частина сайту */
 $newsData = $db->readAll('news');
 ?>

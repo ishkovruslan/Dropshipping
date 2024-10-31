@@ -1,5 +1,4 @@
 <?php
-session_start(); /* Початок сессії */
 require_once('header.php'); /* Верхня частина сайту */
 $accessControl->checkAccess(1); /* Доступ лише у адміністраторів */
 $key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
