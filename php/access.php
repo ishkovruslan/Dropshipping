@@ -65,9 +65,11 @@ class Authentication
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['login'] = $login;
+                logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна авторизація ' . $login);
                 return array('success' => true);
             }
         }
+        logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Невірний логін або пароль ' . $login);
         return array('success' => false, 'message' => "Невірний логін або пароль!");
     }
 
@@ -76,6 +78,7 @@ class Authentication
         $conditions = ['login' => $login];
         $result = $this->db->read('users', ['login'], $conditions);
         if (count($result) > 0) {
+            logAction($this->db, 'Реєстрація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба реєстрації під чужим логіном ' . $login);
             return array('unique' => false, 'message' => "Цей логін вже використовується!");
         } else {
             return array('unique' => true);
@@ -99,6 +102,7 @@ class Authentication
             $dataUserList = [$login, 'user', $timeInNanoseconds, 0];
             $this->db->write('userlist', ['login', 'role', 'registration_time', 'unique_key'], $dataUserList, 'ssii');
             $this->authenticate($login, $password);
+            logAction($this->db, 'Реєстрація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна реєстрація ' . $login);
             return array('success' => true);
         }
     }
@@ -127,12 +131,14 @@ class RemoteAccess
 
         // Оновлюємо поле unique_key у користувача
         $this->db->update('userlist', $data, $conditions, 'i');
+        logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Користувач ' . $login . ' отримав новий ключ');
     }
 
     // Отримуємо registration_time і unique_key з бази
     public function getUserData($login)
     {
         $conditions = ['login' => $login];
+        logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Перегляд ключа користувача ' . $login);
         return $this->db->read('userlist', ['registration_time', 'unique_key'], $conditions);
     }
 
@@ -144,33 +150,31 @@ class RemoteAccess
 
     // Керування віддаленим доступом (інтерфейс)
     public function manageRemoteAccess($login)
-{
-    // Отримуємо registration_time та unique_key з бази даних
-    $userData = $this->getUserData($login);
+    {
+        // Отримуємо registration_time та unique_key з бази даних
+        $userData = $this->getUserData($login);
 
-    if (isset($userData[0]['registration_time'])) {
-        $registrationTime = (int) $userData[0]['registration_time'];
-        $uniqueKey = $userData[0]['unique_key'];
+        if (isset($userData[0]['registration_time'])) {
+            $registrationTime = (int) $userData[0]['registration_time'];
+            $uniqueKey = $userData[0]['unique_key'];
 
-        // Якщо користувач натиснув на кнопку "Згенерувати ключ"
-        if (isset($_POST['generate_key'])) {
-            // Генеруємо новий ключ
-            $newKey = $this->generateUniqueKey();
-            $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
-            $uniqueKey = $newKey; // Оновлюємо значення для відображення
-        }elseif ($uniqueKey == 0) {
-            // Якщо ключ не згенеровано, виводимо повідомлення, що ключ ще не згенеровано
-            return "Ключ ще не згенеровано.";
+            // Якщо користувач натиснув на кнопку "Згенерувати ключ"
+            if (isset($_POST['generate_key'])) {
+                // Генеруємо новий ключ
+                $newKey = $this->generateUniqueKey();
+                $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
+                $uniqueKey = $newKey; // Оновлюємо значення для відображення
+            } elseif ($uniqueKey == 0) {
+                // Якщо ключ не згенеровано, виводимо повідомлення, що ключ ще не згенеровано
+                return "Ключ ще не згенеровано.";
+            }
+
+            // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
+            return $this->xorKeys($registrationTime, (int) $uniqueKey);
         }
 
-        // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
-        return $this->xorKeys($registrationTime, (int) $uniqueKey);
+        return "Помилка: дані користувача не знайдено!";
     }
-
-    return "Помилка: дані користувача не знайдено!";
-}
-
-
 }
 
 $accessControl = new AccessControl($db, $roles);

@@ -162,4 +162,19 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
 
     $db = new Database($servername, $username, $password, $dbname);
 }
+function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult) {
+    $sourceTime = round(microtime(true) * 1000); // Час у мс
+    $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
+    $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];
+    $types = 'ssssss';
+
+    $db->write('log', $columns, $values, $types);
+}
+
+$table = 'log';
+$columns = ['*'];
+
+$filter = $_GET['filter'] ?? null;
+$conditions = $filter ? ['login' => $filter] : ['login'];
+$logs = $db->read($table, $columns, $conditions);
 ?>

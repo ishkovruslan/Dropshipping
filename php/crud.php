@@ -19,15 +19,13 @@ class User
         $conditions = ['login' => $this->login];
         $this->db->update('userlist', $data, $conditions);
         $this->role = $newRole;
-        // Логування
-        logAction($this->db, 'Зміна ролі', $this->login, $_SERVER['REMOTE_ADDR']);
+        logAction($this->db, 'Зміна ролі', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' змінив роль користувачу ' . $conditions['login'] . ' на ' . $newRole);
     }    
 
     public function deleteUser() {
         $this->db->remove('userlist', ['login'], [$this->login]);
         $this->db->remove('users', ['login'], [$this->login]);
-        // Логування
-        logAction($this->db, 'Видалення користувача', $this->login, $_SERVER['REMOTE_ADDR']);
+        logAction($this->db, 'Видалення користувача', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' видалив користувача ' . $this->login);
     }
 
     public function getLogin()
@@ -123,7 +121,6 @@ class Product
 
     public function create($category, $name, $count, $price, $image, $characteristics)
     {/* Створити товар */
-        session_start();
         $columns = ['category', 'product_name', 'count', 'price', 'uploadPath', 'characteristics'];
         if (!is_array($characteristics)) {
             $characteristics = [$characteristics];
@@ -144,9 +141,14 @@ class Product
 function updateData($table, $data, $conditions, $db) {
     try {
         $db->update($table, $data, $conditions);
-
-        // Логування
-        logAction($db, "Update $table", $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
+        // Формування рядків для логування
+        $dataString = implode(', ', array_map(function($key, $value) {
+            return "$key: $value";
+        }, array_keys($data), $data));
+        $conditionsString = implode(', ', array_map(function($key, $value) {
+            return "$key: $value";
+        }, array_keys($conditions), $conditions));
+        logAction($db, "Оновлення $table", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' оновив таблицю ' . $table . ' змінивши значення ' . $dataString . ', ' . $conditionsString);
         header("Location: ../pages/management.php");
         exit();
     } catch (mysqli_sql_exception $e) {
@@ -158,6 +160,7 @@ function deleteEntity($entity, $id, $db)
 {/* Видалення категорії */
     $conditions = ['id' => $id];
     deleteEntityWithImages($entity, $conditions, $db);
+    logAction($db, "Оновлення $entity", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' оновив таблицю ' . $entity . ' видаливши запис ' . $id);
     header("Location: ../pages/management.php"); // Перенаправлення назад до списку
     exit();
 }
@@ -194,6 +197,9 @@ function deleteFile($filePath)
 function handlePostRequest($db)
 {/* Обробка запитів */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         if (isset($_POST['login'])) {
             handleUserPostRequest($db);
         } elseif (isset($_POST['entity']) && isset($_POST['id'])) {
@@ -281,9 +287,7 @@ function handleCreateNewsRequest($db) {
     $end = $_POST['end_date'];
     $imageFileName = uploadFile('uploadPath', "../images/news/");
     $news->create($name, $imageFileName, $description, $start, $end);
-
-    // Логування
-    logAction($db, 'Створено новину', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
+    logAction($db, "Створено новину", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' створив новину ' . $name . ' з описом ' . $description . ' яка триває з ' . $start . ' до ' . $end);
     header("Location: ../pages/newnews.php");
 }
 
@@ -293,27 +297,53 @@ function handleCreateCategoryRequest($db)
     $name = $_POST['category_name'];
     $specifications = explode(",", $_POST['specifications']);
     $category->create($name, $specifications);
-    
-    // Логування
-    logAction($db, 'Створено категорію', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
+    $dataSpecifications = implode(', ', array_map(function($key, $value) {
+        return "$key: $value";
+    }, array_keys($specifications), $specifications));
+    logAction($db, "Створено категорію", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' створив категорію ' . $name . ' з наступними специфікаціями ' . $dataSpecifications);
     header("Location: ../pages/newcategory.php");
 }
 
 function handleCreateProductRequest($db)
-{/* POST запит створення товару */
+{
+    /* POST запит створення товару */
     $product = new Product($db);
     $name = $_POST['name'];
     $count = $_POST['count'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    $characteristics = $_POST['characteristics'];
+    
+    // Перевірка, чи характеристики є масивом
+    if (isset($_POST['characteristics']) && is_array($_POST['characteristics'])) {
+        $characteristics = implode(',', $_POST['characteristics']); // Об'єднуємо масив в рядок
+    } else {
+        $characteristics = $_POST['characteristics'] ?? ''; // Якщо не масив, просто беремо значення
+    }
+    
     $imageFileName = uploadFile('uploadPath', "../images/products/");
+    
+    // Форматування характеристик
+    $characteristicsArray = explode(',', $characteristics);
+    $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $category]);
+    $specifications = explode(',', $specificationsResult[0]["specifications"]);
+    
+    $formattedCharacteristics = [];
+    foreach ($characteristicsArray as $key => $value) {
+        if ($value !== "-" && $value !== "") {
+            $formattedCharacteristics[] = htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value);
+        }
+    }
+    
+    // Об'єднуємо характеристики в один рядок
+    $characteristicsString = implode(", ", $formattedCharacteristics);
+    
     $product->create($category, $name, $count, $price, $imageFileName, $characteristics);
-
-    // Логування
-    logAction($db, 'Створено товар', $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR']);
+    
+    logAction($db, "Створено товар", $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив в категорії ' . $category . ' товар ' . $name . ' в кількості ' . $count . ' який має вартість ' . $price . " та має наступні характеристики: " . $characteristicsString);
+    
     header("Location: ../pages/newproduct.php");
 }
+
 
 function uploadFile($fileKey, $uploadDir)
 {/* Завантаження файлу */
@@ -338,7 +368,7 @@ function populateDataArray($entity, &$data)
         case 'products':
             $data['category'] = $_POST['category'];
             $data['product_name'] = $_POST['product_name'];
-            $data['coutn'] = $_POST['count'];
+            $data['count'] = $_POST['count'];
             $data['price'] = $_POST['price'];
             $data['characteristics'] = $_POST['characteristics'];
             break;
@@ -364,25 +394,4 @@ function countAccessibleProductsByCategory($categoryName, $productsData)
     }
     return $count;
 }
-
-function logAction($db, $operation, $login, $sourceIp, $sourceType = 'WEB', $sourceResult = 'Success') {
-    $sourceTime = round(microtime(true) * 1000); // Час у мс
-    $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
-    $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];
-    $types = 'ssssss';
-
-    $db->write('log', $columns, $values, $types);
-}
-
-function getLogEntries($db, $filter = null)
-{
-    return $filter ? $db->readFiltered('log', $filter) : $db->readAll('log');
-}
-
-$table = 'log';
-$columns = ['*'];
-
-$filter = $_GET['filter'] ?? null;
-$conditions = $filter ? ['login' => $filter] : ['login'];
-$logs = $db->read($table, $columns, $conditions);
 ?>
