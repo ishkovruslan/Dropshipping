@@ -12,7 +12,28 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult) {
+    $sourceTime = round(microtime(true) * 1000); // Час у мс
+    $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
+    $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];
+    $types = 'ssssss';
 
+    /* Запис інформації */
+    $columns_str = implode(", ", $columns);
+    $placeholders = implode(", ", array_fill(0, count($values), '?'));
+    $sql = "INSERT INTO log ($columns_str) VALUES ($placeholders)";
+    
+    // Використовуємо $db для підготовки запиту
+    $stmt = $db->prepare($sql); 
+    if ($stmt === false) {
+        die("Error preparing statement: " . $db->error);
+    }
+    $stmt->bind_param($types, ...$values);
+    if ($stmt->execute() === false) {
+        die("Error executing statement: " . $stmt->error);
+    }
+    $stmt->close();
+}
 /* Імпорт з .csv в БД */
 function insertDataFromCSV($conn, $filename, $tablename)
 {
@@ -40,7 +61,11 @@ function insertDataFromCSV($conn, $filename, $tablename)
             $data = array_slice($data, 0, 6);/* Все що йде після 5 значення сприймаємо як 1 масив */
             $types = "ssiissi"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
             $data[] = NULL; /* Додаємо NULL в кінець масиву даних для стовпця id */
+        } elseif ($filename == "userlist.csv") {
+            $types = "ssii"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
         }
+        /* echo $tablename; */
+        logAction($conn, 'Заповнення таблиці ' . $tablename, "Owner", $_SERVER['REMOTE_ADDR'], 'WEB', "Ініціалізація");
         /* Заповнення бази */
         $placeholders = implode(",", array_fill(0, count($data), "?"));
         $sql = "INSERT INTO $tablename VALUES ($placeholders)";
@@ -59,8 +84,8 @@ function insertDataFromCSV($conn, $filename, $tablename)
 }
 
 /* Виклик для кожного .csv файлу */
-/* insertDataFromCSV($conn, "users.csv", "users");
-insertDataFromCSV($conn, "userlist.csv", "userlist"); */
+insertDataFromCSV($conn, "users.csv", "users");
+insertDataFromCSV($conn, "userlist.csv", "userlist");
 insertDataFromCSV($conn, "news.csv", "news");
 insertDataFromCSV($conn, "categories.csv", "categories");
 insertDataFromCSV($conn, "products.csv", "products");
@@ -71,7 +96,6 @@ $conn->close();/* Закриваємо з'єднання */
 $sourceDir = '../images/reserve/';
 $targetDirs = [
     '../images/news/',
-    '../images/categories/',
     '../images/products/'
 ];
 
