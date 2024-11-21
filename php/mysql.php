@@ -153,6 +153,28 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             }
             $stmt->close();
         }
+
+        public function searchLike($tablename, $columns, $searchColumn, $searchValue)
+        {
+            $columnString = implode(',', $columns);
+            $sql = "SELECT $columnString FROM $tablename WHERE $searchColumn LIKE ?";
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt === false) {
+                die("Error preparing statement: " . $this->conn->error);
+            }
+            $searchValue = "%" . $searchValue . "%";
+            $stmt->bind_param('s', $searchValue);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+            $stmt->close();
+            return $data;
+        }
     }
 
     $servername = "localhost:3306";
@@ -162,7 +184,8 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
 
     $db = new Database($servername, $username, $password, $dbname);
 }
-function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult) {
+function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult)
+{
     $sourceTime = round(microtime(true) * 1000); // Час у мс
     $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
     $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];

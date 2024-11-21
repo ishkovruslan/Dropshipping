@@ -28,18 +28,50 @@ $local_ip = gethostbyname($hostname);
 
 <body>
     <header>
-        <p>
-            <a href="../index.php">Головна</a>
-            <script src="../scripts/header.js"></script>
-        </p>
-        <p>
-            <a href="products.php">Товари</a>
-        </p>
-        <?php
-        /* Перевірка авторизації користувача */
-        if (isset($_SESSION['loggedin']) === true) {
+        <div>
+            <p>
+                <a href="../index.php">Головна</a>
+                <script src="../scripts/header.js"></script>
+            </p>
+            <p>
+                <a href="products.php">Товари</a>
+            </p>
+            <?php
+            /* Перевірка авторизації користувача */
+            if (isset($_SESSION['loggedin']) === true) {
+                /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
+                if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
+                    ?>
+                    <p>
+                        <a href="account.php">Керування обліковим записом</a>
+                    </p>
+                    <?php if (!empty($_SESSION['cart'])) { ?>
+                        <p>
+                            <a href="cart.php">Кошик</a>
+                        </p>
+                        <?php
+                    }
+                } ?>
+                <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
+                    <a href="../php/logout.php">Вийти</a>
+                </p>
+            <?php } else { /* Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації */ ?>
+                <p>
+                    <a href="authorization.php">Авторизація</a>
+                </p>
+                <p>
+                    <a href="registration.php">Реєстрація</a>
+                </p>
+            <?php } ?>
+            <p> <!-- Керування темою -->
+                <button id="themeButton" data-theme="<?php echo $theme; ?>">Змінити тему</button>
+                <script src="../scripts/header.js"></script>
+            </p>
+        </div>
+        <div>
+            <?php
             /* Якщо це адміністратор - надати доступ до створення новин та категорій*/
-            if ($accessControl->getUserLevel($_SESSION['login']) == 2) {
+            if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) {
                 ?>
                 <p>
                     <a href="newnews.php">Додати новину</a>
@@ -55,33 +87,7 @@ $local_ip = gethostbyname($hostname);
                 </p>
                 <p><?php echo $local_ip; ?></p>
             <?php } ?>
-            <?php
-            /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
-            if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
-                ?>
-                <p>
-                    <a href="account.php">Керування обліковим записом</a>
-                </p>
-                <p>
-                    <a href="cart.php">Кошик</a>
-                </p>
-            <?php } ?>
-            <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
-                <a href="../php/logout.php">Вийти</a>
-            </p>
-        <?php } else { /* Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації */ ?>
-            <p>
-                <a href="authorization.php">Авторизація</a>
-            </p>
-            <p>
-                <a href="registration.php">Реєстрація</a>
-            </p>
-        <?php } ?>
-        <p> <!-- Керування темою -->
-            <button id="themeButton" data-theme="<?php echo $theme; ?>">Змінити тему</button>
-            <script src="../scripts/header.js"></script>
-        </p>
+        </div>
     </header>
 </body>
 <main>
-    

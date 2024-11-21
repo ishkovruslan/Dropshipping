@@ -4,7 +4,7 @@ body {
     border: 1vw solid red;
 }
 
-header {
+header div{
     display: flex;
     justify-content: space-between; /* Розподіляє кнопки з рівними проміжками */
     align-items: center; /* Вирівнює кнопки по вертикалі */

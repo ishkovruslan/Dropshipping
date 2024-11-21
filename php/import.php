@@ -89,6 +89,7 @@ insertDataFromCSV($conn, "userlist.csv", "userlist");
 insertDataFromCSV($conn, "news.csv", "news");
 insertDataFromCSV($conn, "categories.csv", "categories");
 insertDataFromCSV($conn, "products.csv", "products");
+insertDataFromCSV($conn, "consumer.csv", "consumer");
 
 $conn->close();/* Закриваємо з'єднання */
 
