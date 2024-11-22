@@ -154,16 +154,17 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             $stmt->close();
         }
 
-        public function searchLike($tablename, $columns, $searchColumn, $searchValue)
+        public function searchLike($tablename, $columns, $searchColumn, $searchValue, $limit = 10)
         {
             $columnString = implode(',', $columns);
-            $sql = "SELECT $columnString FROM $tablename WHERE $searchColumn LIKE ?";
+            $sql = "SELECT $columnString FROM $tablename WHERE $searchColumn LIKE ? LIMIT ?";
             $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
                 die("Error preparing statement: " . $this->conn->error);
             }
+
             $searchValue = "%" . $searchValue . "%";
-            $stmt->bind_param('s', $searchValue);
+            $stmt->bind_param('si', $searchValue, $limit); // 'si' - s для рядка, i для цілого числа
             $stmt->execute();
             $result = $stmt->get_result();
             $data = [];
@@ -175,6 +176,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             $stmt->close();
             return $data;
         }
+
     }
 
     $servername = "localhost:3306";

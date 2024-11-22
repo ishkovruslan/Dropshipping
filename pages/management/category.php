@@ -6,7 +6,10 @@
             <th>Кількість пропозицій</th>
             <th>Специфікації</th>
         </tr>
-        <?php foreach ($categoriesData as $category): ?>
+        <?php
+        $categoriesData = $db->readAll('categories');
+        $productsData = $db->readAll('products');
+        foreach ($categoriesData as $category): ?>
             <tr>
                 <td>
                     <a href="management.php?category=<?php echo $category['category_name']; ?>">

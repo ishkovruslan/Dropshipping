@@ -43,13 +43,16 @@ $local_ip = gethostbyname($hostname);
                 if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
                     ?>
                     <p>
+                        <a href="report.php">Звіти</a>
+                    </p>
+                    <p>
                         <a href="account.php">Керування обліковим записом</a>
                     </p>
                     <?php if (!empty($_SESSION['cart'])) { ?>
                         <p>
                             <a href="cart.php">Кошик</a>
                         </p>
-                        <?php
+                    <?php
                     }
                 } ?>
                 <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
@@ -68,11 +71,11 @@ $local_ip = gethostbyname($hostname);
                 <script src="../scripts/header.js"></script>
             </p>
         </div>
-        <div>
-            <?php
-            /* Якщо це адміністратор - надати доступ до створення новин та категорій*/
-            if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) {
-                ?>
+        <?php
+        /* Якщо це адміністратор - надати доступ до створення новин та категорій*/
+        if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) {
+            ?>
+            <div>
                 <p>
                     <a href="newnews.php">Додати новину</a>
                 </p>
@@ -86,8 +89,8 @@ $local_ip = gethostbyname($hostname);
                     <a href="management.php">Сторінка керування</a>
                 </p>
                 <p><?php echo $local_ip; ?></p>
-            <?php } ?>
-        </div>
+            </div>
+        <?php } ?>
     </header>
 </body>
 <main>

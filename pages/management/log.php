@@ -27,6 +27,7 @@
             <th>Час</th>
         </tr>
         <?php
+        $logs = $db->readAll('log');
         function getFilteredLogs($logs)
         {
             // Сортуємо логи від нових до старих

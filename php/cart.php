@@ -5,7 +5,8 @@ $action = $_GET['action'] ?? null;
 
 if ($action === 'search') {
     $search = $_GET['query'] ?? '';
-    $results = $db->searchLike('consumer', ['id', 'full_name'], 'full_name', $search);
+    $limit = (int)($_GET['limit'] ?? 10); // Встановлюємо значення за замовчуванням на 10
+    $results = $db->searchLike('consumer', ['id', 'full_name'], 'full_name', $search, $limit);
     echo json_encode($results);
 } elseif ($action === 'details') {
     $id = $_GET['id'] ?? null;

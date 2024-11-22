@@ -126,7 +126,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             echo "<p>Ваше замовлення успішно збережено!</p>";
             unset($_SESSION['cart']); // Очистка кошика
             error_log('Замовлення збережено, кошик очищено');
-            exit;
+            header("location: ../index.php");
         }
     }
 
@@ -184,11 +184,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     title="Телефон має містити від 8 до 15 цифр"></label><br>
             <label>Електронна пошта: <input type="email" id="email" name="email" required
                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                    title= "Введіть коректну електронну пошту"></label><br>
+                    title="Введіть коректну електронну пошту"></label><br>
             <label>Поштовий оператор: <input type="text" id="post_type" name="post_type" required
                     pattern="^[А-Яа-яA-Za-z\s]+$"
                     title="Поштовий оператор може містити лише літери українського та англійського алфавіту"></label><br>
-            <label>Місто: <input type="text" id="city" name="city" required pattern="^[А-Яа-яA-Za-z\s]+$"
+            <label>Місто: <input type="text" id="city" name="city" required pattern="^[А-Я][а-яA-Za-z\s]+$"
                     title="Місто може містити лише літери українського та англійського алфавіту"></label><br>
             <label>Номер відділення: <input type="text" id="post_number" name="post_number" required pattern="^\d+$"
                     title="Номер відділення має містити лише цифри"></label><br>

@@ -3,7 +3,7 @@ require_once('header.php'); // Верхня частина сайту
 $accessControl->checkAccess(2); // Доступ лише у адміністраторів
 require_once('../php/crud.php'); // Необхідні функції
 // Якщо не вибрано жодної таблиці, показати форму вибору
-if (!isset($_GET['table']) && !isset($_GET['category'])) {
+if (!isset($_GET['table'])) {
     ?>
     <div class="table-selection">
         <h1>Виберіть таблицю для перегляду:</h1>
@@ -18,27 +18,24 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
 } else {
     // Завантаження таблиці користувачів, новин, категорій або товарів за обраною категорією
     $table = $_GET['table'] ?? null;
-    $selectedCategory = $_GET['category'] ?? null;
     // Відображення вибраної таблиці
     switch ($table) {
-        case 'users':
-            require_once('management/userlist.php');
+        case 'order':
+            require_once('report/order.php');
             break;
         case 'log':
-            require_once('management/log.php');
+            $logs = $db->readAll('log');
+            require_once('report/log.php');
             break;
         case 'news':
-            require_once('management/news.php');
+            $newsData = $db->readAll('news');
+            require_once('report/news.php');
             break;
         case 'categories':
-            require_once('management/category.php');
+            $categoriesData = $db->readAll('categories');
+            $productsData = $db->readAll('products');
+            require_once('report/category.php');
             break;
-    }
-    if ($selectedCategory) {
-        $categoriesData = $db->readAll('categories');
-        $productsData = $db->readAll('products');
-        $filteredProducts = $selectedCategory ? array_filter($productsData, fn($product) => $product['category'] === $selectedCategory) : $productsData;
-        require_once('management/products.php');
     }
 }
 require_once('../php/footer.php'); ?>

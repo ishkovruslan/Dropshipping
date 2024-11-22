@@ -47,7 +47,7 @@ function insertDataFromCSV($conn, $filename, $tablename)
         return;
     }
     $file = fopen("../data/$filename", "r");
-    while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
+    while (($data = fgetcsv($file, 10000, ",")) !== FALSE) {
         /* Тип за замовчуванням */
         $types = "";
         /* Обробка специфікацій для категорій та продуктів */
@@ -63,9 +63,44 @@ function insertDataFromCSV($conn, $filename, $tablename)
             $data[] = NULL; /* Додаємо NULL в кінець масиву даних для стовпця id */
         } elseif ($filename == "userlist.csv") {
             $types = "ssii"; /* Типи даних для кожного стовпця (s для рядка, i для цілого числа) */
+        } elseif ($filename == "orders.csv"/*  && $data[9 + (int)$data[2] * 4] < 10 */) {
+            // Парсинг замовлень
+            $login = $data[0];
+            $time = $data[1];
+            $recordCount = (int)$data[2];
+            $group1 = implode(",", array_slice($data, 3, $recordCount));
+            $group2 = implode(",", array_slice($data, 3 + $recordCount, $recordCount));
+            $group3 = implode(",", array_slice($data, 3 + $recordCount * 2, $recordCount));
+            $group4 = implode(",", array_slice($data, 3 + $recordCount * 3, $recordCount));
+            $fullName = $data[3 + $recordCount * 4];
+            $phoneNumber = $data[4 + $recordCount * 4];
+            $email = $data[5 + $recordCount * 4];
+            $postalService = $data[6 + $recordCount * 4];
+            $city = $data[7 + $recordCount * 4];
+            $branch = $data[8 + $recordCount * 4];
+            $id = $data[9 + $recordCount * 4];
+            
+            // Формування масиву даних
+            $data = [
+                $login,
+                $time,
+                $recordCount,
+                $group1,
+                $group2,
+                $group3,
+                $group4,
+                $fullName,
+                $phoneNumber,
+                $email,
+                $postalService,
+                $city,
+                $branch,
+                $id
+            ];
+            $types = "sisssssssssssi"; // Типи даних: s - string, i - integer
         }
         /* echo $tablename; */
-        logAction($conn, 'Заповнення таблиці ' . $tablename, "Owner", $_SERVER['REMOTE_ADDR'], 'WEB', "Ініціалізація");
+        /* logAction($conn, 'Заповнення таблиці ' . $tablename, "Owner", $_SERVER['REMOTE_ADDR'], 'WEB', "Ініціалізація"); */
         /* Заповнення бази */
         $placeholders = implode(",", array_fill(0, count($data), "?"));
         $sql = "INSERT INTO $tablename VALUES ($placeholders)";
@@ -90,6 +125,7 @@ insertDataFromCSV($conn, "news.csv", "news");
 insertDataFromCSV($conn, "categories.csv", "categories");
 insertDataFromCSV($conn, "products.csv", "products");
 insertDataFromCSV($conn, "consumer.csv", "consumer");
+insertDataFromCSV($conn, "orders.csv", "orders");
 
 $conn->close();/* Закриваємо з'єднання */
 

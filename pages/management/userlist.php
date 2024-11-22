@@ -6,10 +6,16 @@
             <th width="20%">Роль</th>
             <th width="40%">Керування користувачем</th>
         </tr>
-        <?php foreach ($userList->getUsers() as $user): /* Перебираємо всіх користувачів */
+        <?php
+        $userList = new UserList($db);
+        $userList->loadUsersFromDB();
+        $roles = ["user" => "Користувач", "seller" => "Продавець"];
+        foreach ($userList->getUsers() as $user): /* Перебираємо всіх користувачів */
             if ($user->getRole() !== 'administrator'): ?> <!-- Пропускаємо адміністраторів -->
                 <tr>
-                    <td><a href = "management.php?table=log&user=<?php echo $user->getLogin() ?>"><?php echo $user->getLogin(); ?></a></td>
+                    <td><a
+                            href="management.php?table=log&user=<?php echo $user->getLogin() ?>"><?php echo $user->getLogin(); ?></a>
+                    </td>
                     <td><?php echo $roles[$user->getRole()]; ?></td>
                     <td><!-- Меню керування користувачем -->
                         <form method="post">

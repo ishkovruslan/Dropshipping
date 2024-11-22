@@ -8,7 +8,9 @@
             <th width="12.5%">Початкова дата</th>
             <th width="12.5%">Кінцева дата</th>
         </tr>
-        <?php foreach ($newsData as $news): ?>
+        <?php
+        $newsData = $db->readAll('news');
+        foreach ($newsData as $news): ?>
             <tr>
                 <td><!-- Редагування по натисканню на зображення -->
                     <img src="../images/news/<?php echo $news['uploadPath']; ?>"
