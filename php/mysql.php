@@ -176,7 +176,6 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             $stmt->close();
             return $data;
         }
-
     }
 
     $servername = "localhost:3306";

@@ -1,7 +1,7 @@
 body {
     max-width: 1280px;
     margin: 0 auto;
-    border: 1vw solid red;
+    border: 0.25vw solid red;
 }
 
 header div{
@@ -10,7 +10,7 @@ header div{
     align-items: center; /* Вирівнює кнопки по вертикалі */
     flex-wrap: wrap; /* Дозволяє елементам переноситися на новий рядок, якщо бракує місця */
     /* padding: 10px; */
-    border: 1vw solid yellow;
+    border: 0.25vw solid yellow;
 }
 
 header a {
@@ -23,7 +23,7 @@ header a:hover {
 }
 
 main {
-    border: 1vw solid green;
+    border: 0.25vw solid green;
     padding: 0.5vw;
 }
 

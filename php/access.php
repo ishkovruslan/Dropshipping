@@ -35,11 +35,13 @@ class AccessControl
     public function checkAccess($minRequiredRole)
     {/* Перевірка доступу, якщо його немає відправляємо користувача на головну сторінку */
         if (!isset($_SESSION['login'])) {
+            logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба відкрити сторінку без авторизації ' . $_SESSION['login']);
             header("location: ../index.php");
             exit;
         }
         $role = $this->getUserRole($_SESSION['login']);
         if (!isset($this->roles[$role]) || $this->roles[$role] < $minRequiredRole) {
+            logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Наявний рівень ' . $this->roles[$role] . ' Необхідний рівень ' . $minRequiredRole);
             header("location: ../index.php");
             exit;
         }

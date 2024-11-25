@@ -2,6 +2,7 @@
     <div class="table-selection">
         <h1>Виберіть таблицю для перегляду:</h1>
         <ul>
+            <li><a href="?table=log&operation=Неавторизований доступ">Неавторизований доступ</a></li>
             <li><a href="?table=log&operation=Авторизація">Авторизація</a></li>
             <li><a href="?table=log&operation=Реєстрація">Реєстрація</a></li>
             <li><a href="?table=log&operation=Зміна ролі">Зміна ролі</a></li>
@@ -16,7 +17,7 @@
             <li><a href="?table=log&role=administrator">Дії всіх адміністраторів</a></li>
         </ul>
     </div>
-    <h1>Перегляд змін</h1>
+    <h1>Перегляд дій</h1>
     <table>
         <tr>
             <th>Операція</th>

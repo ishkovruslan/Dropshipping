@@ -11,7 +11,11 @@
             <th width="10%">Ціна</th>
             <th width="25%">Характеристики</th>
         </tr>
-        <?php foreach ($filteredProducts as $product): ?>
+        <?php
+        $categoriesData = $db->readAll('categories');
+        $productsData = $db->readAll('products');
+        $filteredProducts = $selectedCategory ? array_filter($productsData, fn($product) => $product['category'] === $selectedCategory) : $productsData;
+        foreach ($filteredProducts as $product): ?>
             <tr><!-- Редагування по натисканню на зображення -->
                 <td><img src="../images/products/<?php echo $product['uploadPath']; ?>" alt="Товар"
                         onclick="openEditProductModal('<?php echo $product['id']; ?>', '<?php echo $product['uploadPath']; ?>', '<?php echo addslashes($product['category']); ?>', '<?php echo addslashes($product['product_name']); ?>', '<?php echo $product['count']; ?>', '<?php echo $product['price']; ?>', '<?php echo addslashes($product['characteristics']); ?>')">

@@ -35,9 +35,6 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) {
             break;
     }
     if ($selectedCategory) {
-        $categoriesData = $db->readAll('categories');
-        $productsData = $db->readAll('products');
-        $filteredProducts = $selectedCategory ? array_filter($productsData, fn($product) => $product['category'] === $selectedCategory) : $productsData;
         require_once('management/products.php');
     }
 }
