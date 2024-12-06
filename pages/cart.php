@@ -1,6 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Бібліотека має бути підключеною перед скриптом -->
 <?php
+ob_start(); // Початок буферизації виводу
 require_once('header.php');
 
 // Увімкнення відображення помилок
@@ -8,128 +9,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Перевірка наявності активного сеансу користувача
+if (!isset($_SESSION['login'])) {
+    exit('Помилка: Ви повинні увійти до системи, щоб здійснити замовлення.');
+}
+
 // Перевірка, чи є товари в кошику
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    // Обробка оновлення цін
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_price'])) {
-        foreach ($_POST['new_price'] as $id => $newPrice) {
-            // Перевірка, чи товар є в кошику
-            if (isset($_SESSION['cart'][$id])) {
-                // Оновлення endprice в сесії
-                $_SESSION['cart'][$id]['price'] = max($newPrice, $_SESSION['cart'][$id]['price']);
-            }
-        }
-    }
-
-    // Перевірка наявності відправленої форми замовлення
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_order'])) {
-        // Логування надходження форми
-        error_log('Форма замовлення відправлена');
-
-        // Перевірка наявності обов'язкових полів
-        $requiredFields = ['full_name', 'phone', 'email', 'post_type', 'city', 'post_number'];
-        foreach ($requiredFields as $field) {
-            if (empty($_POST[$field])) {
-                error_log("Поле $field порожнє");
-                exit("Помилка: Поле $field є обов'язковим.");
-            }
-        }
-
-        $full_name = $_POST['full_name'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $post = $_POST['post_type'];
-        $city = $_POST['city'];
-        $post_number = $_POST['post_number'];
-
-        // Перевірка наявності споживача
-        $existingConsumer = $db->read('consumer', ['*'], ['full_name' => $full_name]);
-        if (count($existingConsumer) > 0) {
-            $consumerId = $existingConsumer[0]['id'];
-            $db->update('consumer', [
-                'phone' => $phone,
-                'email' => $email,
-                'post' => $post,
-                'city' => $city,
-                'post_number' => $post_number
-            ], ['id' => $consumerId]);
-        } else {
-            $columns = ['full_name', 'phone', 'email', 'post', 'city', 'post_number'];
-            $values = [$full_name, $phone, $email, $post, $city, $post_number];
-            $types = 'ssssss';
-
-            if (!$db->write('consumer', $columns, $values, $types)) {
-                error_log('Помилка запису споживача');
-                exit('Помилка: Не вдалося додати споживача.');
-            }
-        }
-
-        // Збір даних про товари
-        $productQuantities = [];
-        $productPrices = [];
-        $productRealizations = []; // Додано новий масив для цін, які вказав користувач
-
-        foreach ($_SESSION['cart'] as $id => $item) {
-            $productIds[] = $id;
-            $productQuantities[] = $item['quantity'];
-            $productPrices[] = $item['price'];
-            $productRealizations[] = isset($_POST['new_price'][$id]) ? $_POST['new_price'][$id] : $item['price']; // Отримання ціни, яку вказав користувач
-        }
-
-        // Підготовка даних для запису у форматі CSV
-        $products_count = count($productIds);
-        $products_list = implode(",", $productIds);
-        $products_number = implode(",", $productQuantities);
-        $products_price = implode(",", $productPrices);
-        $products_realization = implode(",", $productRealizations); // Додано новий рядок для реалізації цін
-        $record_time = (int) (microtime(true) * 1000);
-
-        // Підготовка даних для запису у таблицю orders
-        $columns = [
-            'login',
-            'record_time',
-            'products_count',
-            'products_list',
-            'products_number',
-            'products_realization', // Додано новий стовпець
-            'products_price',
-            'full_name',
-            'phone',
-            'email',
-            'post',
-            'city',
-            'post_number'
-        ];
-        $values = [
-            $_SESSION['login'],
-            $record_time,
-            $products_count,
-            $products_list,
-            $products_number,
-            $products_realization, // Додано новий рядок
-            $products_price,
-            $full_name,
-            $phone,
-            $email,
-            $post,
-            $city,
-            $post_number
-        ];
-        $types = 'sssssssssssss';
-        logAction($db, "Замовлення", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив нове замовлення');
-
-        // Збереження даних у таблицю orders
-        if ($db->write('orders', $columns, $values, $types)) {
-            error_log('Помилка запису в таблицю orders');
-            exit('Помилка: Не вдалося додати замовлення.');
-        } else {
-            echo "<p>Ваше замовлення успішно збережено!</p>";
-            unset($_SESSION['cart']); // Очистка кошика
-            error_log('Замовлення збережено, кошик очищено');
-            header("location: ../index.php");
-        }
-    }
-
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    header("location: ../index.php");
+} else {
     ?>
     <h2>Ваш кошик</h2>
     <form method='POST' action='cart.php'>
@@ -142,7 +30,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <th>Сума</th>
             </tr>
             <?php
-            $totalPrice = 0;
+            $totalPrice = 0; // Ініціалізація загальної суми
             foreach ($_SESSION['cart'] as $id => $item) {
                 $result = $db->read('products', ['*'], ['id' => $id]);
 
@@ -151,24 +39,30 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     $itemName = htmlspecialchars($row["product_name"]);
                     $lowprice = htmlspecialchars($row["price"]);
                     $endprice = htmlspecialchars($item['price']);
+
+                    // Обчислення загальної суми для товару
+                    $itemTotal = $endprice * $item['quantity']; // Переконайтеся, що $item['quantity'] існує
+                    $totalPrice += $itemTotal; // Додаємо до загальної суми
+        
                     echo "<tr>
-                <td>$itemName</td>
-                <td>{$item['quantity']}</td>
-                <td>$lowprice</td>
-                <td><input type='number' name='new_price[$id]' value='$endprice' min='$lowprice' step='1'></td>";
-                    $itemTotal = $endprice * $item['quantity'];
-                    echo "<td>$itemTotal</td>
-              </tr>";
-                    $totalPrice += $itemTotal;
+                    <td>$itemName</td>
+                    <td>
+                        <input type='number' name='quantity[$id]' value='{$item['quantity']}' min='1' max='{$row['count']}'>
+                        <button type='submit' name='remove[$id]'>Видалити</button>
+                    </td>
+                    <td>$lowprice</td>
+                    <td><input type='number' name='new_price[$id]' value='$endprice' min='$lowprice' step='1'></td>
+                    <td>$itemTotal</td>
+                </tr>";
                 }
             }
             ?>
             <tr>
-                <td><button type='submit'>Оновити ціни</button></td>
-                <td colspan='3'>Загальна сума:</td>
-                <td><?php echo $totalPrice ?></td>
+                <td colspan='4'>Загальна сума:</td>
+                <td><?php echo $totalPrice; ?></td>
             </tr>
         </table>
+        <button type='submit'>Оновити кошик</button> <!-- Залиште кнопку для оновлення кількості та видалення товарів -->
     </form>
 
     <h3>Оформити замовлення</h3>
@@ -195,8 +89,126 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             <button type="submit" name="submit_order">Зберегти замовлення</button>
     </form>
     <?php
-} else {
-    header("location: ../index.php");
+}
+
+// Обробка запитів POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Оновлення кількості товарів
+    if (isset($_POST['quantity'])) {
+        foreach ($_POST['quantity'] as $id => $newQuantity) {
+            if (isset($_SESSION['cart'][$id])) {
+                $_SESSION['cart'][$id]['quantity'] = max(0, (int) $newQuantity);
+                if ($_SESSION['cart'][$id]['quantity'] === 0) {
+                    unset($_SESSION['cart'][$id]);
+                }
+            }
+        }
+    }
+
+    // Оновлення цін
+    if (isset($_POST['new_price'])) {
+        foreach ($_POST['new_price'] as $id => $newPrice) {
+            if (isset($_SESSION['cart'][$id])) {
+                // Оновлюємо ціну, якщо нова ціна більша за 0
+                if ($newPrice > 0) {
+                    $_SESSION['cart'][$id]['price'] = (float) $newPrice;
+                }
+            }
+        }
+    }
+
+    // Видалення товару
+    if (isset($_POST['remove'])) {
+        foreach ($_POST['remove'] as $id => $value) {
+            unset($_SESSION['cart'][$id]);
+        }
+        header("Location: cart.php");
+        exit();
+    }
+
+    // Відправлення замовлення
+    if (isset($_POST['submit_order'])) {
+        error_log('Форма замовлення відправлена');
+        $outOfStockItems = [];
+        foreach ($_SESSION['cart'] as $id => $item) {
+            $result = $db->read('products', ['*'], ['id' => $id]);
+            if (!empty($result)) {
+                $product = $result[0];
+                if ($item['quantity'] > $product['count']) {
+                    $outOfStockItems[$id] = [
+                        'name' => $product['product_name'],
+                        'available' => $product['count'],
+                        'requested' => $item['quantity']
+                    ];
+                }
+            }
+        }
+
+        // Якщо товарів недостатньо
+        if (!empty($outOfStockItems)) {
+            $message = "На жаль, деякі товари недоступні:<br>";
+            foreach ($outOfStockItems as $item) {
+                $message .= "{$item['name']}: Запитано {$item['requested']}, Доступно {$item['available']}<br>";
+            }
+            exit($message);
+        }
+
+        // Перевірка обов'язкових полів
+        $requiredFields = ['full_name', 'phone', 'email', 'post_type', 'city', 'post_number'];
+        foreach ($requiredFields as $field) {
+            if (empty($_POST[$field])) {
+                exit("Помилка: Поле $field є обов'язковим.");
+            }
+        }
+
+        $consumerData = [
+            'full_name' => $_POST['full_name'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'post' => $_POST['post_type'],
+            'city' => $_POST['city'],
+            'post_number' => $_POST['post_number']
+        ];
+
+        // Додати або оновити споживача
+        $existingConsumer = $db->read('consumer', ['*'], ['full_name' => $consumerData['full_name']]);
+        if ($existingConsumer) {
+            $db->update('consumer', $consumerData, ['id' => $existingConsumer[0]['id']]);
+        } else {
+            $db->write('consumer', array_keys($consumerData), array_values($consumerData), 'ssssss');
+        }
+
+        // Підготовка даних для замовлення
+        $productsCount = count($_SESSION['cart']);
+        $productsList = implode(",", array_keys($_SESSION['cart']));
+        $productsQuantities = implode(",", array_column($_SESSION['cart'], 'quantity'));
+        $productsPrices = implode(",", array_column($_SESSION['cart'], 'price'));
+        $newPrices = $_POST['new_price'] ?? [];
+        $productsRealization = implode(",", array_map(function ($id, $post) {
+            return $post['new_price'][$id] ?? $_SESSION['cart'][$id]['price'];
+        }, array_keys($_SESSION['cart']), array_fill(0, count($_SESSION['cart']), $_POST)));
+        
+        $orderData = [
+            'login' => $_SESSION['login'],
+            'record_time' => (int) (microtime(true) * 1000),
+            'products_count' => $productsCount,
+            'products_list' => $productsList,
+            'products_number' => $productsQuantities,
+            'products_realization' => $productsRealization,
+            'products_price' => $productsPrices
+        ] + $consumerData;
+
+        // Запис замовлення в базу
+        if ($db->write('orders', array_keys($orderData), array_values($orderData), 'sssssssssssss')) {
+            unset($_SESSION['cart']);
+            error_log('Замовлення збережено');
+            header("location: ../index.php");
+            exit();
+        } else {
+            exit('Помилка: Не вдалося додати замовлення.');
+        }
+    }
 }
 require_once('../php/footer.php');
+ob_end_flush(); // Відправка буферизованого виводу на браузер
 ?>

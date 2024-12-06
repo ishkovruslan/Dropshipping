@@ -46,6 +46,9 @@ $local_ip = gethostbyname($hostname);
                         <a href="report.php">Звіти</a>
                     </p>
                     <p>
+                        <a href="alerts.php">Сповіщення</a>
+                    </p>
+                    <p>
                         <a href="account.php">Керування обліковим записом</a>
                     </p>
                     <?php if (!empty($_SESSION['cart'])) { ?>

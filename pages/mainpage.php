@@ -1,7 +1,12 @@
 <?php
 require_once('header.php'); /* Верхня частина сайту */
-$newsData = $db->readAll('news');
+
+// Отримуємо значення для пошуку з GET-запиту
+$searchValue = isset($_GET['search']) ? $_GET['search'] : '';
+$columns = ['uploadPath', 'news_title', 'news_description', 'start_date', 'end_date'];
+$newsData = array_unique($db->searchLike('news', $columns, 'news_title', $searchValue), SORT_REGULAR);
 ?>
+
 <p>
     Бакалаврська робота студента 545-а групи Ішкова Руслана Вікторовича.
 </p>
@@ -20,22 +25,27 @@ $newsData = $db->readAll('news');
     Результатом роботи сайт який надає зручні можливості дропшопінга для продавців.
 </p>
 
-<table>
-    <?php 
-    $currentDate = date('Y-m-d'); // Отримуємо поточну дату у форматі 'YYYY-MM-DD'
-    foreach ($newsData as $news): 
-        // Перевіряємо, чи новина дійсна на сьогодні
-        if ($news['start_date'] <= $currentDate && $news['end_date'] >= $currentDate): ?>
-            <tr>
-                <td width="20%"><!-- Редагування по натисканню на зображення -->
-                    <img src="../images/news/<?php echo $news['uploadPath']; ?>">
-                </td>
-                <td width="20%"><?php echo $news['news_title']; ?></td>
-                <td><?php echo $news['news_description']; ?></td>
-            </tr>
-        <?php endif; 
-    endforeach; ?>
-</table>
+<?php
+// Діагностика: перевірка, чи є новини
+if (empty($newsData)) {
+    echo "<p>Немає актуальних новин.</p>";
+} else {
+    $filteredNewsData = [];
 
+    if (empty($newsData)) {
+        echo "<p>Немає дійсних новин на сьогодні.</p>";
+    } else {
+        echo '<table>';
+        foreach ($newsData as $news) {
+            echo '<tr>';
+            echo '<td width="20%"><img src="../images/news/' . htmlspecialchars($news['uploadPath']) . '"></td>';
+            echo '<td width="20%">' . htmlspecialchars($news['news_title']) . '</td>';
+            echo '<td>' . htmlspecialchars($news['news_description']) . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    }
+}
 
-<?php require_once('../php/footer.php'); ?>
+require_once('../php/footer.php');
+?>

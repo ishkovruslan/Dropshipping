@@ -41,3 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });    
 });
+
+$(document).ready(function() {
+    $('form').on('submit', function(e) {
+        if ($('.error-message').length) {
+            e.preventDefault();
+            alert('Будь ласка, виправте помилки перед продовженням.');
+        }
+    });
+});

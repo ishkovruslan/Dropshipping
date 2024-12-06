@@ -46,35 +46,37 @@ $result = $db->readWithSort('products', ['*'], $conditions, $orderBy);
         <?php
         if (count($result) > 0) {
             foreach ($result as $row) {
-                // Генерація HTML для кожного продукту
-                $id = htmlspecialchars($row["id"]);
-                $category = htmlspecialchars($row["category"]);
-                $itemName = htmlspecialchars($row["product_name"]);
                 $count = htmlspecialchars($row["count"]);
-                $price = htmlspecialchars($row["price"]);
-                $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
-                // Отримання характеристик товару
-                $characteristics = explode(',', $row['characteristics']);
-                $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $row['category']]);
-                $specifications = explode(',', $specificationsResult[0]["specifications"]);
-                $characteristicsHTML = '';
-                // Формування HTML для характеристик
-                foreach ($characteristics as $key => $value) {
-                    if ($value !== "-" && $value !== "") {
-                        $characteristicsHTML .= htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value) . "<br>";
+                if ($count != 0) {
+                    // Генерація HTML для кожного продукту
+                    $id = htmlspecialchars($row["id"]);
+                    $category = htmlspecialchars($row["category"]);
+                    $itemName = htmlspecialchars($row["product_name"]);
+                    $price = htmlspecialchars($row["price"]);
+                    $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
+                    // Отримання характеристик товару
+                    $characteristics = explode(',', $row['characteristics']);
+                    $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $row['category']]);
+                    $specifications = explode(',', $specificationsResult[0]["specifications"]);
+                    $characteristicsHTML = '';
+                    // Формування HTML для характеристик
+                    foreach ($characteristics as $key => $value) {
+                        if ($value !== "-" && $value !== "") {
+                            $characteristicsHTML .= htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value) . "<br>";
+                        }
                     }
+                    // Відображення продукту у рядку таблиці
+                    echo "<tr>
+                            <td>
+                                <img src='$imagePath' alt='$itemName' onclick=\"openEditProductModal('$id', '$imagePath', '$category', '$itemName', '$count', '$price', '" . addslashes($row['characteristics']) . "')\">
+                            </td>
+                            <td>$category</td>
+                            <td><a href='product.php?id=$id'>$itemName</a></td>
+                            <td>$count</td>
+                            <td>$price</td>
+                            <td>$characteristicsHTML</td>
+                        </tr>";
                 }
-                // Відображення продукту у рядку таблиці
-                echo "<tr>
-                        <td>
-                            <img src='$imagePath' alt='$itemName' onclick=\"openEditProductModal('$id', '$imagePath', '$category', '$itemName', '$count', '$price', '" . addslashes($row['characteristics']) . "')\">
-                        </td>
-                        <td>$category</td>
-                        <td><a href='product.php?id=$id'>$itemName</a></td>
-                        <td>$count</td>
-                        <td>$price</td>
-                        <td>$characteristicsHTML</td>
-                    </tr>";
             }
         } else {
             echo "<tr><td colspan='6'>Товари відсутні</td></tr>";

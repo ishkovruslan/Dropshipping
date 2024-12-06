@@ -1,5 +1,5 @@
 <?php
-require_once ('mysql.php'); // Підключення до бази
+require_once('mysql.php'); // Підключення до бази
 /* Модуль керування */
 class User
 {/* Клас взаємодія з користувачами */
@@ -14,15 +14,17 @@ class User
         $this->db = $db;
     }
 
-    public function changeRole($newRole) {
+    public function changeRole($newRole)
+    {
         $data = ['role' => $newRole];
         $conditions = ['login' => $this->login];
         $this->db->update('userlist', $data, $conditions);
         $this->role = $newRole;
         logAction($this->db, 'Зміна ролі', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' змінив роль користувачу ' . $conditions['login'] . ' на ' . $newRole);
-    }    
+    }
 
-    public function deleteUser() {
+    public function deleteUser()
+    {
         $this->db->remove('userlist', ['login'], [$this->login]);
         $this->db->remove('users', ['login'], [$this->login]);
         logAction($this->db, 'Видалення користувача', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' видалив користувача ' . $this->login);
@@ -133,22 +135,24 @@ class Product
         $this->db->write('products', $columns, $values, $types);
     }
 
-    public function getCategories() {
+    public function getCategories()
+    {
         return $this->db->read('categories', ['category_name', 'specifications']);
     }
 }
 
-function updateData($table, $data, $conditions, $db) {
+function updateData($table, $data, $conditions, $db)
+{
     try {
         $db->update($table, $data, $conditions);
         // Формування рядків для логування
-        $dataString = implode(', ', array_map(function($key, $value) {
+        $dataString = implode(', ', array_map(function ($key, $value) {
             return "$key: $value";
         }, array_keys($data), $data));
-        $conditionsString = implode(', ', array_map(function($key, $value) {
+        $conditionsString = implode(', ', array_map(function ($key, $value) {
             return "$key: $value";
         }, array_keys($conditions), $conditions));
-        logAction($db, "Оновлення $table", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' оновив таблицю ' . $table . ' змінивши значення ' . $dataString . ', ' . $conditionsString);
+        logAction($db, "Оновлення $table", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' оновив таблицю ' . $table . ' змінивши значення ' . $dataString . ', ' . $conditionsString);
         header("Location: ../pages/management.php");
         exit();
     } catch (mysqli_sql_exception $e) {
@@ -160,7 +164,7 @@ function deleteEntity($entity, $id, $db)
 {/* Видалення категорії */
     $conditions = ['id' => $id];
     deleteEntityWithImages($entity, $conditions, $db);
-    logAction($db, "Оновлення $entity", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' оновив таблицю ' . $entity . ' видаливши запис ' . $id);
+    logAction($db, "Оновлення $entity", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' оновив таблицю ' . $entity . ' видаливши запис ' . $id);
     header("Location: ../pages/management.php"); // Перенаправлення назад до списку
     exit();
 }
@@ -225,11 +229,9 @@ function handleUserPostRequest($db)
             if ($new_role === 'user') {
                 $remoteAccess->setUniqueKey($login, 0);
             }
-        }
-        elseif ($_POST['new_role'] === 'changekey') {
-                $remoteAccess->setUniqueKey($login, 0);
-        }
-        elseif (isset($_POST['delete_user'])) {
+        } elseif ($_POST['new_role'] === 'changekey') {
+            $remoteAccess->setUniqueKey($login, 0);
+        } elseif (isset($_POST['delete_user'])) {
             $user->deleteUser();
             $userList->loadUsersFromDB();
         }
@@ -279,7 +281,8 @@ function handleCreatePostRequest($db)
     }
 }
 
-function handleCreateNewsRequest($db) {
+function handleCreateNewsRequest($db)
+{
     $news = new News($db);
     $name = $_POST['news_title'];
     $description = $_POST['news_description'];
@@ -287,7 +290,7 @@ function handleCreateNewsRequest($db) {
     $end = $_POST['end_date'];
     $imageFileName = uploadFile('uploadPath', "../images/news/");
     $news->create($name, $imageFileName, $description, $start, $end);
-    logAction($db, "Створено новину", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' створив новину ' . $name . ' з описом ' . $description . ' яка триває з ' . $start . ' до ' . $end);
+    logAction($db, "Створено новину", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив новину ' . $name . ' з описом ' . $description . ' яка триває з ' . $start . ' до ' . $end);
     header("Location: ../pages/newnews.php");
 }
 
@@ -297,10 +300,17 @@ function handleCreateCategoryRequest($db)
     $name = $_POST['category_name'];
     $specifications = explode(",", $_POST['specifications']);
     $category->create($name, $specifications);
-    $dataSpecifications = implode(', ', array_map(function($key, $value) {
+    $dataSpecifications = implode(', ', array_map(function ($key, $value) {
         return "$key: $value";
     }, array_keys($specifications), $specifications));
-    logAction($db, "Створено категорію", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login']. ' створив категорію ' . $name . ' з наступними специфікаціями ' . $dataSpecifications);
+    logAction($db, "Створено категорію", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив категорію ' . $name . ' з наступними специфікаціями ' . $dataSpecifications);
+    $alertDescription = "Створено нову категорію: $name із специфікаціями: $dataSpecifications";
+    $db->write(
+        'alerts',
+        ['operation', 'description', 'date'],
+        ['Додано товар', $alertDescription, date('Y-m-d')],
+        'sss'
+    );
     header("Location: ../pages/newcategory.php");
 }
 
@@ -312,35 +322,39 @@ function handleCreateProductRequest($db)
     $count = $_POST['count'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    
+
     // Перевірка, чи характеристики є масивом
     if (isset($_POST['characteristics']) && is_array($_POST['characteristics'])) {
         $characteristics = implode(',', $_POST['characteristics']); // Об'єднуємо масив в рядок
     } else {
         $characteristics = $_POST['characteristics'] ?? ''; // Якщо не масив, просто беремо значення
     }
-    
+
     $imageFileName = uploadFile('uploadPath', "../images/products/");
-    
+
     // Форматування характеристик
     $characteristicsArray = explode(',', $characteristics);
     $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $category]);
     $specifications = explode(',', $specificationsResult[0]["specifications"]);
-    
+
     $formattedCharacteristics = [];
     foreach ($characteristicsArray as $key => $value) {
         if ($value !== "-" && $value !== "") {
             $formattedCharacteristics[] = htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value);
         }
     }
-    
+
     // Об'єднуємо характеристики в один рядок
     $characteristicsString = implode(", ", $formattedCharacteristics);
-    
     $product->create($category, $name, $count, $price, $imageFileName, $characteristics);
-    
     logAction($db, "Створено товар", $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив в категорії ' . $category . ' товар ' . $name . ' в кількості ' . $count . ' який має вартість ' . $price . " та має наступні характеристики: " . $characteristicsString);
-    
+    $alertDescription = "Створено новий товар: $name в категорії $category. Кількість: $count, ціна: $price, характеристики: $characteristicsString";
+    $db->write(
+        'alerts',
+        ['operation', 'description', 'date'],
+        ['Додано товар', $alertDescription, date('Y-m-d')],
+        'sss'
+    );
     header("Location: ../pages/newproduct.php");
 }
 
