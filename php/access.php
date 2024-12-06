@@ -33,7 +33,7 @@ class AccessControl
     }
 
     public function checkAccess($minRequiredRole)
-    {/* Перевірка доступу, якщо його немає відправляємо користувача на головну сторінку */
+    {
         if (!isset($_SESSION['login'])) {
             logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба відкрити сторінку без авторизації ' . $_SESSION['login']);
             header("location: ../index.php");
@@ -45,6 +45,37 @@ class AccessControl
             header("location: ../index.php");
             exit;
         }
+    }
+
+    public function isMostFrequentIp($login, $currentIp)
+    {
+        // Отримуємо всі записи з логом для заданого логіну
+        $result = $this->db->read(
+            'log',
+            ['source_ip'],
+            ['login' => $login]
+        );
+
+        if (empty($result)) {
+            return false;
+        }
+
+        // Рахуємо частоти кожного IP
+        $ipCounts = [];
+        foreach ($result as $row) {
+            $ip = $row['source_ip'];
+            if (!isset($ipCounts[$ip])) {
+                $ipCounts[$ip] = 0;
+            }
+            $ipCounts[$ip]++;
+        }
+
+        // Знаходимо найчастіший IP
+        arsort($ipCounts); // Сортуємо за спаданням частоти
+        $mostFrequentIp = key($ipCounts); // Перший ключ — це найчастіший IP
+
+        // Перевіряємо, чи найчастіший IP збігається з поточним
+        return $mostFrequentIp === $currentIp;
     }
 }
 
@@ -107,6 +138,32 @@ class Authentication
             logAction($this->db, 'Реєстрація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна реєстрація ' . $login);
             return array('success' => true);
         }
+    }
+
+    public function changePassword($login, $currentPassword, $newPassword, $confirmPassword)
+    {
+        if ($newPassword !== $confirmPassword) {
+            return ['success' => false, 'message' => "Новий пароль не співпадає з підтвердженням!"];
+        }
+
+        $conditions = ['login' => $login];
+        $user = $this->db->read('users', ['password'], $conditions);
+        if (empty($user)) {
+            return ['success' => false, 'message' => "Користувача не знайдено!"];
+        }
+
+        if (!password_verify($currentPassword, $user[0]['password'])) {
+            return ['success' => false, 'message' => "Старий пароль невірний!"];
+        }
+
+        if (strlen($newPassword) < 8) {
+            return ['success' => false, 'message' => "Новий пароль повинен містити мінімум 8 символів!"];
+        }
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $this->db->update('users', ['password' => $hashedPassword], $conditions, 's');
+        logAction($this->db, 'Зміна паролю', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Пароль успішно змінено');
+        return ['success' => true];
     }
 }
 
