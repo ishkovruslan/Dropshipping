@@ -58,16 +58,50 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function readWithSort($tablename, $columns, $conditions = [], $orderBy = [])
-        {/* Читання з сортуванням */
+        {
+            // Читання з сортуванням
             $columnString = implode(',', $columns);
             $sql = "SELECT $columnString FROM $tablename";
+
+            // Обробка умов з логічними операторами (AND, OR)
             if (!empty($conditions)) {
                 $conditionStrings = [];
-                foreach ($conditions as $column => $value) {
-                    $conditionStrings[] = strpos($column, '>=') !== false || strpos($column, '<=') !== false ? "$column ?" : "$column = ?";
+                $params = [];
+                $currentCondition = [];
+
+                foreach ($conditions as $condition) {
+                    if (is_array($condition)) {
+                        // Якщо це масив (умова з 3 елементів), додаємо її до поточного запиту
+                        $column = $condition[0];
+                        $operator = $condition[1];
+                        $value = $condition[2];
+
+                        // Перевірка на оператори порівняння, що можуть містити інші символи
+                        if (strpos($column, '>=') !== false || strpos($column, '<=') !== false) {
+                            $currentCondition[] = "$column ?";
+                        } else {
+                            $currentCondition[] = "$column $operator ?";
+                        }
+                        // Додаємо значення для параметрів
+                        $params[] = $value;
+                    } elseif ($condition === 'OR' || $condition === 'AND') {
+                        // Якщо умова - логічний оператор, додаємо його як розділювач
+                        if (!empty($currentCondition)) {
+                            $conditionStrings[] = "(" . implode(" AND ", $currentCondition) . ")";
+                            $currentCondition = [];
+                        }
+                        $conditionStrings[] = $condition;
+                    }
                 }
-                $sql .= " WHERE " . implode(' AND ', $conditionStrings);
+
+                if (!empty($currentCondition)) {
+                    $conditionStrings[] = "(" . implode(" AND ", $currentCondition) . ")";
+                }
+
+                $sql .= " WHERE " . implode(" ", $conditionStrings);
             }
+
+            // Обробка сортування
             if (!empty($orderBy)) {
                 $orderStrings = [];
                 foreach ($orderBy as $column => $direction) {
@@ -75,19 +109,27 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 }
                 $sql .= " ORDER BY " . implode(', ', $orderStrings);
             }
+
+            // Підготовка запиту
             $stmt = $this->conn->prepare($sql);
-            if (!empty($conditions)) {
-                $types = str_repeat("s", count($conditions));
-                $stmt->bind_param($types, ...array_values($conditions));
+
+            // Прив'язка параметрів для умов
+            if (!empty($params)) {
+                $types = str_repeat("s", count($params)); // всі параметри типу string
+                $stmt->bind_param($types, ...$params);
             }
+
+            // Виконання запиту
             $stmt->execute();
             $result = $stmt->get_result();
             $data = [];
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }
             }
+
             return $data;
         }
 
