@@ -1,35 +1,25 @@
 <?php
-require_once('header.php'); // Верхня частина сайту
+require_once('header.php');
 $accessControl->checkAccess(1);
 
-// Отримуємо рівень доступу користувача
 $userLevel = $accessControl->getUserLevel($_SESSION['login']);
-
-// Отримуємо параметри фільтрації зі змінної GET
 $stateFilter = $_GET['state'] ?? null;
 $searchValue = $_GET['search'] ?? '';
-
-// Вибрані колонки для запиту
 $columns = ['operation', 'description', 'date'];
-
-// Формуємо умови для запиту
 $conditions = [];
+
 if (!empty($stateFilter)) {
-    // Якщо користувач не адміністратор, приховати доступ до обмежених станів
     if ($userLevel < 2 && in_array($stateFilter, ['Обмежена кількість', 'Відсутність'])) {
         echo '<p>Недостатньо прав для перегляду вибраного стану.</p>';
         $accessControl->checkAccess(2);
     }
-    $conditions['operation'] = $stateFilter; // Фільтрація за станом
+    $conditions['operation'] = $stateFilter;
 }
 if (!empty($searchValue)) {
-    $conditions['description LIKE'] = '%' . $searchValue . '%'; // Пошук у описі
+    $conditions['description LIKE'] = "%$searchValue%";
 }
-
-// Сортування за датою (найновіші зверху)
 $orderBy = ['date' => 'DESC'];
 
-// Отримуємо сповіщення з бази даних
 $alertsData = $db->readWithSort('alerts', $columns, $conditions, $orderBy);
 
 // Інтерфейс вибору стану
