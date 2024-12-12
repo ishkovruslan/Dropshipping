@@ -28,6 +28,7 @@ foreach ($messages as &$message) {
     $key = generateXORKey($key, $message['source_time']);
     $message['message'] = decryptMessage($message['message'], $key);
 }
+unset($message);
 ?>
 
 <div class="chat-interface">

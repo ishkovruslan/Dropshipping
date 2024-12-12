@@ -51,11 +51,16 @@ $local_ip = gethostbyname($hostname);
                     <p>
                         <a href="account.php">Керування обліковим записом</a>
                     </p>
-                    <?php if (!empty($_SESSION['cart'])) { ?>
+                    <?php if ($accessControl->getUserLevel($_SESSION['login']) == 1) { ?>
+                    <p>
+                        <a href="chat.php">Зв'язок з адміністратором</a>
+                    </p>
+                    <?php }
+                    if (!empty($_SESSION['cart'])) { ?>
                         <p>
                             <a href="cart.php">Кошик</a>
                         </p>
-                    <?php
+                        <?php
                     }
                 } ?>
                 <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
@@ -90,6 +95,9 @@ $local_ip = gethostbyname($hostname);
                 </p>
                 <p>
                     <a href="management.php">Сторінка керування</a>
+                </p>
+                <p>
+                    <a href="messages.php">Зв'язок з користувачами</a>
                 </p>
                 <p><?php echo $local_ip; ?></p>
             </div>
