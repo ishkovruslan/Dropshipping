@@ -197,19 +197,38 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             return $data;
         }
 
-        public function readMessages($currentUser, $targetUser)
-        {
-            $sql = "SELECT sender, receiver, message, source_time FROM messages WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) ORDER BY source_time ASC";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $messages = [];
-            while ($row = $result->fetch_assoc()) {
-                $messages[] = $row;
-            }
-            return $messages;
-        }
+        public function readMessagesForRole($currentUser, $targetUser, $userLevel)
+{
+    $isAdmin = $userLevel >= 2;
+    if ($isAdmin) {
+        // Всі повідомлення до/від адміністратора повинні виглядати з іменем "administrator"
+        $sql = "SELECT 
+                    CASE WHEN sender = 'administrator' THEN 'administrator' ELSE sender END AS sender,
+                    CASE WHEN receiver = 'administrator' THEN 'administrator' ELSE receiver END AS receiver,
+                    message, 
+                    source_time 
+                FROM messages 
+                WHERE receiver = 'administrator' OR sender = 'administrator' 
+                ORDER BY source_time ASC";
+        $stmt = $this->conn->prepare($sql);
+    } else {
+        // Для звичайного користувача
+        $sql = "SELECT sender, receiver, message, source_time 
+                FROM messages 
+                WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) 
+                ORDER BY source_time ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $messages = [];
+    while ($row = $result->fetch_assoc()) {
+        $messages[] = $row;
+    }
+    return $messages;
+}
 
         public function getUserRegistrationTime($login)
         {
@@ -220,17 +239,6 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             $result = $stmt->get_result();
             $userData = $result->fetch_assoc();
             return $userData['registration_time'] ?? 0;
-        }
-
-        public function checkUserExists($login)
-        {
-            $sql = "SELECT COUNT(*) AS count FROM userlist WHERE login = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("s", $login);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $userData = $result->fetch_assoc();
-            return $userData['count'] > 0;
         }
 
         public function getMessagesForAdmin()
@@ -283,17 +291,22 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         public function saveMessage($sender, $receiver, $message, $time)
         {
             $query = "
-                INSERT INTO messages (sender, receiver, message, source_time)
-                VALUES (?, ?, ?, ?)
-            ";
+        INSERT INTO messages (sender, receiver, message, source_time)
+        VALUES (?, ?, ?, ?)
+    ";
             $stmt = $this->conn->prepare($query);
             if (!$stmt) {
                 throw new Exception("Помилка підготовки запиту: " . $this->conn->error);
             }
+
+            // Перевірка на порожні значення
+            if (empty($sender) || empty($receiver)) {
+                throw new Exception("Відправник або отримувач не вказаний.");
+            }
+
             $stmt->bind_param("sssi", $sender, $receiver, $message, $time);
             return $stmt->execute();
         }
-
     }
 
     $servername = "localhost:3306";

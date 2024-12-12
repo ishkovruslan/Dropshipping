@@ -4,15 +4,16 @@ function getEncryptionKey($db, $sender, $receiver)
 {
     global $accessControl;
 
-    // Якщо це користувач, використовуємо його ключ
-    if ($accessControl->getUserLevel($_SESSION['login']) <= 1) {
-        $user = $_SESSION['login']; // Відправник або отримувач
+    $currentUser = $_SESSION['login'];
+
+    if ($accessControl->getUserLevel($currentUser) >= 2) {
+        // Якщо користувач - адміністратор
+        $user = $receiver !== 'administrator' ? $receiver : $sender;
     } else {
-        // Якщо адміністратор, ключ прив’язаний до користувача
-        $user = ($sender !== $_SESSION['login']) ? $sender : $receiver;
+        // Звичайний користувач: ключ прив’язаний до поточного логіну
+        $user = $currentUser;
     }
 
-    // Отримання ключа (registration_time) для користувача
     return $db->getUserRegistrationTime($user);
 }
 
@@ -56,27 +57,35 @@ function decryptMessage($encryptedMessage, $key)
 }
 
 // Функція для отримання імені відправника (Адміністратор або логін користувача)
-function getSenderName($sender, $accessControl, $adminLogin)
+
+function getSenderName($sender, $accessControl)
 {
-    if ($accessControl->getUserLevel($sender) >= 2) {
-        return "Адміністратор";
-    } else {
-        return "$sender";  // Виведення логіну користувача
-    }
+    // Якщо відправник — адміністратор, завжди показуємо як "Адміністратор"
+    return $sender === 'administrator' ? 'Адміністратор' : $sender;
 }
 
-// Відправка нового повідомлення
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     $message = $_POST['message'];
     $sourceTime = round(microtime(true) * 1000);
+
+    $currentUser = $_SESSION['login'] ?? null;
+    $targetUser = $_GET['user'] ?? "administrator";
 
     // Отримання ключа користувача
     $key = getEncryptionKey($db, $currentUser, $targetUser);
     $key = generateXORKey($key, $sourceTime);
     $encryptedMessage = encryptMessage($message, $key);
 
-    // Збереження повідомлення
-    $db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);
+    // Підміна значення для адміністратора
+if ($accessControl->getUserLevel($currentUser) >= 2) {
+    $currentUser = "administrator";
+}
+if ($accessControl->getUserLevel($targetUser) >= 2) {
+    $targetUser = "administrator";
+}
+
+// Збереження повідомлення
+$db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);
 
     header("Location: chat.php?user=" . urlencode($targetUser));
     exit;
