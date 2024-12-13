@@ -33,19 +33,26 @@ class AccessControl
     }
 
     public function checkAccess($minRequiredRole)
-    {
-        if (!isset($_SESSION['login'])) {
-            logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба відкрити сторінку без авторизації ' . $_SESSION['login']);
-            header("location: ../index.php");
-            exit;
-        }
-        $role = $this->getUserRole($_SESSION['login']);
-        if (!isset($this->roles[$role]) || $this->roles[$role] < $minRequiredRole) {
-            logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Наявний рівень ' . $this->roles[$role] . ' Необхідний рівень ' . $minRequiredRole);
-            header("location: ../index.php");
-            exit;
-        }
+{
+    if (!isset($_SESSION['login'])) {
+        logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба відкрити сторінку без авторизації ' . $_SESSION['login']);
+        header("location: ../index.php");
+        exit;
     }
+
+    $currentIp = $_SERVER['REMOTE_ADDR'];
+    if ($this->isBlocked($_SESSION['login'], $currentIp)) {
+        header("Location: ../php/logout.php");
+        exit;
+    }
+
+    $role = $this->getUserRole($_SESSION['login']);
+    if (!isset($this->roles[$role]) || $this->roles[$role] < $minRequiredRole) {
+        logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Наявний рівень ' . $this->roles[$role] . ' Необхідний рівень ' . $minRequiredRole);
+        header("location: ../index.php");
+        exit;
+    }
+}
 
     public function isMostFrequentIp($login, $currentIp)
     {
@@ -77,6 +84,27 @@ class AccessControl
         // Перевіряємо, чи найчастіший IP збігається з поточним
         return $mostFrequentIp === $currentIp;
     }
+
+    public function isBlocked($login, $ip)
+{
+    $conditions = [
+        'block_id' => $login,
+        'block_type' => 'login'
+    ];
+    $result = $this->db->read('blacklist', ['id'], $conditions);
+    
+    if (!empty($result)) {
+        return true; // Логін заблокований
+    }
+
+    $conditions = [
+        'block_id' => $ip,
+        'block_type' => 'ip'
+    ];
+    $result = $this->db->read('blacklist', ['id'], $conditions);
+    
+    return !empty($result); // IP заблокований
+}
 }
 
 class Authentication
@@ -89,22 +117,30 @@ class Authentication
     }
 
     public function authenticate($login, $password)
-    {/* Авторизація */
-        $conditions = ['login' => $login];
-        $result = $this->db->read('users', ['login', 'password'], $conditions);
-        if (count($result) === 1) {
-            $user = $result[0];
-            if (password_verify($password, $user['password'])) {
-                session_start();
-                $_SESSION['loggedin'] = true;
-                $_SESSION['login'] = $login;
-                logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна авторизація ' . $login);
-                return array('success' => true);
-            }
-        }
-        logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Невірний логін або пароль ' . $login);
-        return array('success' => false, 'message' => "Невірний логін або пароль!");
+{
+    $currentIp = $_SERVER['REMOTE_ADDR'];
+    
+    // Перевірка на блокування
+    if ($this->isBlocked($login, $currentIp)) {
+        header("Location: ../php/logout.php");
+        exit;
     }
+
+    $conditions = ['login' => $login];
+    $result = $this->db->read('users', ['login', 'password'], $conditions);
+    if (count($result) === 1) {
+        $user = $result[0];
+        if (password_verify($password, $user['password'])) {
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $_SESSION['login'] = $login;
+            logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна авторизація ' . $login);
+            return array('success' => true);
+        }
+    }
+    logAction($this->db, 'Авторизація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Невірний логін або пароль ' . $login);
+    return array('success' => false, 'message' => "Невірний логін або пароль!");
+}
 
     public function isLoginUnique($login)
     {/* Унікальність логіна */
@@ -119,26 +155,34 @@ class Authentication
     }
 
     public function register($login, $password)
-    {/* Реєстрація */
-        if (strlen($password) < 8) {
-            return array('success' => false, 'message' => "Пароль повинен містити мінімум 8 символів!");
-        }
-        $checkLogin = $this->isLoginUnique($login);
-        if (!$checkLogin['unique']) {
-            return array('success' => false, 'message' => $checkLogin['message']);
-        } else {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $data = [$login, $hashedPassword];
-            $this->db->write('users', ['login', 'password'], $data, 'ss');
-            $microtime = microtime(true);
-            $timeInNanoseconds = (int) ($microtime * 1e9);
-            $dataUserList = [$login, 'user', $timeInNanoseconds, 0];
-            $this->db->write('userlist', ['login', 'role', 'registration_time', 'unique_key'], $dataUserList, 'ssii');
-            $this->authenticate($login, $password);
-            logAction($this->db, 'Реєстрація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна реєстрація ' . $login);
-            return array('success' => true);
-        }
+{
+    $currentIp = $_SERVER['REMOTE_ADDR'];
+    
+    // Перевірка на блокування
+    if ($this->isBlocked($login, $currentIp)) {
+        header("Location: ../php/logout.php");
+        exit;
     }
+
+    if (strlen($password) < 8) {
+        return array('success' => false, 'message' => "Пароль повинен містити мінімум 8 символів!");
+    }
+    $checkLogin = $this->isLoginUnique($login);
+    if (!$checkLogin['unique']) {
+        return array('success' => false, 'message' => $checkLogin['message']);
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $data = [$login, $hashedPassword];
+        $this->db->write('users', ['login', 'password'], $data, 'ss');
+        $microtime = microtime(true);
+        $timeInNanoseconds = (int) ($microtime * 1e9);
+        $dataUserList = [$login, 'user', $timeInNanoseconds, 0];
+        $this->db->write('userlist', ['login', 'role', 'registration_time', 'unique_key'], $dataUserList, 'ssii');
+        $this->authenticate($login, $password);
+        logAction($this->db, 'Реєстрація', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Успішна реєстрація ' . $login);
+        return array('success' => true);
+    }
+}
 
     public function changePassword($login, $currentPassword, $newPassword, $confirmPassword)
     {
@@ -165,6 +209,29 @@ class Authentication
         logAction($this->db, 'Зміна паролю', $login, $_SERVER['REMOTE_ADDR'], 'WEB', 'Пароль успішно змінено');
         return ['success' => true];
     }
+
+    public function isBlocked($login, $ip)
+{
+    // Перевірка блокування за логіном
+    $conditions = [
+        'block_id' => $login,
+        'block_type' => 'login'
+    ];
+    $result = $this->db->read('blacklist', ['id'], $conditions);
+    
+    if (!empty($result)) {
+        return true; // Логін заблокований
+    }
+
+    // Перевірка блокування за IP-адресою
+    $conditions = [
+        'block_id' => $ip,
+        'block_type' => 'ip'
+    ];
+    $result = $this->db->read('blacklist', ['id'], $conditions);
+    
+    return !empty($result); // IP заблокований
+}
 }
 
 class RemoteAccess

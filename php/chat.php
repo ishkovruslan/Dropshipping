@@ -58,7 +58,7 @@ function decryptMessage($encryptedMessage, $key)
 
 // Функція для отримання імені відправника (Адміністратор або логін користувача)
 
-function getSenderName($sender, $accessControl)
+function getSenderName($sender)
 {
     // Якщо відправник — адміністратор, завжди показуємо як "Адміністратор"
     return $sender === 'administrator' ? 'Адміністратор' : $sender;
@@ -76,17 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     $key = generateXORKey($key, $sourceTime);
     $encryptedMessage = encryptMessage($message, $key);
 
-    // Підміна значення для адміністратора
-if ($accessControl->getUserLevel($currentUser) >= 2) {
-    $currentUser = "administrator";
-}
-if ($accessControl->getUserLevel($targetUser) >= 2) {
-    $targetUser = "administrator";
-}
+    // Збереження повідомлення
+    $db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);
 
-// Збереження повідомлення
-$db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);
-
+    require_once('access.php');
+    if ($accessControl->getUserLevel($currentUser) >= 2) {
+        logAction($db, 'Повідомлення', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Адміністратор ' . $_SESSION['login'] . ' відправив повідомлення користувачу ' . $targetUser);
+    }
     header("Location: chat.php?user=" . urlencode($targetUser));
     exit;
 }

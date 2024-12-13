@@ -198,11 +198,11 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function readMessagesForRole($currentUser, $targetUser, $userLevel)
-{
-    $isAdmin = $userLevel >= 2;
-    if ($isAdmin) {
-        // Всі повідомлення до/від адміністратора повинні виглядати з іменем "administrator"
-        $sql = "SELECT 
+        {
+            $isAdmin = $userLevel >= 2;
+            if ($isAdmin) {
+                // Всі повідомлення до/від адміністратора повинні виглядати з іменем "administrator"
+                $sql = "SELECT 
                     CASE WHEN sender = 'administrator' THEN 'administrator' ELSE sender END AS sender,
                     CASE WHEN receiver = 'administrator' THEN 'administrator' ELSE receiver END AS receiver,
                     message, 
@@ -210,25 +210,25 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 FROM messages 
                 WHERE receiver = 'administrator' OR sender = 'administrator' 
                 ORDER BY source_time ASC";
-        $stmt = $this->conn->prepare($sql);
-    } else {
-        // Для звичайного користувача
-        $sql = "SELECT sender, receiver, message, source_time 
+                $stmt = $this->conn->prepare($sql);
+            } else {
+                // Для звичайного користувача
+                $sql = "SELECT sender, receiver, message, source_time 
                 FROM messages 
                 WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) 
                 ORDER BY source_time ASC";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
-    }
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
+            }
 
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $messages = [];
-    while ($row = $result->fetch_assoc()) {
-        $messages[] = $row;
-    }
-    return $messages;
-}
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $messages = [];
+            while ($row = $result->fetch_assoc()) {
+                $messages[] = $row;
+            }
+            return $messages;
+        }
 
         public function getUserRegistrationTime($login)
         {
@@ -263,15 +263,15 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
 
             // Основний запит для отримання повідомлень
             $query = "
-        SELECT 
-            m.sender AS login,
-            MAX(m.message) AS message, -- Вибір останнього повідомлення
-            MAX(m.source_time) AS last_time
-        FROM messages m
-        WHERE m.sender NOT IN ($placeholders) -- Виключення адміністраторів
-        GROUP BY m.sender
-        ORDER BY last_time DESC
-    ";
+                        SELECT 
+                            m.sender AS login,
+                            MAX(m.message) AS message, -- Вибір останнього повідомлення
+                            MAX(m.source_time) AS last_time
+                        FROM messages m
+                        WHERE m.sender NOT IN ($placeholders) -- Виключення адміністраторів
+                        GROUP BY m.sender
+                        ORDER BY last_time DESC
+                    ";
 
             $stmt = $this->conn->prepare($query);
 

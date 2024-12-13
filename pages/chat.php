@@ -36,7 +36,7 @@ unset($message);
     <div class="messages">
         <?php foreach ($messages as $message): ?>
             <div class="message <?php echo $message['sender'] === $currentUser ? 'sent' : 'received'; ?>">
-                <strong><?php echo getSenderName($message['sender'], $accessControl); ?>:</strong>
+                <strong><?php echo getSenderName($message['sender']); ?>:</strong>
                 <span><?php echo htmlspecialchars($message['message']); ?></span>
                 <time><?php echo date("Y-m-d H:i:s", substr($message['source_time'], 0, -3)); ?></time>
             </div>

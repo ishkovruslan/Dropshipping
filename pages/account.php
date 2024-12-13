@@ -2,6 +2,11 @@
 require_once('header.php'); /* Верхня частина сайту */
 $accessControl->checkAccess(1); /* Доступ лише у адміністраторів */
 $key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
+
+if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) {
+    echo '<p style="color: red;">Зміна паролю доступна лише з вашої найчастішої IP-адреси.</p>';
+    exit;
+}
 ?>
 
 <h1>Керування обліковим записом</h1>
@@ -13,13 +18,6 @@ $key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
         <button type="submit" name="generate_key">Згенерувати новий ключ</button>
     </form>
 </div>
-
-<?php
-if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) {
-    echo '<p style="color: red;">Зміна паролю доступна лише з вашої найчастішої IP-адреси.</p>';
-    exit;
-}
-?>
 
 <h1>Зміна паролю</h1>
 <form method="post">
