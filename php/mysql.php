@@ -125,9 +125,9 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 $values[] = $value;
             }
             $sql = "UPDATE $table SET " . implode(', ', $setStrings) . " WHERE " . implode(' AND ', $conditionStrings);
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
-                die("Error preparing statement: " . $this->connection->error);
+                die("Error preparing statement: " . $this->conn->error);
             }
             $types = str_repeat("s", count($values));
             $stmt->bind_param($types, ...$values);
@@ -162,9 +162,9 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 $types .= is_int($values[array_search($column, $columns)]) ? 'i' : 's';
             }
             $sql = "DELETE FROM $table WHERE " . implode(' AND ', $conditions);
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
-                throw new mysqli_sql_exception($this->connection->error);
+                throw new mysqli_sql_exception($this->conn->error);
             }
             $stmt->bind_param($types, ...$values);
             $stmt->execute();
@@ -290,6 +290,16 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
 
         public function saveMessage($sender, $receiver, $message, $time)
         {
+            $adminAlias = 'administrator';
+
+            // Перевірка: якщо відправник або отримувач — адміністратор, підмінити логін
+            if ($this->isAdmin($sender)) {
+                $sender = $adminAlias;
+            }
+            if ($this->isAdmin($receiver)) {
+                $receiver = $adminAlias;
+            }
+
             $query = "
         INSERT INTO messages (sender, receiver, message, source_time)
         VALUES (?, ?, ?, ?)
@@ -307,6 +317,19 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             $stmt->bind_param("sssi", $sender, $receiver, $message, $time);
             return $stmt->execute();
         }
+
+        // Додаткова функція для перевірки ролі адміністратора
+        private function isAdmin($login)
+        {
+            $sql = "SELECT role FROM userlist WHERE login = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $userData = $result->fetch_assoc();
+            return isset($userData['role']) && $userData['role'] === 'administrator';
+        }
+
     }
 
     $servername = "localhost:3306";

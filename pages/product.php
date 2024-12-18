@@ -45,7 +45,7 @@ if ($id) {
 
         // Додавання товару до сесії
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-            $quantity = $_POST['quantity'] ?? 1; // Кількість товару, за замовчуванням 1
+            $quantity = $_POST['quantity'];
 
             if (!isset($_SESSION['cart'])) {
                 $_SESSION['cart'] = []; // Ініціалізація масиву сесії, якщо він ще не існує
@@ -61,15 +61,18 @@ if ($id) {
 
             if ($quantity > 0) {
                 if (isset($_SESSION['cart'][$id])) {
-                    $_SESSION['cart'][$id]['quantity'] += $quantity; // Збільшення кількості, якщо товар вже в сесії
+                    $_SESSION['cart'][$id]['quantity'] += $quantity;
                 } else {
                     $_SESSION['cart'][$id] = [
+                        'id' => $id,
+                        'product_name' => $itemName,
                         'quantity' => $quantity,
-                        'price' => $price,
-                        'product_name' => $itemName // Додаємо назву товару до сесії
+                        'low_price' => $row['price'], // Мінімальна ціна з бази
+                        'realization_price' => $row['price']      // Початкова ціна користувача
                     ];
                 }
                 echo "<p>Товар додано до кошика!</p>";
+                header("location: product.php?id=" . $id);
             } else {
                 echo "<p>Кількість товару перевищує наявний залишок. Товар не додано до кошика.</p>";
             }
