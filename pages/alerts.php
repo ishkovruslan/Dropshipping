@@ -1,6 +1,6 @@
 <?php
-require_once('header.php');
-$accessControl->checkAccess(1);
+require_once('header.php'); /* Навігаційне меню */
+$accessControl->checkAccess(1); /* Перевірка рівня */
 
 $userLevel = $accessControl->getUserLevel($_SESSION['login']);
 $stateFilter = $_GET['state'] ?? null;
@@ -9,9 +9,9 @@ $columns = ['operation', 'description', 'date'];
 $conditions = [];
 
 if (!empty($stateFilter)) {
-    if ($userLevel < 2 && in_array($stateFilter, ['Обмежена кількість', 'Відсутність'])) {
+    if ($userLevel < 2 && in_array($stateFilter, ['Обмежена кількість', 'Відсутність'])) { /* Деякі фільтри не доступні звичайним користувачам */
         echo '<p>Недостатньо прав для перегляду вибраного стану.</p>';
-        $accessControl->checkAccess(2);
+        $accessControl->checkAccess(2); /* Перевірка прав з формуванням  */
     }
     $conditions['operation'] = $stateFilter;
 }

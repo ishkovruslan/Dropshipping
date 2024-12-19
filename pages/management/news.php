@@ -1,4 +1,4 @@
-<div class="news"><!-- Таблиця взаємодії з новинами -->
+<div class="news"> <!-- Таблиця взаємодії з новинами -->
     <h1>Список новин</h1>
     <table>
         <tr>
@@ -8,11 +8,10 @@
             <th width="12.5%">Початкова дата</th>
             <th width="12.5%">Кінцева дата</th>
         </tr>
-        <?php
-        $newsData = $db->readAll('news');
+        <?php $newsData = $db->readAll('news');
         foreach ($newsData as $news): ?>
             <tr>
-                <td><!-- Редагування по натисканню на зображення -->
+                <td>
                     <img src="../images/news/<?php echo $news['uploadPath']; ?>"
                         onclick="openEditModal('<?php echo $news['id']; ?>', '<?php echo $news['uploadPath']; ?>', '<?php echo $news['news_title']; ?>', '<?php echo $news['news_description']; ?>', '<?php echo $news['start_date']; ?>', '<?php echo $news['end_date']; ?>')">
                 </td>
@@ -24,7 +23,7 @@
         <?php endforeach; ?>
     </table>
     <div id="editModal" class="modal">
-        <div class="modal-content"><!-- Модальний контент керування записом -->
+        <div class="modal-content">
             <span class="close" onclick="closeEditModal()">&times;</span>
             <form id="editForm" method="post" action="../php/crud.php" enctype="multipart/form-data">
                 <input type="hidden" name="entity" value="news">
@@ -40,7 +39,7 @@
                 <label for="end_date">Кінець:</label>
                 <input type="date" name="end_date" id="end_date" placeholder="Кінець">
                 <button type="submit">Зберегти</button>
-            </form><!-- Модальний контент видалення запису -->
+            </form>
             <form id="deleteNewsForm" method="post" action="../php/crud.php"
                 onsubmit="return confirm('Ви впевнені, що хочете видалити цю новину?');" style="margin-top: 10px;">
                 <input type="hidden" name="entity" value="news">

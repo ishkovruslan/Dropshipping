@@ -1,27 +1,27 @@
 <?php
-require_once('header.php');
-require_once('../php/chat.php');
-$accessControl->checkAccess(1);
+require_once('header.php'); /* Навігаційне меню */
+require_once('../php/chat.php'); /* Функції для роботи чату */
+$accessControl->checkAccess(1); /* Спілкуватись можуть лише продавці та адміністратори */
 
 $currentUser = $_SESSION['login'] ?? null;
 $userLevel = $accessControl->getUserLevel($currentUser);
 
-// Лише адміністратор може використовувати аргументи в посиланні
+/* Лише адміністратор може використовувати аргументи в посиланні */
 if ($userLevel >= 2) {
     $targetUser = $_GET['user'] ?? null;
 } else {
     $targetUser = 'administrator';
 }
 
-// Перевірка: чи користувач намагається написати комусь, крім адміністратора
+/* Перевірка: чи користувач намагається написати комусь, крім адміністратора */
 if ($userLevel < 2 && $targetUser !== 'administrator') {
     die("Недостатньо прав для написання цьому користувачу.");
 }
 
-// Отримання повідомлень між поточним користувачем і адресатом
+/* Отримання повідомлень між поточним користувачем і адресатом */
 $messages = $db->readMessagesForRole($currentUser, $targetUser, $userLevel);
 
-// Розшифрування повідомлень
+/* Розшифрування повідомлень */
 foreach ($messages as &$message) {
     $keyOwner = $message['receiver'] === 'administrator' ? $message['sender'] : $message['receiver'];
     $key = getEncryptionKey($db, $message['sender'], $keyOwner);
@@ -31,7 +31,7 @@ foreach ($messages as &$message) {
 unset($message);
 ?>
 
-<div class="chat-interface">
+<div class="chat-interface"> <!-- Вивід повідомлень -->
     <h1>Чат з <?php echo htmlspecialchars($targetUser === 'administrator' ? 'Адміністратором' : $targetUser); ?></h1>
     <div class="messages">
         <?php foreach ($messages as $message): ?>

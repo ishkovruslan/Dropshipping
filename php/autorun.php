@@ -1,12 +1,12 @@
 <?php
-$currentMinute = (int) date('i'); // Отримуємо хвилини у форматі числа
-$currentSecond = (int) date('s'); // Отримуємо секунди у форматі числа
-if ($currentMinute % 15 == 0) { // Кожні 15 хвилин при переході будь-куди та будь-кого оновлюємо алерти по низькій кількості товарів. 
-    require_once('mysql.php'); // Підключення до бази
+$currentMinute = (int) date('i'); /* Поточна хвилина */
+$currentSecond = (int) date('s'); /* Поточна секунда */
+if ($currentMinute % 15 == 0) { /* Перевіряємо товари кожні 15 хвилин */
+    require_once('mysql.php'); /* Підключення до БД */
     require_once('autorun/alerts.php');
 }
-if ($currentSecond % 5 == 0) { // Перевірка на зловживання доступом кожну хвилину
-    require_once('mysql.php'); // Підключення до бази
+if ($currentSecond % 5 == 0) { /* Кожні 5 секунд перевіряємо на зловживання доступом */
+    require_once('mysql.php'); /* Підключення до БД */
     require_once('autorun/blacklist.php');
 }
 ?>

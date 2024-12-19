@@ -1,10 +1,9 @@
 <?php
-require_once('header.php');
-$accessControl->checkAccess(2); // Доступ лише адміністраторам
-
-// Використання методу з класу Database для отримання повідомлень
-$messages = $db->getMessagesForAdmin();
+require_once('header.php'); /* Навігаційне меню */
+$accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
+$messages = $db->getMessagesForAdmin(); /* Повідомлення від адміністраторів */
 ?>
+
 <div class="messages-list">
     <h1>Обмін повідомленнями</h1>
     <table>

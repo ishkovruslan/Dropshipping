@@ -1,4 +1,4 @@
-<div class="log">
+<div class="log"> <!-- Таблиця взаємодії з записами дій -->
     <div class="table-selection">
         <h1>Виберіть таблицю для перегляду:</h1>
         <ul>
@@ -27,31 +27,21 @@
             <th>Результат</th>
             <th>Час</th>
         </tr>
-        <?php
-        $logs = $db->readAll('log');
+        <?php $logs = $db->readAll('log');
         function getFilteredLogs($logs)
         {
-            // Сортуємо логи від нових до старих
             usort($logs, function ($a, $b) {
                 return $b['source_time'] <=> $a['source_time'];
             });
-
-            // Фільтруємо записи за останні 24 години
             $last24HoursLogs = array_filter($logs, function ($log) {
                 $logTime = substr($log['source_time'], 0, -3);
                 return $logTime >= strtotime('-24 hours');
             });
-
-            // Якщо записів за останні 24 години більше 50, повертаємо їх
             if (count($last24HoursLogs) > 50) {
                 return $last24HoursLogs;
             }
-
-            // Інакше повертаємо останні 50 записів
-            return array_slice($logs, 0, 50); // Повертаємо перші 50 записів після сортування
+            return array_slice($logs, 0, 50);
         }
-
-        // Отримуємо параметри фільтрації з URL
         $operation = $_GET['operation'] ?? null;
         $source_type = $_GET['source_type'] ?? null;
         $role = $_GET['role'] ?? null;
@@ -59,18 +49,13 @@
         $ip = $_GET['ip'] ?? null;
         $date = $_GET['date'] ?? null;
         $usersByRole = [];
-
-        // Фільтруємо за роллю або користувачем, якщо вони задані
         if ($role) {
             $users = $db->readAll('userlist');
             $usersByRole = array_column(array_filter($users, fn($u) => $u['role'] === $role), 'login');
         }
-
-        // Якщо немає фільтрів
         if (!$operation && !$source_type && !$role && !$user && !$ip && !$date) {
             $filteredLogs = getFilteredLogs($logs);
         } else {
-            // Якщо встановлені фільтри, застосовуємо їх до всіх записів
             $filteredLogs = array_filter($logs, function ($log) use ($operation, $source_type, $user, $role, $usersByRole, $ip, $date) {
                 $matchesOperation = $operation ? $log['operation'] === $operation : true;
                 $matchesSourceType = $source_type ? $log['source_type'] === $source_type : true;
@@ -82,8 +67,6 @@
             });
             $filteredLogs = getFilteredLogs($filteredLogs);
         }
-
-        // Виводимо відфільтровані записи
         foreach ($filteredLogs as $log): ?>
             <tr>
                 <td><a

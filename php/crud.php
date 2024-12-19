@@ -1,8 +1,7 @@
 <?php
-require_once('mysql.php'); // Підключення до бази
-/* Модуль керування */
+require_once('mysql.php'); /* Підключення до БД */
 class User
-{/* Клас взаємодія з користувачами */
+{ /* Клас взаємодія з користувачами */
     private $login;
     private $role;
     private $db;
@@ -15,7 +14,7 @@ class User
     }
 
     public function changeRole($newRole)
-    {
+    { /* Зміна ролі */
         $data = ['role' => $newRole];
         $conditions = ['login' => $this->login];
         $this->db->update('userlist', $data, $conditions);
@@ -24,25 +23,25 @@ class User
     }
 
     public function deleteUser()
-    {
+    { /* Видалення користувача */
         $this->db->remove('userlist', ['login'], [$this->login]);
         $this->db->remove('users', ['login'], [$this->login]);
         logAction($this->db, 'Видалення користувача', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' видалив користувача ' . $this->login);
     }
 
     public function getLogin()
-    {
+    { /* Отримання логіну */
         return $this->login;
     }
 
     public function getRole()
-    {
+    { /* Отримання ролі */
         return $this->role;
     }
 }
 
 class UserList
-{
+{ /* Клас взаємодії з користувачами */
     private $users = [];
     private $db;
 
@@ -52,8 +51,8 @@ class UserList
     }
 
     public function loadUsersFromDB()
-    {/* Завантаження користувачів з БД */
-        $this->users = []; // Очищуємо список користувачів перед завантаженням
+    { /* Завантаження користувачів з БД */
+        $this->users = [];
         $result = $this->db->read('userlist', ['login', 'role']);
         foreach ($result as $row) {
             $this->users[] = new User($row['login'], $row['role'], $this->db);
@@ -61,7 +60,7 @@ class UserList
     }
 
     public function getUserByLogin($login)
-    {/* Пошук користувача за логіном */
+    { /* Пошук користувача за логіном */
         foreach ($this->users as $user) {
             if ($user->getLogin() == $login) {
                 return $user;
@@ -71,13 +70,13 @@ class UserList
     }
 
     public function getUsers()
-    {
+    { /* Отримуємо користувачів */
         return $this->users;
     }
 }
 
 class News
-{
+{ /* Клас взаємодії з новинами */
     private $db;
 
     public function __construct($db)
@@ -86,7 +85,7 @@ class News
     }
 
     public function create($title, $image, $description, $startDate, $endDate)
-    {/* Створити новину */
+    { /* Створити новину */
         $columns = ['news_title', 'uploadPath', 'news_description', 'start_date', 'end_date'];
         $values = [$title, $image, $description, $startDate, $endDate];
         $types = 'sssss';
@@ -95,7 +94,7 @@ class News
 }
 
 class Category
-{
+{ /* Клас взаємодії з категоріями */
     private $db;
 
     public function __construct($db)
@@ -113,7 +112,7 @@ class Category
 }
 
 class Product
-{
+{ /* Клас взаємодії з товарами */
     private $db;
 
     public function __construct($db)
@@ -122,7 +121,7 @@ class Product
     }
 
     public function create($category, $name, $count, $price, $image, $characteristics)
-    {/* Створити товар */
+    { /* Створити товар */
         $columns = ['category', 'product_name', 'count', 'price', 'uploadPath', 'characteristics'];
         if (!is_array($characteristics)) {
             $characteristics = [$characteristics];
@@ -136,16 +135,15 @@ class Product
     }
 
     public function getCategories()
-    {
+    { /* Отримати категорії */
         return $this->db->read('categories', ['category_name', 'specifications']);
     }
 }
 
 function updateData($table, $data, $conditions, $db)
-{
+{ /* Оновлення інформації */
     try {
         $db->update($table, $data, $conditions);
-        // Формування рядків для логування
         $dataString = implode(', ', array_map(function ($key, $value) {
             return "$key: $value";
         }, array_keys($data), $data));
@@ -161,7 +159,7 @@ function updateData($table, $data, $conditions, $db)
 }
 
 function deleteEntity($entity, $id, $db)
-{/* Видалення категорії */
+{ /* Видалення категорії */
     $conditions = ['id' => $id];
     deleteEntityWithImages($entity, $conditions, $db);
     logAction($db, "Оновлення $entity", $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' оновив таблицю ' . $entity . ' видаливши запис ' . $id);
@@ -170,7 +168,7 @@ function deleteEntity($entity, $id, $db)
 }
 
 function deleteEntityWithImages($entity, $conditions, $db)
-{/* Видалення разом з зображенням */
+{ /* Видалення разом з зображенням */
     $imagePathPrefix = "../images/$entity/";
     $imageColumn = 'uploadPath';
     if ($entity == 'categories') {
@@ -192,14 +190,14 @@ function deleteEntityWithImages($entity, $conditions, $db)
 }
 
 function deleteFile($filePath)
-{/* Видалення файлу */
+{ /* Видалення файлу */
     if (file_exists($filePath)) {
         unlink($filePath);
     }
 }
 
 function handlePostRequest($db)
-{/* Обробка запитів */
+{ /* Обробка запитів */
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -216,7 +214,7 @@ function handlePostRequest($db)
 
 
 function handleUserPostRequest($db)
-{/* POST запит для взаємодії з користувачем */
+{ /* POST запит для взаємодії з користувачем */
     $login = $_POST['login'];
     $userList = new UserList($db);
     $userList->loadUsersFromDB();
@@ -239,7 +237,7 @@ function handleUserPostRequest($db)
 }
 
 function handleEntityPostRequest($db)
-{/* POST запит для взаємодії з новиною/категорією/товаром */
+{ /* POST запит для взаємодії з новиною/категорією/товаром */
     $entity = $_POST['entity'];
     $id = $_POST['id'];
     if (isset($_POST['delete'])) {
@@ -249,7 +247,6 @@ function handleEntityPostRequest($db)
         $uploadDir = "../images/$entity/";
         $fileKey = 'uploadPath';
         if (!empty($_FILES[$fileKey]['name'])) {
-            // Видалення старого зображення перед завантаженням нового
             $conditions = ['id' => $id];
             $result = $db->read($entity, ['uploadPath'], $conditions);
             if (!empty($result)) {
@@ -271,7 +268,7 @@ function handleEntityPostRequest($db)
 
 
 function handleCreatePostRequest($db)
-{/* POST запит створення новини/категорії/товару */
+{ /* POST запит створення новини/категорії/товару */
     if (isset($_POST['create_news'])) {
         handleCreateNewsRequest($db);
     } elseif (isset($_POST['create_category'])) {
@@ -282,7 +279,7 @@ function handleCreatePostRequest($db)
 }
 
 function handleCreateNewsRequest($db)
-{
+{ /* POST запит для створення новин */
     $news = new News($db);
     $name = $_POST['news_title'];
     $description = $_POST['news_description'];
@@ -295,7 +292,7 @@ function handleCreateNewsRequest($db)
 }
 
 function handleCreateCategoryRequest($db)
-{/* POST запит створення категорії */
+{ /* POST запит створення категорії */
     $category = new Category($db);
     $name = $_POST['category_name'];
     $specifications = explode(",", $_POST['specifications']);
@@ -315,24 +312,19 @@ function handleCreateCategoryRequest($db)
 }
 
 function handleCreateProductRequest($db)
-{
-    /* POST запит створення товару */
+{ /* POST запит створення товару */
     $product = new Product($db);
     $name = $_POST['name'];
     $count = $_POST['count'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-
-    // Перевірка, чи характеристики є масивом
     if (isset($_POST['characteristics']) && is_array($_POST['characteristics'])) {
-        $characteristics = implode(',', $_POST['characteristics']); // Об'єднуємо масив в рядок
+        $characteristics = implode(',', $_POST['characteristics']);
     } else {
-        $characteristics = $_POST['characteristics'] ?? ''; // Якщо не масив, просто беремо значення
+        $characteristics = $_POST['characteristics'] ?? '';
     }
 
     $imageFileName = uploadFile('uploadPath', "../images/products/");
-
-    // Форматування характеристик
     $characteristicsArray = explode(',', $characteristics);
     $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $category]);
     $specifications = explode(',', $specificationsResult[0]["specifications"]);
@@ -344,7 +336,6 @@ function handleCreateProductRequest($db)
         }
     }
 
-    // Об'єднуємо характеристики в один рядок
     $characteristicsString = implode(", ", $formattedCharacteristics);
     $product->create($category, $name, $count, $price, $imageFileName, $characteristics);
     logAction($db, "Створено товар", $_SESSION['login'] ?? 'Administrator', $_SERVER['REMOTE_ADDR'], 'WEB', $_SESSION['login'] . ' створив в категорії ' . $category . ' товар ' . $name . ' в кількості ' . $count . ' який має вартість ' . $price . " та має наступні характеристики: " . $characteristicsString);
@@ -360,7 +351,7 @@ function handleCreateProductRequest($db)
 
 
 function uploadFile($fileKey, $uploadDir)
-{/* Завантаження файлу */
+{ /* Завантаження файлу */
     $fileExtension = pathinfo($_FILES[$fileKey]['name'], PATHINFO_EXTENSION);
     $uniqueFileName = uniqid() . '.' . $fileExtension;
     $targetFilePath = $uploadDir . $uniqueFileName;
@@ -371,7 +362,7 @@ function uploadFile($fileKey, $uploadDir)
 }
 
 function populateDataArray($entity, &$data)
-{
+{ /* Опис таблиці для оновлення */
     switch ($entity) {
         case 'news':
             $data['news_title'] = $_POST['news_title'];
@@ -395,11 +386,11 @@ function populateDataArray($entity, &$data)
             exit();
     }
 }
-/* Універсальний обробник POST запитів */
-handlePostRequest($db);
+
+handlePostRequest($db); /* Універсальний обробник POST запитів */
 
 function countAccessibleProductsByCategory($categoryName, $productsData)
-{/* Лічильник товарів */
+{ /* Лічильник товарів */
     $count = 0;
     foreach ($productsData as $product) {
         if ($product['category'] == $categoryName) {

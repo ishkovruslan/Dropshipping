@@ -1,12 +1,13 @@
 <?php
-require_once('header.php'); /* Верхня частина сайту */
-$accessControl->checkAccess(1); /* Доступ лише у адміністраторів */
-$key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
+require_once('header.php'); /* Навігаційне меню */
+$accessControl->checkAccess(1); /* Перевірка рівня */
 
-if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) {
+if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) { /* Доступ має лише основний ip */
     echo '<p style="color: red;">Зміна паролю доступна лише з вашої найчастішої IP-адреси.</p>';
     exit;
 }
+
+$key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
 ?>
 
 <h1>Керування обліковим записом</h1>
@@ -14,7 +15,6 @@ if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'
     <p>Керування віддаленим доступом</p>
     <p>Унікальний ключ: <?php echo $key; ?></p>
     <form method="post">
-        <!-- Кнопка для генерації ключа -->
         <button type="submit" name="generate_key">Згенерувати новий ключ</button>
     </form>
 </div>
@@ -23,13 +23,10 @@ if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'
 <form method="post">
     <label for="current_password">Старий пароль:</label>
     <input type="password" id="current_password" name="current_password" required>
-    
     <label for="new_password">Новий пароль:</label>
     <input type="password" id="new_password" name="new_password" required>
-    
     <label for="confirm_password">Підтвердіть новий пароль:</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
-    
     <button type="submit" name="change_password">Змінити пароль</button>
 </form>
 

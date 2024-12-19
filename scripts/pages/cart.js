@@ -1,7 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { /* Пошук по фрагменту ПІБ кінцевого користувача */
     const searchInput = document.querySelector('#searchConsumer');
     const resultsContainer = document.querySelector('#searchResults');
-    const detailsContainer = document.querySelector('#consumerDetails');
 
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.trim();
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(`../../php/cart.php?action=details&id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Заповнення полів форми
                     document.querySelector('#full_name').value = data.full_name || '';
                     document.querySelector('#phone').value = data.phone || '';
                     document.querySelector('#email').value = data.email || '';
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('#city').value = data.city || '';
                     document.querySelector('#post_number').value = data.post_number || '';
                     
-                    // Очищення результатів пошуку
                     resultsContainer.innerHTML = '';
                 });
         }

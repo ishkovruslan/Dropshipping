@@ -1,5 +1,5 @@
 <?php
-require_once('header.php'); /* Верхня частина сайту */
+require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 ?>
 

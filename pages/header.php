@@ -1,10 +1,7 @@
 <?php
-session_start(); /* Початок сессії */ /* Верхня частина сайту */
-require_once('../php/access.php'); /* Перевірка рівня доступу та ролей*/
-// Отримуємо ім'я хоста
-$hostname = gethostname();
-// Отримуємо IP-адресу за ім'ям хоста
-$local_ip = gethostbyname($hostname);
+session_start(); /* Початок сессії */
+require_once('../php/access.php'); /* Модуль безпеки */
+$current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація про поточну сторінку */
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +12,8 @@ $local_ip = gethostbyname($hostname);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Курсова робота</title>
     <link rel="stylesheet" type="text/css" href="../styles/global/style.css">
-    <!-- Автоматичні стилі з врахування назви сторінки та ролі користувача -->
-    <?php
-    /* Визначення ролі користувача */
-    $current_page = basename($_SERVER['PHP_SELF'], '.php');
-    require_once('../php/theme.php'); /* Робота з темами */
-    ?>
+    <?php require_once('../php/theme.php'); ?> <!-- Робота з темами -->
+    <!-- Автоматичні стилі з врахування назви сторінки -->
     <link rel="stylesheet" type="text/css" href="../styles/pages/<?= htmlspecialchars($current_page); ?>.css">
     <link rel="stylesheet" type="text/css" href="../styles/theme/<?= htmlspecialchars($theme); ?>.css">
     <script src="../scripts/pages/<?= htmlspecialchars($current_page); ?>.js"></script>
@@ -37,10 +30,8 @@ $local_ip = gethostbyname($hostname);
                 <a href="products.php">Товари</a>
             </p>
             <?php
-            /* Перевірка авторизації користувача */
-            if (isset($_SESSION['loggedin']) === true) {
-                /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
-                if ($accessControl->getUserLevel($_SESSION['login']) >= 1) {
+            if (isset($_SESSION['loggedin']) === true) { /* Перевірка авторизації користувача */
+                if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
                     ?>
                     <p>
                         <a href="report.php">Звіти</a>
@@ -52,9 +43,10 @@ $local_ip = gethostbyname($hostname);
                         <a href="account.php">Керування обліковим записом</a>
                     </p>
                     <?php if ($accessControl->getUserLevel($_SESSION['login']) == 1) { ?>
-                    <p>
-                        <a href="chat.php">Зв'язок з адміністратором</a>
-                    </p>
+                        <!-- Виключно продавці можуть зв'язуватись з авдміністраторами -->
+                        <p>
+                            <a href="chat.php">Зв'язок з адміністратором</a>
+                        </p>
                     <?php }
                     if (!empty($_SESSION['cart'])) { ?>
                         <p>
@@ -66,7 +58,8 @@ $local_ip = gethostbyname($hostname);
                 <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
                     <a href="../php/logout.php">Вийти</a>
                 </p>
-            <?php } else { /* Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації */ ?>
+            <?php } else { ?>
+                <!-- Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації -->
                 <p>
                     <a href="authorization.php">Авторизація</a>
                 </p>
@@ -80,9 +73,8 @@ $local_ip = gethostbyname($hostname);
             </p>
         </div>
         <?php
-        /* Якщо це адміністратор - надати доступ до створення новин та категорій*/
-        if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) {
-            ?>
+        /* Адміністратор має додаткове навігаційне меню */
+        if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) { ?>
             <div>
                 <p>
                     <a href="newnews.php">Додати новину</a>
@@ -99,9 +91,13 @@ $local_ip = gethostbyname($hostname);
                 <p>
                     <a href="messages.php">Зв'язок з користувачами</a>
                 </p>
-                <p><?php echo $local_ip; ?></p>
+                <p>
+                    <?php $hostname = gethostname(); /* Отримуємо ім'я хоста */
+                    $local_ip = gethostbyname($hostname); /* Отримуємо IP-адресу за ім'ям хоста */
+                    echo $local_ip; ?> <!-- Вивід адреси сервера для адміністраторів -->
+                </p>
             </div>
         <?php } ?>
     </header>
 </body>
-<main>
+<main> <!-- Відкриття контейнеру main для наповнення -->

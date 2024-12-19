@@ -1,5 +1,5 @@
 <?php
-require_once('header.php'); /* Верхня частина сайту */
+require_once('header.php'); /* Навігаційне меню */
 ?>
 
 <h2>Форма авторизації</h2>

@@ -1,4 +1,4 @@
-<div class="category"><!-- Таблиця взаємодії з категоріями -->
+<div class="category"> <!-- Таблиця взаємодії з категоріями -->
     <h1>Список категорій</h1>
     <table>
         <tr>
@@ -6,8 +6,7 @@
             <th>Кількість пропозицій</th>
             <th>Специфікації</th>
         </tr>
-        <?php
-        $categoriesData = $db->readAll('categories');
+        <?php $categoriesData = $db->readAll('categories');
         $productsData = $db->readAll('products');
         foreach ($categoriesData as $category): ?>
             <tr>
@@ -16,12 +15,11 @@
                         <?php echo $category['category_name']; ?>
                     </a>
                 </td>
-                <td><!-- По натисканню на категорію відкривається таблиця продуктів цієї категорії -->
+                <td>
                     <?php echo countAccessibleProductsByCategory($category['category_name'], $productsData); ?>
                 </td>
                 <td>
-                    <?php
-                    $specifications = explode(',', $category['specifications']);
+                    <?php $specifications = explode(',', $category['specifications']);
                     foreach ($specifications as $spec):
                         if ($spec != ""): ?>
                             <br><?php echo htmlspecialchars($spec); ?></b>

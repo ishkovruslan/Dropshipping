@@ -1,14 +1,14 @@
-<?php /* Модуль безпеки */
-require_once('mysql.php'); // Підключення до бази
+<?php
+require_once('mysql.php'); /* Підключення до БД */
 
-$roles = [/* Цифрове значення ролей */
+$roles = [ /* Числове значення ролей */
     'user' => 0,
     'seller' => 1,
     'administrator' => 2
 ];
 
 class AccessControl
-{/* Клас керування доступом користувача */
+{ /* Клас керування доступом користувача */
     private $db;
 
     private $roles;
@@ -20,20 +20,20 @@ class AccessControl
     }
 
     public function getUserRole($login)
-    {/* Роль користувача */
+    { /* Роль користувача */
         $conditions = ['login' => $login];
         $result = $this->db->read('userlist', ['role'], $conditions);
         return isset($result[0]['role']) ? $result[0]['role'] : 'unauthorized';
     }
 
     public function getUserLevel($login)
-    {/* Рівень доступу користувача */
+    { /* Рівень доступу користувача */
         $role = $this->getUserRole($login);
         return isset($this->roles[$role]) ? $this->roles[$role] : -1;
     }
 
     public function checkAccess($minRequiredRole)
-    {
+    { /* Перевірка доступу */
         if (!isset($_SESSION['login'])) {
             logAction($this->db, 'Неавторизований доступ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Спроба відкрити сторінку без авторизації ' . $_SESSION['login']);
             header("location: ../index.php");
@@ -55,8 +55,7 @@ class AccessControl
     }
 
     public function isMostFrequentIp($login, $currentIp)
-    {
-        // Отримуємо всі записи з логом для заданого логіну
+    { /* Пошук найчастішої адреси */
         $result = $this->db->read(
             'log',
             ['source_ip'],
@@ -67,7 +66,6 @@ class AccessControl
             return false;
         }
 
-        // Рахуємо частоти кожного IP
         $ipCounts = [];
         foreach ($result as $row) {
             $ip = $row['source_ip'];
@@ -77,17 +75,14 @@ class AccessControl
             $ipCounts[$ip]++;
         }
 
-        // Знаходимо найчастіший IP
-        arsort($ipCounts); // Сортуємо за спаданням частоти
-        $mostFrequentIp = key($ipCounts); // Перший ключ — це найчастіший IP
+        arsort($ipCounts); /* Сортування усіх адрес користувача */
+        $mostFrequentIp = key($ipCounts); /* Перша адреса є найпопулярнішою */
 
-        // Перевіряємо, чи найчастіший IP збігається з поточним
         return $mostFrequentIp === $currentIp;
     }
 
     public function isBlocked($login, $ip)
-    {
-        // Перевірка блокування за логіном
+    { /* Перевірка блокування за логіном */
         $conditions = [
             'block_id' => $login,
             'block_type' => 'login'
@@ -97,11 +92,11 @@ class AccessControl
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
             if (strtotime($blockDate) >= time()) {
-                return true; // Логін заблокований
+                return true; /* Логін заблоковано */
             }
         }
 
-        // Перевірка блокування за IP-адресою
+        /* Перевірка блокування за IP-адресою */
         $conditions = [
             'block_id' => $ip,
             'block_type' => 'ip'
@@ -111,16 +106,16 @@ class AccessControl
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
             if (strtotime($blockDate) >= time()) {
-                return true; // IP заблокований
+                return true; /* Адресу заблоковано */
             }
         }
 
-        return false; // Не заблокований
+        return false; /* Блокувань немає */
     }
 }
 
 class Authentication
-{/* Клас авторизації/реєстрації */
+{ /* Клас авторизації/реєстрації */
     private $db;
 
     public function __construct($db)
@@ -129,10 +124,10 @@ class Authentication
     }
 
     public function authenticate($login, $password)
-    {
+    { /* Авторизація */
         $currentIp = $_SERVER['REMOTE_ADDR'];
 
-        // Перевірка на блокування
+        /* Перевірка блокування */
         if ($this->isBlocked($login, $currentIp)) {
             header("Location: ../php/logout.php");
             exit;
@@ -155,7 +150,7 @@ class Authentication
     }
 
     public function isLoginUnique($login)
-    {/* Унікальність логіна */
+    { /* Унікальність логіна */
         $conditions = ['login' => $login];
         $result = $this->db->read('users', ['login'], $conditions);
         if (count($result) > 0) {
@@ -167,10 +162,10 @@ class Authentication
     }
 
     public function register($login, $password)
-    {
+    { /* Реєстрація */
         $currentIp = $_SERVER['REMOTE_ADDR'];
 
-        // Перевірка на блокування
+        /* Перевірка блокування */
         if ($this->isBlocked($login, $currentIp)) {
             header("Location: ../php/logout.php");
             exit;
@@ -197,7 +192,7 @@ class Authentication
     }
 
     public function changePassword($login, $currentPassword, $newPassword, $confirmPassword)
-    {
+    { /* Зміна паролю */
         if ($newPassword !== $confirmPassword) {
             return ['success' => false, 'message' => "Новий пароль не співпадає з підтвердженням!"];
         }
@@ -223,8 +218,7 @@ class Authentication
     }
 
     public function isBlocked($login, $ip)
-    {
-        // Перевірка блокування за логіном
+    { /* Перевірка блокування за логіном */
         $conditions = [
             'block_id' => $login,
             'block_type' => 'login'
@@ -234,11 +228,11 @@ class Authentication
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
             if (strtotime($blockDate) >= time()) {
-                return true; // Логін заблокований
+                return true; /* Логін заблоковано */
             }
         }
 
-        // Перевірка блокування за IP-адресою
+        /* Перевірка блокування за IP-адресою */
         $conditions = [
             'block_id' => $ip,
             'block_type' => 'ip'
@@ -248,11 +242,11 @@ class Authentication
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
             if (strtotime($blockDate) >= time()) {
-                return true; // IP заблокований
+                return true; /* Адресу заблоковано */
             }
         }
 
-        return false; // Не заблокований
+        return false; /* Блокувань немає */
     }
 }
 
@@ -265,62 +259,49 @@ class RemoteAccess
         $this->db = $db;
     }
 
-    // Функція генерації 64-бітного числа
     public function generateUniqueKey()
-    {
+    { /* Генерація 64 бітного значення */
         return random_int(0, PHP_INT_MAX);
     }
 
-    // Записуємо або оновлюємо унікальний ключ користувача у базі
     public function setUniqueKey($login, $key)
-    {
+    { /* Оновлення унікального ключа */
         $conditions = ['login' => $login];
         $data = ['unique_key' => $key];
 
-        // Оновлюємо поле unique_key у користувача
         $this->db->update('userlist', $data, $conditions, 'i');
         logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Користувач ' . $login . ' отримав новий ключ');
     }
 
-    // Отримуємо registration_time і unique_key з бази
+
     public function getUserData($login)
-    {
+    { /* Інформація про користувача */
         $conditions = ['login' => $login];
         logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Перегляд ключа користувача ' . $login);
         return $this->db->read('userlist', ['registration_time', 'unique_key'], $conditions);
     }
 
-    // Функція для побітового XOR чисел
     public function xorKeys($key1, $key2)
-    {
+    { /* Побітовий XOR */
         return $key1 ^ $key2;
     }
 
-    // Керування віддаленим доступом (інтерфейс)
     public function manageRemoteAccess($login)
-    {
-        // Отримуємо registration_time та unique_key з бази даних
+    { /* Ключ для API */
         $userData = $this->getUserData($login);
 
         if (isset($userData[0]['registration_time'])) {
             $registrationTime = (int) $userData[0]['registration_time'];
             $uniqueKey = $userData[0]['unique_key'];
-
-            // Якщо користувач натиснув на кнопку "Згенерувати ключ"
             if (isset($_POST['generate_key'])) {
-                // Генеруємо новий ключ
                 $newKey = $this->generateUniqueKey();
-                $this->setUniqueKey($login, $newKey); // Оновлюємо ключ у базі
-                $uniqueKey = $newKey; // Оновлюємо значення для відображення
+                $this->setUniqueKey($login, $newKey);
+                $uniqueKey = $newKey;
             } elseif ($uniqueKey == 0) {
-                // Якщо ключ не згенеровано, виводимо повідомлення, що ключ ще не згенеровано
                 return "Ключ ще не згенеровано.";
             }
-
-            // Виводимо результат XOR у десятковому вигляді, якщо ключ існує
             return $this->xorKeys($registrationTime, (int) $uniqueKey);
         }
-
         return "Помилка: дані користувача не знайдено!";
     }
 }
@@ -329,7 +310,7 @@ $accessControl = new AccessControl($db, $roles);
 $authentication = new Authentication($db);
 $remoteAccess = new RemoteAccess($db);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { /* Обробник для реєстрації/авторизації */
     if (isset($_POST['login_submit'])) {
         $login = $_POST['login'];
         $password = $_POST['password'];

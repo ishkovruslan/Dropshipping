@@ -1,5 +1,5 @@
 <?php
-require_once('header.php'); /* Верхня частина сайту */
+require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 ?>
 
@@ -12,9 +12,10 @@ $accessControl->checkAccess(2); /* Доступ лише у адміністра
     <label for="news_description">Опис новини:</label><br>
     <textarea id="news_description" name="news_description" rows="4" cols="50"></textarea><br><br>
     <label for="start_date">Дата початку:</label><br>
-    <input type="date" id="start_date" name="start_date"><br><br>
+    <label for="start_date">Дата початку:</label><br>
+    <input type="date" id="start_date" name="start_date" min="0001-01-01" max="9999-12-31" required><br><br>
     <label for="end_date">Дата кінця:</label><br>
-    <input type="date" id="end_date" name="end_date"><br><br>
+    <input type="date" id="end_date" name="end_date" min="0001-01-01" max="9999-12-31" required><br><br>
     <button type="submit" name="create_news">Створити новину</button>
 </form>
 <?php require_once('../php/footer.php'); ?>

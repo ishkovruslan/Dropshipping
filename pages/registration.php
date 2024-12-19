@@ -1,5 +1,5 @@
 <?php
-require_once('header.php'); /* Верхня частина сайту */
+require_once('header.php'); /* Навігаційне меню */
 ?>
 
 <h2>Форма реєстрації</h2>
@@ -19,5 +19,5 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <input type="password" id="password" name="password"><br><br>
         <input type="submit" name="register_submit" value="Зареєструватись">
     </form>
-<?php } ?>
-<?php require_once('../php/footer.php'); ?>
+<?php }
+require_once('../php/footer.php'); ?>

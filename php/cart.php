@@ -1,11 +1,11 @@
 <?php
-require_once '../php/mysql.php';
+require_once '../php/mysql.php'; /* Підключення до БД */
 
 $action = $_GET['action'] ?? null;
 
 if ($action === 'search') {
     $search = $_GET['query'] ?? '';
-    $limit = (int)($_GET['limit'] ?? 10); // Встановлюємо значення за замовчуванням на 10
+    $limit = (int)($_GET['limit'] ?? 10);
     $results = $db->searchLike('consumer', ['id', 'full_name'], 'full_name', $search, $limit);
     echo json_encode($results);
 } elseif ($action === 'details') {

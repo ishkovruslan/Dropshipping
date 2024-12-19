@@ -1,11 +1,11 @@
 <?php
-require_once('header.php');
-require_once('../php/mysql.php');
-// Ініціалізація змінних фільтрів
+require_once('header.php'); /* Навігаційне меню */
+require_once('../php/mysql.php'); /* Підключення БД */
+/* Ініціалізація змінних фільтрів */
 $minPrice = !empty($_GET['minPrice']) ? $_GET['minPrice'] : null;
 $maxPrice = !empty($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
 $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'asc';
-// Налаштування умов фільтрації та сортування
+/* Налаштування умов фільтрації та сортування */
 $conditions = [];
 if ($minPrice !== null) {
     $conditions['price >='] = $minPrice;
@@ -14,8 +14,7 @@ if ($maxPrice !== null) {
     $conditions['price <='] = $maxPrice;
 }
 $orderBy = ['price' => ($sort === 'asc' ? 'ASC' : 'DESC')];
-// Отримання даних продуктів з бази
-$result = $db->readWithSort('products', ['*'], $conditions, $orderBy);
+$result = $db->readWithSort('products', ['*'], $conditions, $orderBy); /* Отримання даних продуктів з бази */
 ?>
 
 <div class="filters">
@@ -43,29 +42,26 @@ $result = $db->readWithSort('products', ['*'], $conditions, $orderBy);
             <th width="7.5%">Ціна</th>
             <th width="25%">Характеристики</th>
         </tr>
-        <?php
-        if (count($result) > 0) {
+        <?php if (count($result) > 0) {
             foreach ($result as $row) {
                 $count = htmlspecialchars($row["count"]);
-                if ($count != 0) {
-                    // Генерація HTML для кожного продукту
+                if ($count != 0) { /* Формування HTML сторінки */
                     $id = htmlspecialchars($row["id"]);
                     $category = htmlspecialchars($row["category"]);
                     $itemName = htmlspecialchars($row["product_name"]);
                     $price = htmlspecialchars($row["price"]);
                     $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
-                    // Отримання характеристик товару
+                    /* Отримання характеристик товару */
                     $characteristics = explode(',', $row['characteristics']);
                     $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $row['category']]);
                     $specifications = explode(',', $specificationsResult[0]["specifications"]);
                     $characteristicsHTML = '';
-                    // Формування HTML для характеристик
-                    foreach ($characteristics as $key => $value) {
+                    foreach ($characteristics as $key => $value) { /* Формування HTML для характеристик */
                         if ($value !== "-" && $value !== "") {
                             $characteristicsHTML .= htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value) . "<br>";
                         }
                     }
-                    // Відображення продукту у рядку таблиці
+                    /* Відображення продукту у рядку таблиці */
                     echo "<tr>
                             <td>
                                 <img src='$imagePath' alt='$itemName' onclick=\"openEditProductModal('$id', '$imagePath', '$category', '$itemName', '$count', '$price', '" . addslashes($row['characteristics']) . "')\">
@@ -80,8 +76,7 @@ $result = $db->readWithSort('products', ['*'], $conditions, $orderBy);
             }
         } else {
             echo "<tr><td colspan='6'>Товари відсутні</td></tr>";
-        }
-        ?>
+        } ?>
     </table>
 </div>
 

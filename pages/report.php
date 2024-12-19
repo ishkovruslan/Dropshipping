@@ -1,8 +1,9 @@
 <?php
-require_once('header.php'); // Верхня частина сайту
+require_once('header.php'); /* Меню навігації */
 $accessControl->checkAccess(1);
-require_once('../php/order.php'); // Необхідні функції
+require_once('../php/order.php'); /* Необхідні функції */
 ?>
+
 <div class="table-selection">
     <ul>
         <li><a href="?table=sorder">Окремі звіти</a></li>
@@ -13,8 +14,9 @@ require_once('../php/order.php'); // Необхідні функції
         <li><a href="?table=gorder">Загальний звіт</a></li>
     </ul>
 </div>
+
 <?php
-// Завантаження таблиці
+/* Завантаження таблиці */
 $table = $_GET['table'] ?? null;
 
 switch ($table) {

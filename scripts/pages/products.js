@@ -1,4 +1,4 @@
-function resetFilters(event) {
+function resetFilters(event) { /* Сортування продуктів */
     event.preventDefault();
     document.querySelector('input[name="minPrice"]').value = '';
     document.querySelector('input[name="maxPrice"]').value = '';

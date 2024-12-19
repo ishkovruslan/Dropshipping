@@ -2,14 +2,10 @@
 session_start(); /* Початок сессії */
 /* Перевірка сессії */
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Зачистка сесійних куків
-    setcookie(session_name(), '', time() - 3600, '/');
-    // Видалення змінних сесії
-    session_unset();
-    // Закриття сесії
-    session_destroy();
+    setcookie(session_name(), '', time() - 3600, '/'); /* Зачистка сесійних куків */
+    session_unset(); /* Видалення змінних сесії */
+    session_destroy(); /* Закриття сесії */
 }
-// Перенаправлення на сторінку авторизації
-header("Location: ../pages/authorization.php");
+header("Location: ../pages/authorization.php"); /* Перенаправлення на сторінку авторизації */
 exit;
 ?>

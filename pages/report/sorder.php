@@ -1,7 +1,5 @@
-<div class="orders">
+<div class="orders"> <!-- Вивід одного замовлення -->
     <h1>Замовлення за номером</h1>
-
-    <!-- Форма для пошуку -->
     <form method="GET" action="">
         <input type="hidden" name="table" value="sorder" />
         <input type="text" name="id" placeholder="Номер замовлення"
@@ -9,23 +7,18 @@
         <input type="submit" value="Пошук" />
     </form>
 
-    <?php
-    // Отримуємо фільтр
-    $searchFilters = [
+    <?php $searchFilters = [
         'id' => isset($_GET['id']) ? trim($_GET['id']) : '',
     ];
-    // Перевіряємо, чи заданий фільтр для пошуку
     if (!empty($searchFilters['id'])) {
         $currentUserLogin = $_SESSION['login'];
         $orders = orders($db, $currentUserLogin, $searchFilters);
-        // Фільтруємо замовлення за точним співпадінням ID
         $orders = array_filter($orders, function ($order) use ($searchFilters) {
             return (string) $order['id'] === $searchFilters['id'];
         });
         if (empty($orders)) {
             echo "<p>Замовлення не знайдено.</p>";
         } else {
-            // Отримуємо перше замовлення
             $order = reset($orders);
             echo '<h2>Замовлення №' . $order['id'] . ' користувача ' . $order['login'] . ' за ' . date('Y-m-d H:i:s', $order['record_time'] / 1000) . '</h2>';
             echo '<table>';
@@ -77,7 +70,6 @@
             echo '</table>';
         }
     } else {
-        // Якщо фільтр порожній, повідомляємо користувача
         echo "<p>Введіть номер замовлення для пошуку.</p>";
     } ?>
 </div>

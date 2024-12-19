@@ -1,4 +1,4 @@
-function updateButtonText(selectElement) {
+function updateButtonText(selectElement) { /* Модальне вікно менеджменту */
     const submitButton = selectElement.nextElementSibling;
     if (selectElement.value === 'delete') {
         submitButton.textContent = 'Видалити';

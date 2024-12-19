@@ -1,66 +1,57 @@
 <?php
-// Визначення ключа користувача (завжди ключ користувача, навіть якщо відправник - адміністратор)
 function getEncryptionKey($db, $sender, $receiver)
-{
+{ /* Отримуємо власника ключа */
     global $accessControl;
 
     $currentUser = $_SESSION['login'];
 
     if ($accessControl->getUserLevel($currentUser) >= 2) {
-        // Якщо користувач - адміністратор
         $user = $receiver !== 'administrator' ? $receiver : $sender;
     } else {
-        // Звичайний користувач: ключ прив’язаний до поточного логіну
         $user = $currentUser;
     }
 
     return $db->getUserRegistrationTime($user);
 }
 
-// Генерація XOR-ключа для шифрування/дешифрації
 function generateXORKey($registrationTime, $timestamp)
-{
-    return $registrationTime ^ $timestamp; // Унікальний 64-бітний ключ
+{ /* Отримуємо необхідний ключ */
+    return $registrationTime ^ $timestamp;
 }
 
-// Шифрування повідомлення
 function encryptMessage($message, $key)
-{
-    $keyStr = pack('J', $key); // Конвертуємо 64-бітний ключ у рядок
+{ /* Шифрування повідомлення */
+    $keyStr = pack('J', $key);
     $keyLen = strlen($keyStr);
     $encrypted = '';
 
     for ($i = 0; $i < strlen($message); $i++) {
-        $messageChar = ord($message[$i]); // Поточний символ повідомлення
-        $keyChar = ord($keyStr[$i % $keyLen]); // Поточний символ ключа
-        $encrypted .= chr(($messageChar + $keyChar) % 256); // Алгоритм Віженера
+        $messageChar = ord($message[$i]);
+        $keyChar = ord($keyStr[$i % $keyLen]);
+        $encrypted .= chr(($messageChar + $keyChar) % 256);
     }
 
-    return base64_encode($encrypted); // Закодувати в Base64
+    return base64_encode($encrypted);
 }
 
-// Дешифрування повідомлення
 function decryptMessage($encryptedMessage, $key)
-{
-    $encrypted = base64_decode($encryptedMessage); // Декодувати Base64
-    $keyStr = pack('J', $key); // Конвертуємо 64-бітний ключ у рядок
+{ /* Дешифрування повідомлення */
+    $encrypted = base64_decode($encryptedMessage);
+    $keyStr = pack('J', $key);
     $keyLen = strlen($keyStr);
     $decrypted = '';
 
     for ($i = 0; $i < strlen($encrypted); $i++) {
-        $encryptedChar = ord($encrypted[$i]); // Поточний символ зашифрованого повідомлення
-        $keyChar = ord($keyStr[$i % $keyLen]); // Поточний символ ключа
-        $decrypted .= chr(($encryptedChar - $keyChar + 256) % 256); // Зворотний алгоритм Віженера
+        $encryptedChar = ord($encrypted[$i]);
+        $keyChar = ord($keyStr[$i % $keyLen]);
+        $decrypted .= chr(($encryptedChar - $keyChar + 256) % 256);
     }
 
-    return $decrypted; // Повернути розшифроване повідомлення
+    return $decrypted;
 }
 
-// Функція для отримання імені відправника (Адміністратор або логін користувача)
-
 function getSenderName($sender)
-{
-    // Якщо відправник — адміністратор, завжди показуємо як "Адміністратор"
+{ /* Вивід імені відправника */
     return $sender === 'administrator' ? 'Адміністратор' : $sender;
 }
 
@@ -71,12 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     $currentUser = $_SESSION['login'] ?? null;
     $targetUser = $_GET['user'] ?? "administrator";
 
-    // Отримання ключа користувача
     $key = getEncryptionKey($db, $currentUser, $targetUser);
     $key = generateXORKey($key, $sourceTime);
     $encryptedMessage = encryptMessage($message, $key);
 
-    // Збереження повідомлення
     $db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);
 
     require_once('access.php');

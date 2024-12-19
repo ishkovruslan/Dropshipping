@@ -1,12 +1,10 @@
 <?php
-require_once('header.php');
-require_once('../php/mysql.php');
+require_once('header.php'); /* Навігаційне меню */
+require_once('../php/mysql.php'); /* Підключення БД */
 
-// Отримання id товару з параметра URL
-$id = $_GET['id'] ?? null;
+$id = $_GET['id'] ?? null; /* Отримання id товару з параметра URL */
 
-if ($id) {
-    // Отримання даних товару з бази
+if ($id) { /* Виводимо інформації в разі наявності ідентифікатора */
     $result = $db->read('products', ['*'], ['id' => $id]);
 
     if (count($result)) {
@@ -16,13 +14,12 @@ if ($id) {
         $count = htmlspecialchars($row["count"]);
         $imagePath = '../images/products/' . htmlspecialchars($row["uploadPath"]);
         $characteristics = explode(',', $row["characteristics"]);
-
-        // Отримання специфікацій для категорії товару
+        /* Отримання специфікацій для категорії товару */
         $category = $row["category"];
         $specificationsResult = $db->read('categories', ['specifications'], ['category_name' => $category]);
         $specifications = explode(',', $specificationsResult[0]["specifications"]);
 
-        // Генерація HTML для відображення товару
+        /* Генерація HTML для відображення товару */
         echo "<div class='main-block'>
                 <div class='product-container'>
                     <img src='$imagePath' alt='$itemName' class='product-image'>
@@ -32,7 +29,7 @@ if ($id) {
                         <p>Ціна: $price</p>
                         <h3>Характеристики:</h3>
                         <ul>";
-        // Відображення характеристик товару
+        /* Відображення характеристик товару */
         foreach ($characteristics as $key => $value) {
             if ($value !== "-" && $value !== "") {
                 echo "<li>" . htmlspecialchars($specifications[$key]) . ": " . htmlspecialchars($value) . "</li>";
@@ -43,20 +40,18 @@ if ($id) {
                 </div>
             </div>";
 
-        // Додавання товару до сесії
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) { /* Додавання товару до сесії */
             $quantity = $_POST['quantity'];
 
             if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = []; // Ініціалізація масиву сесії, якщо він ще не існує
+                $_SESSION['cart'] = []; /* Ініціалізація масиву сесії, якщо він ще не існує */
             }
 
-            $currentInCart = $_SESSION['cart'][$id]['quantity'] ?? 0; // Кількість вже в кошику
-            $availableQuantity = $count - $currentInCart; // Доступна кількість для додавання
-
+            $currentInCart = $_SESSION['cart'][$id]['quantity'] ?? 0; /* Кількість наявних товарів в кошику */
+            $availableQuantity = $count - $currentInCart; /* Доступна кількість для додавання */
             if ($quantity > $availableQuantity) {
                 echo "<p>На жаль, ви намагаєтеся замовити $quantity одиниць, але в наявності лише $availableQuantity, враховуючи ваш кошик. Будь ласка, скоригуйте кількість.</p>";
-                $quantity = $availableQuantity; // Пропонуємо додати доступну кількість
+                $quantity = $availableQuantity; /* Пропонуємо додати доступну кількість */
             }
 
             if ($quantity > 0) {
@@ -67,8 +62,8 @@ if ($id) {
                         'id' => $id,
                         'product_name' => $itemName,
                         'quantity' => $quantity,
-                        'low_price' => $row['price'], // Мінімальна ціна з бази
-                        'realization_price' => $row['price']      // Початкова ціна користувача
+                        'low_price' => $row['price'], /* Мінімальна ціна з бази */
+                        'realization_price' => $row['price'] /* Початкова ціна користувача */
                     ];
                 }
                 echo "<p>Товар додано до кошика!</p>";
@@ -79,7 +74,7 @@ if ($id) {
         }
 
         if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) >= 1) {
-            // Форма для додавання товару до кошика
+            /* Форма для додавання товару до кошика */
             echo "<form method='POST'>
                     <label for='quantity'>Кількість:</label>
                     <input type='number' name='quantity' value='1' min='1' max='$count'>
