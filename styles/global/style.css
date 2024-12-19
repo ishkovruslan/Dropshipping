@@ -1,75 +1,49 @@
 body {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 1280px;
+    margin: 0 auto;
+    border: 0.25vw solid red;
 }
 
-.PC img {
+header div{
     display: flex;
-    margin-left: 230px;
-    margin-top: -100px;
-    width: 550px;
+    justify-content: space-between; /* Розподіляє кнопки з рівними проміжками */
+    align-items: center; /* Вирівнює кнопки по вертикалі */
+    flex-wrap: wrap; /* Дозволяє елементам переноситися на новий рядок, якщо бракує місця */
+    /* padding: 10px; */
+    border: 0.25vw solid yellow;
 }
 
-.PC a {
-    position: relative;
-    top: -20px;
-    left: 250px;
+header a {
     text-decoration: none;
+    padding: 0.25vw 0.5vw;
 }
 
-.left {
-    margin-top: -250px;
-}
-
-.line {
-    margin: -21px 6px 16px;
-}
-
-.line img {
-    margin-right: -160px;
-}
-
-.line a {
-    margin-top: -16px;
-    margin-left: -10px;
-    display: inline-block;
-    vertical-align: middle;
-    color: black;
-    text-decoration: none;
+header a:hover {
+    text-decoration: underline; /* Підкреслення при наведенні */
 }
 
 main {
-    display: flex;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+    border: 0.25vw solid green;
+    padding: 0.5vw;
 }
 
-.news-block {
-    margin-top: -25px;
-    width: 225px;
-    order: -1;
-    line-height: 0.5;
-}
-
-.news-block img {
-    width: 80%;
-}
-
-.news-text {
-    margin: -30px 0 25px 100px;
-    font-size: 20px;
-}
-
-.news-block .events img{
-    width: 80%;
+main img {
+    max-width: 100%;
     aspect-ratio: 16/9;
 }
 
-.news-block button{
-    margin-top: 20px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* Встановлюємо рівномірний розподіл ширини */
 }
 
-.main-block {
-    max-width: 550px;
-    order: -1;
+th,
+td {
+    text-align: center;
+    padding: 1%;
+    border: 1px solid black;
+    word-wrap: break-word;
+    /* Заворачуємо слова, якщо вони не поміщаються в колонці */
 }

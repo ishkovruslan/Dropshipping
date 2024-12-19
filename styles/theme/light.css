@@ -1,7 +1,4 @@
-body {
-    background-color: #ffffff;
-}
-
-main {
-    color: #2B6CAF;
+body, main, a {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }

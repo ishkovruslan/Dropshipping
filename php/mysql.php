@@ -1,7 +1,7 @@
 <?php
-if (!class_exists('Database')) {/* Запобіжник від подвійного використання */
+if (!class_exists('Database')) { /* Запобіжник від подвійного використання */
     class Database
-    {/* Клас взаємодії з БД */
+    { /* Клас взаємодії з БД */
         public $conn;
 
         public function __construct($servername, $username, $password, $dbname)
@@ -10,11 +10,11 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             if ($this->conn->connect_error) {
                 die("Connection failed: " . $this->conn->connect_error);
             }
-            $this->connection = $this->conn; // Додано для ініціалізації властивості connection
+            $this->connection = $this->conn;
         }
 
         public function read($tablename, $columns, $conditions = [])
-        {/* Читання за певних умов, в більшості випадків по рядках */
+        { /* Читання за певних умов, в більшості випадків по рядках */
             $columnString = implode(',', $columns);
             $sql = "SELECT $columnString FROM $tablename";
             if (!empty($conditions)) {
@@ -24,9 +24,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 }
                 $sql .= " WHERE " . implode(' AND ', $conditionStrings);
             }
-
             $stmt = $this->conn->prepare($sql);
-
             if (!empty($conditions)) {
                 $types = str_repeat("s", count($conditions));
                 $stmt->bind_param($types, ...array_values($conditions));
@@ -43,7 +41,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function readAll($tablename)
-        {/* Читання всієї таблиці */
+        { /* Читання всієї таблиці */
             $sql = "SELECT * FROM $tablename";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -58,15 +56,21 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function readWithSort($tablename, $columns, $conditions = [], $orderBy = [])
-        {/* Читання з сортуванням */
+        { /* Читання з сортуванням */
             $columnString = implode(',', $columns);
             $sql = "SELECT $columnString FROM $tablename";
+            $conditionStrings = [];
+            $params = [];
             if (!empty($conditions)) {
-                $conditionStrings = [];
                 foreach ($conditions as $column => $value) {
-                    $conditionStrings[] = strpos($column, '>=') !== false || strpos($column, '<=') !== false ? "$column ?" : "$column = ?";
+                    if (stripos($column, 'LIKE') !== false || stripos($column, '>=') !== false || stripos($column, '<=') !== false) {
+                        $conditionStrings[] = "$column ?";
+                    } else {
+                        $conditionStrings[] = "$column = ?";
+                    }
+                    $params[] = $value;
                 }
-                $sql .= " WHERE " . implode(' AND ', $conditionStrings);
+                $sql .= " WHERE " . implode(" AND ", $conditionStrings);
             }
             if (!empty($orderBy)) {
                 $orderStrings = [];
@@ -76,23 +80,24 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 $sql .= " ORDER BY " . implode(', ', $orderStrings);
             }
             $stmt = $this->conn->prepare($sql);
-            if (!empty($conditions)) {
-                $types = str_repeat("s", count($conditions));
-                $stmt->bind_param($types, ...array_values($conditions));
+            if (!empty($params)) {
+                $types = str_repeat("s", count($params));
+                $stmt->bind_param($types, ...$params);
             }
             $stmt->execute();
             $result = $stmt->get_result();
             $data = [];
-            if ($result->num_rows > 0) {
+            if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $data[] = $row;
                 }
             }
+
             return $data;
         }
 
         public function update($table, $data, $conditions)
-        {/* Оновлення запису */
+        { /* Оновлення запису */
             $setStrings = [];
             $conditionStrings = [];
             $values = [];
@@ -105,9 +110,9 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 $values[] = $value;
             }
             $sql = "UPDATE $table SET " . implode(', ', $setStrings) . " WHERE " . implode(' AND ', $conditionStrings);
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
-                die("Error preparing statement: " . $this->connection->error);
+                die("Error preparing statement: " . $this->conn->error);
             }
             $types = str_repeat("s", count($values));
             $stmt->bind_param($types, ...$values);
@@ -118,7 +123,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function write($table, $columns, $values, $types)
-        {/* Запис інформації */
+        { /* Запис інформації */
             $columns_str = implode(", ", $columns);
             $placeholders = implode(", ", array_fill(0, count($values), '?'));
             $sql = "INSERT INTO $table ($columns_str) VALUES ($placeholders)";
@@ -134,7 +139,7 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
         }
 
         public function remove($table, $columns, $values)
-        {/* Видалення запису */
+        { /* Видалення запису */
             $conditions = [];
             $types = '';
             foreach ($columns as $column) {
@@ -142,9 +147,9 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
                 $types .= is_int($values[array_search($column, $columns)]) ? 'i' : 's';
             }
             $sql = "DELETE FROM $table WHERE " . implode(' AND ', $conditions);
-            $stmt = $this->connection->prepare($sql);
+            $stmt = $this->conn->prepare($sql);
             if ($stmt === false) {
-                throw new mysqli_sql_exception($this->connection->error);
+                throw new mysqli_sql_exception($this->conn->error);
             }
             $stmt->bind_param($types, ...$values);
             $stmt->execute();
@@ -153,13 +158,161 @@ if (!class_exists('Database')) {/* Запобіжник від подвійно�
             }
             $stmt->close();
         }
+
+        public function searchLike($tablename, $columns, $searchColumn, $searchValue, $limit = 10)
+        { /* Пошук схожих записів */
+            $columnString = implode(',', $columns);
+            $sql = "SELECT $columnString FROM $tablename WHERE $searchColumn LIKE ? LIMIT ?";
+            $stmt = $this->conn->prepare($sql);
+            if ($stmt === false) {
+                die("Error preparing statement: " . $this->conn->error);
+            }
+            $searchValue = "%" . $searchValue . "%";
+            $stmt->bind_param('si', $searchValue, $limit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = [];
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+            $stmt->close();
+            return $data;
+        }
+
+        public function readMessagesForRole($currentUser, $targetUser, $userLevel)
+        { /* Пошук повідомлень з врахуванням ролі */
+            $isAdmin = $userLevel >= 2;
+            if ($isAdmin) {
+                $sql = "SELECT 
+                    CASE WHEN sender = 'administrator' THEN 'administrator' ELSE sender END AS sender,
+                    CASE WHEN receiver = 'administrator' THEN 'administrator' ELSE receiver END AS receiver,
+                    message, 
+                    source_time 
+                FROM messages 
+                WHERE receiver = 'administrator' OR sender = 'administrator' 
+                ORDER BY source_time ASC";
+                $stmt = $this->conn->prepare($sql);
+            } else {
+                $sql = "SELECT sender, receiver, message, source_time 
+                FROM messages 
+                WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) 
+                ORDER BY source_time ASC";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $messages = [];
+            while ($row = $result->fetch_assoc()) {
+                $messages[] = $row;
+            }
+            return $messages;
+        }
+
+        public function getUserRegistrationTime($login)
+        { /* Отримання часу реєстрації користувача */
+            $sql = "SELECT registration_time FROM userlist WHERE login = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $userData = $result->fetch_assoc();
+            return $userData['registration_time'] ?? 0;
+        }
+
+        public function getMessagesForAdmin()
+        { /* Повідомлення від адміністраторів */
+            $queryAdmins = "SELECT login FROM userlist WHERE role = 'administrator'";
+            $resultAdmins = $this->conn->query($queryAdmins);
+            if (!$resultAdmins) {
+                throw new Exception("Помилка отримання списку адміністраторів: " . $this->conn->error);
+            }
+            $adminLogins = $resultAdmins->fetch_all(MYSQLI_ASSOC);
+            $adminLoginsArray = array_map(function ($admin) {
+                return $admin['login'];
+            }, $adminLogins);
+            $placeholders = implode(',', array_fill(0, count($adminLoginsArray), '?'));
+            $query = "
+                        SELECT 
+                            m.sender AS login,
+                            MAX(m.message) AS message, -- Вибір останнього повідомлення
+                            MAX(m.source_time) AS last_time
+                        FROM messages m
+                        WHERE m.sender NOT IN ($placeholders) -- Виключення адміністраторів
+                        GROUP BY m.sender
+                        ORDER BY last_time DESC
+                    ";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                throw new Exception("Помилка підготовки запиту: " . $this->conn->error);
+            }
+            $stmt->bind_param(str_repeat('s', count($adminLoginsArray)), ...$adminLoginsArray);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function saveMessage($sender, $receiver, $message, $time)
+        { /* Збереження повідомлення */
+            $adminAlias = 'administrator';
+            require_once('mysql.php');
+            if ($this->isAdmin($sender)) {
+                $sender = $adminAlias;
+            }
+            if ($this->isAdmin($receiver)) {
+                $receiver = $adminAlias;
+            }
+
+            $query = "
+                        INSERT INTO messages (sender, receiver, message, source_time)
+                        VALUES (?, ?, ?, ?)
+                    ";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                throw new Exception("Помилка підготовки запиту: " . $this->conn->error);
+            }
+            if (empty($sender) || empty($receiver)) {
+                throw new Exception("Відправник або отримувач не вказаний.");
+            }
+            $stmt->bind_param("sssi", $sender, $receiver, $message, $time);
+            return $stmt->execute();
+        }
+
+        private function isAdmin($login)
+        { /* Перевірка ролі */
+            $sql = "SELECT role FROM userlist WHERE login = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $userData = $result->fetch_assoc();
+            return isset($userData['role']) && $userData['role'] === 'administrator';
+        }
     }
 
     $servername = "localhost:3306";
     $username = "root";
     $password = "Kharkiv2024";
-    $dbname = "courseproject";
+    $dbname = "bacalavr";
 
     $db = new Database($servername, $username, $password, $dbname);
 }
+function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult)
+{ /* Логування */
+    $sourceTime = round(microtime(true) * 1000);
+    $columns = ['operation', 'login', 'source_ip', 'source_type', 'source_result', 'source_time'];
+    $values = [$operation, $login, $sourceIp, $sourceType, $sourceResult, $sourceTime];
+    $types = 'ssssss';
+
+    $db->write('log', $columns, $values, $types);
+}
+
+$table = 'log';
+$columns = ['*'];
+
+$filter = $_GET['filter'] ?? null;
+$conditions = $filter ? ['login' => $filter] : ['login'];
+$logs = $db->read($table, $columns, $conditions);
 ?>
