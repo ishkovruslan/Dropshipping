@@ -3,11 +3,11 @@ require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(1); /* Перевірка рівня */
 
 if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) { /* Доступ має лише основний ip */
-    echo '<p style="color: red;">Зміна паролю доступна лише з вашої найчастішої IP-адреси.</p>';
+    echo '<p style="color: red;">Сторінка доступна лише з вашої найчастішої IP-адреси.</p>';
     exit;
 }
 
-$key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
+$key = $remoteAccess->manageRemoteAccess("WEB", $_SESSION['login']);
 ?>
 
 <h1>Керування обліковим записом</h1>

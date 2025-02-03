@@ -25,7 +25,7 @@ $messages = $db->readMessagesForRole($currentUser, $targetUser, $userLevel);
 foreach ($messages as &$message) {
     $keyOwner = $message['receiver'] === 'administrator' ? $message['sender'] : $message['receiver'];
     $key = getEncryptionKey($db, $message['sender'], $keyOwner);
-    $key = generateXORKey($key, $message['source_time']);
+    $key = XORKey($key, $message['source_time']);
     $message['message'] = decryptMessage($message['message'], $key);
 }
 unset($message);

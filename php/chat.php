@@ -14,7 +14,7 @@ function getEncryptionKey($db, $sender, $receiver)
     return $db->getUserRegistrationTime($user);
 }
 
-function generateXORKey($registrationTime, $timestamp)
+function XORKey($registrationTime, $timestamp)
 { /* Отримуємо необхідний ключ */
     return $registrationTime ^ $timestamp;
 }
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
     $targetUser = $_GET['user'] ?? "administrator";
 
     $key = getEncryptionKey($db, $currentUser, $targetUser);
-    $key = generateXORKey($key, $sourceTime);
+    $key = XORKey($key, $sourceTime);
     $encryptedMessage = encryptMessage($message, $key);
 
     $db->saveMessage($currentUser, $targetUser, $encryptedMessage, $sourceTime);

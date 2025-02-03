@@ -106,7 +106,7 @@ class AccessControl
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
             if (strtotime($blockDate) >= time()) {
-                return true; /* Адресу заблоковано */
+                return true; /* Логін заблоковано */
             }
         }
 
@@ -274,10 +274,16 @@ class RemoteAccess
     }
 
 
-    public function getUserData($login)
+    public function getUserData($type, $login)
     { /* Інформація про користувача */
         $conditions = ['login' => $login];
-        logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Перегляд ключа користувача ' . $login);
+        if ($type == "WEB") {
+            logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Перегляд ключа користувача ' . $login);
+        } else if ($type == "API") {
+            logAction($this->db, 'Ключ', $login, $_SERVER['REMOTE_ADDR'], 'API', 'Перегляд ключа користувача ' . $login);
+        } else {
+            require_once('autorun/blacklist.php');
+        }
         return $this->db->read('userlist', ['registration_time', 'unique_key'], $conditions);
     }
 
@@ -286,9 +292,9 @@ class RemoteAccess
         return $key1 ^ $key2;
     }
 
-    public function manageRemoteAccess($login)
+    public function manageRemoteAccess($type, $login)
     { /* Ключ для API */
-        $userData = $this->getUserData($login);
+        $userData = $this->getUserData($type, $login);
 
         if (isset($userData[0]['registration_time'])) {
             $registrationTime = (int) $userData[0]['registration_time'];
