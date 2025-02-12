@@ -91,11 +91,11 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
                 <p>
                     <a href="messages.php">Зв'язок з користувачами</a>
                 </p>
-                <p>
+                <!-- <p>
                     <?php $hostname = gethostname(); /* Отримуємо ім'я хоста */
                     $local_ip = gethostbyname($hostname); /* Отримуємо IP-адресу за ім'ям хоста */
-                    echo $local_ip; ?> <!-- Вивід адреси сервера для адміністраторів -->
-                </p>
+                    echo $local_ip; /* Вивід адреси сервера для адміністраторів */ ?> 
+                </p> -->
             </div>
         <?php } ?>
     </header>

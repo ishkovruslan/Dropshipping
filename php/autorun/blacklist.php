@@ -1,16 +1,28 @@
 <?php
+// Отримуємо параметр типу
+if (defined('SOURCE_TYPE')) {
+    $sourceType = SOURCE_TYPE;
+} elseif (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
+    $sourceType = 'API';
+} else {
+    $sourceType = 'WEB';
+}
+
+// Встановлюємо поріг блокування залежно від типу: 60 для API, 5 для WEB
+$threshold = ($sourceType === 'API') ? 60 : 5;
+
 // Отримуємо поточний час в мілісекундах
 $currentTime = round(microtime(true) * 1000);
 $oneMinuteAgo = $currentTime - 60000;
 
-// Читаємо логи лише для source_type 'WEB'
+// Читаємо логи для заданого source_type
 $recentLogs = $db->readWithSort(
     'log',
     ['login', 'source_ip'],
     [
         'source_time >=' => $oneMinuteAgo,
         'source_time <=' => $currentTime,
-        'source_type'    => 'WEB'
+        'source_type'    => $sourceType
     ]
 );
 
@@ -19,24 +31,27 @@ $ipCounts = [];
 
 // Рахуємо кількість записів для кожного логіну та IP
 foreach ($recentLogs as $log) {
+    // Лічильник для логіну
     if (!isset($loginCounts[$log['login']])) {
         $loginCounts[$log['login']] = 0;
     }
     $loginCounts[$log['login']]++;
 
+    // Лічильник для IP
     if (!isset($ipCounts[$log['source_ip']])) {
         $ipCounts[$log['source_ip']] = 0;
     }
     $ipCounts[$log['source_ip']]++;
 }
 
-// Якщо кількість записів перевищує 5, додаємо до списку блокувань
-$loginsToBlock = array_keys(array_filter($loginCounts, function ($count) {
-    return $count > 5;
+// Якщо кількість записів перевищує встановлений поріг,
+// додаємо логіни та IP до списку блокувань
+$loginsToBlock = array_keys(array_filter($loginCounts, function ($count) use ($threshold) {
+    return $count > $threshold;
 }));
 
-$ipsToBlock = array_keys(array_filter($ipCounts, function ($count) {
-    return $count > 5;
+$ipsToBlock = array_keys(array_filter($ipCounts, function ($count) use ($threshold) {
+    return $count > $threshold;
 }));
 
 // Якщо один з параметрів вже знаходиться у списку для блокування,
@@ -77,6 +92,7 @@ foreach ($loginsToBlock as $login) {
             ['login', $login, $date],
             'sss'
         );
+        if ($source_type == "API") {$remoteAccess->changeKey("API", $login);}
     }
 }
 

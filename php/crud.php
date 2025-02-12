@@ -225,10 +225,10 @@ function handleUserPostRequest($db)
             $new_role = $_POST['new_role'];
             $user->changeRole($new_role);
             if ($new_role === 'user') {
-                $remoteAccess->setUniqueKey($login, 0);
+                $remoteAccess->setUniqueKey("WEB", $login, 0);
             }
         } elseif ($_POST['new_role'] === 'changekey') {
-            $remoteAccess->setUniqueKey($login, 0);
+            $remoteAccess->setUniqueKey("WEB", $login, 0);
         } elseif (isset($_POST['delete_user'])) {
             $user->deleteUser();
             $userList->loadUsersFromDB();

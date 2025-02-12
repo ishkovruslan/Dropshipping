@@ -91,9 +91,10 @@ class AccessControl
 
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
-            if (strtotime($blockDate) >= time()) {
+            if (strtotime($blockDate . ' 23:59:59') >= time()) {
                 return true; /* Логін заблоковано */
             }
+
         }
 
         /* Перевірка блокування за IP-адресою */
@@ -105,9 +106,10 @@ class AccessControl
 
         if (!empty($result)) {
             $blockDate = $result[0]['date'];
-            if (strtotime($blockDate) >= time()) {
+            if (strtotime($blockDate . ' 23:59:59') >= time()) {
                 return true; /* Логін заблоковано */
             }
+
         }
 
         return false; /* Блокувань немає */
@@ -264,13 +266,17 @@ class RemoteAccess
         return random_int(0, PHP_INT_MAX);
     }
 
-    public function setUniqueKey($login, $key)
+    public function setUniqueKey($type, $login, $key)
     { /* Оновлення унікального ключа */
         $conditions = ['login' => $login];
         $data = ['unique_key' => $key];
 
         $this->db->update('userlist', $data, $conditions, 'i');
-        logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], 'WEB', 'Користувач ' . $login . ' отримав новий ключ');
+        if ($type == "API") {
+            logAction($this->db, 'Ключ', $login, $_SERVER['REMOTE_ADDR'], $type, 'Користувач ' . $login . ' отримав новий ключ');
+        } else {
+            logAction($this->db, 'Ключ', $_SESSION['login'], $_SERVER['REMOTE_ADDR'], $type, 'Користувач ' . $login . ' отримав новий ключ');
+        }
     }
 
 
@@ -301,12 +307,29 @@ class RemoteAccess
             $uniqueKey = $userData[0]['unique_key'];
             if (isset($_POST['generate_key'])) {
                 $newKey = $this->generateUniqueKey();
-                $this->setUniqueKey($login, $newKey);
+                $this->setUniqueKey($type, $login, $newKey);
                 $uniqueKey = $newKey;
             } elseif ($uniqueKey == 0) {
                 return "Ключ ще не згенеровано.";
             }
             return $this->xorKeys($registrationTime, (int) $uniqueKey);
+        }
+        return "Помилка: дані користувача не знайдено!";
+    }
+
+    public function changeKey($type, $login)
+    {
+        // Отримуємо дані користувача
+        $userData = $this->getUserData($type, $login);
+
+        if (isset($userData[0]['registration_time'])) {
+            $registrationTime = (int) $userData[0]['registration_time'];
+            // Генеруємо новий унікальний ключ
+            $newUniqueKey = $this->generateUniqueKey();
+            // Зберігаємо новий ключ для користувача
+            $this->setUniqueKey($type, $login, $newUniqueKey);
+            // Повертаємо "повний" ключ (з використанням xor з часом реєстрації)
+            return $this->xorKeys($registrationTime, (int) $newUniqueKey);
         }
         return "Помилка: дані користувача не знайдено!";
     }
