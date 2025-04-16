@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-require_once 'php/server.php';
+require_once 'php/api.php';
+require_once 'php/info.php';
 define('SOURCE_TYPE', 'API');
 require_once 'php/autorun/blacklist.php';
-
 $input = json_decode(file_get_contents('php://input'), true);
 
 $login = $input['login'] ?? '';
@@ -32,6 +32,17 @@ $decryptedTime = (int) decrypt($encryptedTime, $key);
 $microtime = microtime(true);
 $currentTime = (int) ($microtime * 1e9);
 
+/* http_response_code(200);
+echo json_encode([
+    'new_key' => $key,
+    'decryptedQuery' => $decryptedQuery,
+    'decryptedTime' => $decryptedTime,
+    'microtime' => $microtime,
+    'currentTime' => $currentTime,
+    'delta' => ($decryptedTime < $currentTime ? $currentTime - $decryptedTime : $decryptedTime - $currentTime) / 1e9
+]);
+exit; */
+
 if (abs($currentTime - $decryptedTime) > 2.5 * 1000000000) { // Секунди * 9 знаків
     http_response_code(403);
     echo json_encode(['error' => 'Access denied']);
@@ -39,7 +50,7 @@ if (abs($currentTime - $decryptedTime) > 2.5 * 1000000000) { // Секунди *
 }
 
 // Розшифровуємо запит (параметр encrypted_query шифрувався часом, який клієнт передавав)
-$decryptedQuery = json_decode(decrypt($encryptedQuery, $key * $decryptedTime), true);
+$decryptedQuery = json_decode(decrypt($encryptedQuery, $key), true);
 
 if (!isset($decryptedQuery['operation'])) {
     http_response_code(400);
@@ -51,13 +62,13 @@ $operation = $decryptedQuery['operation'];
 $result = operation($operation, $decryptedQuery);
 
 // Шифруємо результат за допомогою "старого" ключа
-$encryptedResult = encrypt(json_encode($result), $key * $decryptedTime);
+$encryptedResult = encrypt(json_encode($result), $key);
 
 // Генеруємо новий ключ для користувача
 $newKey = $remoteAccess->changeKey("API", $login);
 
 // Перетворюємо новий ключ в рядок і шифруємо його за допомогою "старого" ключа
-$encryptedNewKey = rtrim(encrypt((string)$newKey, $key * $decryptedTime), '=');
+$encryptedNewKey = rtrim(encrypt((string)$newKey, $key), '=');
 
 http_response_code(200);
 echo json_encode([

@@ -22,56 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if (isset($_POST['submit_order'])) { /* Обробка замовлення */
-        $requiredFields = ['full_name', 'phone', 'email', 'post_type', 'city', 'post_number'];
-        foreach ($requiredFields as $field) {
-            if (empty($_POST[$field])) {
-                exit("Помилка: Поле $field є обов'язковим.");
-            }
-        }
-
-        $consumerData = [
-            'full_name' => $_POST['full_name'],
-            'phone' => $_POST['phone'],
-            'email' => $_POST['email'],
-            'post' => $_POST['post_type'],
-            'city' => $_POST['city'],
-            'post_number' => $_POST['post_number']
-        ];
-
-        /* Запис нових кінцевих користувачів в таблицю */
-        $existingConsumer = $db->read('consumer', ['*'], ['full_name' => $consumerData['full_name']]);
-        if ($existingConsumer) {
-            $db->update('consumer', $consumerData, ['id' => $existingConsumer[0]['id']]);
-        } else {
-            $db->write('consumer', array_keys($consumerData), array_values($consumerData), 'ssssss');
-        }
-
-        /* Формування рядка замовлення для запису в таблицю */
-        $orderData = [
-            'login' => $_SESSION['login'],
-            'record_time' => (int) (microtime(true) * 1000),
-            'products_count' => count($_SESSION['cart']),
-            'products_list' => implode(",", array_keys($_SESSION['cart'])),
-            'products_number' => implode(",", array_column($_SESSION['cart'], 'quantity')),
-            'products_realization' => implode(",", array_column($_SESSION['cart'], 'realization_price')),
-            'products_price' => implode(",", array_column($_SESSION['cart'], 'low_price'))
-        ] + $consumerData;
-
-        /* Передача рядка замовлення в таблицю */
-        if (!$db->write('orders', array_keys($orderData), array_values($orderData), 'sssssssssssss')) {
-            foreach ($_SESSION['cart'] as $id => $item) {
-                $result = $db->read('products', ['count'], ['id' => $id]);
-                if (!empty($result)) { /* Оновлення кількості товарів */
-                    $newCount = max(0, (int) $result[0]['count'] - $item['quantity']);
-                    $db->update('products', ['count' => $newCount], ['id' => $id]);
-                }
-            }
-            unset($_SESSION['cart']); /* Скидання кошика */
-            header("location: ../index.php"); /* Перехід на головну сторінку */
-        } else {
-            exit('Помилка: Не вдалося додати замовлення. Зверніться до адміністратора');
-        }
+    if (isset($_POST['submit_order'])) {
+        require_once('../php/cart.php'); // Підключення файлу з функцією оформлення замовлення
+        createOrder($db); // Виклик функції оформлення замовлення
     }
 }
 
