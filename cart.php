@@ -33,17 +33,6 @@ $decryptedTime = (int) decrypt($encryptedTime, $key);
 $microtime = microtime(true);
 $currentTime = (int) ($microtime * 1e9);
 
-/* http_response_code(200);
-echo json_encode([
-    'new_key' => $key,
-    'decryptedQuery' => $decryptedQuery,
-    'decryptedTime' => $decryptedTime,
-    'microtime' => $microtime,
-    'currentTime' => $currentTime,
-    'delta' => ($decryptedTime < $currentTime ? $currentTime - $decryptedTime : $decryptedTime - $currentTime) / 1e9
-]);
-exit; */
-
 // Перевірка валідності часу запиту (поріг 2.5 секунд)
 if (abs($currentTime - $decryptedTime) > 2.5 * 1e9) {
     http_response_code(403);
@@ -91,6 +80,9 @@ echo json_encode([
     'new_key' => $encryptedNewKey
 ]);
 
+/**
+ * Функція оформлення замовлення через API (адаптовано для декількох товарів)
+ */
 function createOrderAPI($db, $orderData) {
     require_once 'php/mysql.php'; /* Підключення до БД */
     // Перевірка обов'язкових полів
@@ -111,7 +103,7 @@ function createOrderAPI($db, $orderData) {
         'post_number' => $orderData['post_number']
     ];
 
-    // Перевірка наявності споживача в БД за унікальним іменем (альтернативно можна використовувати email)
+    // Перевірка наявності споживача в БД за унікальним ім'ям (можна використовувати і email)
     $existingConsumer = $db->read('consumer', ['*'], ['full_name' => $consumerData['full_name']]);
     if ($existingConsumer) {
         $db->update('consumer', $consumerData, ['id' => $existingConsumer[0]['id']]);
@@ -119,15 +111,27 @@ function createOrderAPI($db, $orderData) {
         $db->write('consumer', array_keys($consumerData), array_values($consumerData), 'ssssss');
     }
 
-    // Обробка даних замовлення
-    // Очікується, що дані кошика передаються у вигляді асоціативного масиву
+    // Обробка даних замовлення для декількох товарів
     $cart = $orderData['cart'];
+    // Якщо клієнт передав поле productsCount, використовуємо його, інакше обчислюємо як кількість рядків у кошику
+    $productsCount = isset($orderData['productsCount']) ? (int)$orderData['productsCount'] : count($cart);
     $productIds = array_keys($cart);
-    $productsCount = count($cart);
     $productsList = implode(",", $productIds);
     $productsNumber = implode(",", array_map(function($item) { return $item['quantity']; }, $cart));
     $productsRealization = implode(",", array_map(function($item) { return $item['realization_price']; }, $cart));
-    $productsPrice = implode(",", array_map(function($item) { return $item['low_price']; }, $cart));
+    
+    // Отримання актуальної мінімальної ціни для кожного товару з бази даних
+    $prices = [];
+    foreach ($productIds as $pid) {
+        $result = $db->read('products', ['price'], ['id' => $pid]);
+        if (!empty($result)) {
+            $prices[] = $result[0]['price'];
+        } else {
+            // Якщо запис не знайдено, використовуємо значення з кошика як резервне
+            $prices[] = $cart[$pid]['low_price'];
+        }
+    }
+    $productsPrice = implode(",", $prices);
 
     // Формування масиву даних замовлення
     $orderDataArray = [
@@ -146,18 +150,20 @@ function createOrderAPI($db, $orderData) {
         'post_number'          => $consumerData['post_number']
     ];
 
-    // Запис замовлення в таблицю orders. Рядок форматування типів (наприклад, 'sssssssssssss') залежить від структури таблиці.
-    if ($db->write('orders', array_keys($orderDataArray), array_values($orderDataArray), 'sssssssssssss')) {
-        return ['error' => 'Помилка: Не вдалося додати замовлення. Зверніться до адміністратора'];
-    }
-
-    // Оновлення залишків товарів у БД
-    foreach ($cart as $productId => $item) {
-        $result = $db->read('products', ['count'], ['id' => $productId]);
-        if (!empty($result)) {
-            $newCount = max(0, (int)$result[0]['count'] - $item['quantity']);
-            $db->update('products', ['count' => $newCount], ['id' => $productId]);
+    // Запис замовлення в таблицю orders. Рядок форматування типів ('sssssssssssss') повинен відповідати структурі таблиці.
+    if (!$db->write('orders', array_keys($orderDataArray), array_values($orderDataArray), 'sssssssssssss')) {
+        // Оновлення залишків товарів у БД
+        foreach ($cart as $productId => $item) {
+            $result = $db->read('products', ['count'], ['id' => $productId]);
+            if (!empty($result)) {
+                $newCount = max(0, (int)$result[0]['count'] - $item['quantity']);
+                $db->update('products', ['count' => $newCount], ['id' => $productId]);
+            }
         }
+        unset($_SESSION['cart']); // Очищення кошика
+        header("location: ../index.php"); // Перехід на головну сторінку
+    } else {
+        return ['error' => 'Помилка: Не вдалося додати замовлення. Зверніться до адміністратора'];
     }
 
     return ['success' => true, 'message' => 'Замовлення успішно оформлено'];
