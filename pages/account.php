@@ -44,4 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         echo '<p style="color: red;">' . $result['message'] . '</p>';
     }
 }
-require_once('../php/footer.php'); ?>
+require_once('footer.php'); ?>

@@ -45,5 +45,5 @@ if (empty($newsData)) {
     }
 }
 
-require_once('../php/footer.php');
+require_once('footer.php');
 ?>

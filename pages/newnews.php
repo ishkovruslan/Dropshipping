@@ -4,7 +4,7 @@ $accessControl->checkAccess(2); /* Доступ лише у адміністра
 ?>
 
 <h1>Створити нову новину</h1>
-<form action="../php/crud.php" method="post" enctype="multipart/form-data">
+<form action="../functions/crud.php" method="post" enctype="multipart/form-data">
     <label for="news_title">Назва новини:</label><br>
     <input type="text" id="news_title" name="news_title"><br><br>
     <label for="uploadPath">Зображення новини з співвідношенням 16:9:</label><br>
@@ -17,4 +17,4 @@ $accessControl->checkAccess(2); /* Доступ лише у адміністра
     <input type="date" id="end_date" name="end_date" min="0001-01-01" max="9999-12-31" required><br><br>
     <button type="submit" name="create_news">Створити новину</button>
 </form>
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php'); ?>

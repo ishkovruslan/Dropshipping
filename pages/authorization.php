@@ -20,4 +20,4 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <input type="submit" name="login_submit" value="Авторизація">
     </form>
 <?php } ?>
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php'); ?>

@@ -20,4 +20,4 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <input type="submit" name="register_submit" value="Зареєструватись">
     </form>
 <?php }
-require_once('../php/footer.php'); ?>
+require_once('footer.php'); ?>

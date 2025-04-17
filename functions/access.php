@@ -42,7 +42,7 @@ class AccessControl
 
         $currentIp = $_SERVER['REMOTE_ADDR'];
         if ($this->isBlocked($_SESSION['login'], $currentIp)) {
-            header("Location: ../php/logout.php");
+            header("Location: ../functions/logout.php");
             exit;
         }
 
@@ -131,7 +131,7 @@ class Authentication
 
         /* Перевірка блокування */
         if ($this->isBlocked($login, $currentIp)) {
-            header("Location: ../php/logout.php");
+            header("Location: ../functions/logout.php");
             exit;
         }
 
@@ -169,7 +169,7 @@ class Authentication
 
         /* Перевірка блокування */
         if ($this->isBlocked($login, $currentIp)) {
-            header("Location: ../php/logout.php");
+            header("Location: ../functions/logout.php");
             exit;
         }
 

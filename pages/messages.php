@@ -29,4 +29,4 @@ $messages = $db->getMessagesForAdmin(); /* Повідомлення від ад�
         </tbody>
     </table>
 </div>
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php'); ?>

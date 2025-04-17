@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['submit_order'])) {
-        require_once('../php/cart.php'); // Підключення файлу з функцією оформлення замовлення
+        require_once('../functions/cart.php'); // Підключення файлу з функцією оформлення замовлення
         createOrder($db); // Виклик функції оформлення замовлення
     }
 }
@@ -106,5 +106,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 
 <?php
-require_once('../php/footer.php');
+require_once('footer.php');
 ?>

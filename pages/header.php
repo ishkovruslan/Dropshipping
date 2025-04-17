@@ -1,6 +1,6 @@
 <?php
 session_start(); /* Початок сессії */
-require_once('../php/access.php'); /* Модуль безпеки */
+require_once('../functions/access.php'); /* Модуль безпеки */
 $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація про поточну сторінку */
 ?>
 
@@ -12,7 +12,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бакалаврська робота</title>
     <link rel="stylesheet" type="text/css" href="../styles/global/style.css">
-    <?php require_once('../php/theme.php'); ?> <!-- Робота з темами -->
+    <?php require_once('../handler/theme.php'); ?> <!-- Робота з темами -->
     <!-- Автоматичні стилі з врахування назви сторінки -->
     <link rel="stylesheet" type="text/css" href="../styles/pages/<?= htmlspecialchars($current_page); ?>.css">
     <link rel="stylesheet" type="text/css" href="../styles/theme/<?= htmlspecialchars($theme); ?>.css">
@@ -56,7 +56,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
                     }
                 } ?>
                 <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
-                    <a href="../php/logout.php">Вийти</a>
+                    <a href="logout.php">Вийти</a>
                 </p>
             <?php } else { ?>
                 <!-- Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації -->

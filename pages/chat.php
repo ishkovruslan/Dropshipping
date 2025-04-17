@@ -1,6 +1,6 @@
 <?php
 require_once('header.php'); /* Навігаційне меню */
-require_once('../php/chat.php'); /* Функції для роботи чату */
+require_once('../functions/chat.php'); /* Функції для роботи чату */
 $accessControl->checkAccess(1); /* Спілкуватись можуть лише продавці та адміністратори */
 
 $currentUser = $_SESSION['login'] ?? null;
@@ -47,4 +47,4 @@ unset($message);
         <button type="submit">Відправити</button>
     </form>
 </div>
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php'); ?>

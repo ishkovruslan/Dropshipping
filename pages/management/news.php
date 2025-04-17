@@ -25,7 +25,7 @@
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeEditModal()">&times;</span>
-            <form id="editForm" method="post" action="../php/crud.php" enctype="multipart/form-data">
+            <form id="editForm" method="post" action="../functions/crud.php" enctype="multipart/form-data">
                 <input type="hidden" name="entity" value="news">
                 <input type="hidden" name="id" id="news_id">
                 <label for="uploadPath">Зображення:</label>
@@ -40,7 +40,7 @@
                 <input type="date" name="end_date" id="end_date" placeholder="Кінець">
                 <button type="submit">Зберегти</button>
             </form>
-            <form id="deleteNewsForm" method="post" action="../php/crud.php"
+            <form id="deleteNewsForm" method="post" action="../functions/crud.php"
                 onsubmit="return confirm('Ви впевнені, що хочете видалити цю новину?');" style="margin-top: 10px;">
                 <input type="hidden" name="entity" value="news">
                 <input type="hidden" name="id" id="delete_news_id">

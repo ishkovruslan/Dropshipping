@@ -6,6 +6,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     session_unset(); /* Видалення змінних сесії */
     session_destroy(); /* Закриття сесії */
 }
-header("Location: ../pages/authorization.php"); /* Перенаправлення на сторінку авторизації */
+header("Location: authorization.php"); /* Перенаправлення на сторінку авторизації */
 exit;
 ?>

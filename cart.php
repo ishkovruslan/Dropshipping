@@ -2,9 +2,9 @@
 header('Content-Type: application/json');
 
 // Підключення бібліотек API та обробки замовлень
-require_once 'php/api.php';
+require_once 'functions/api.php';
 define('SOURCE_TYPE', 'API');
-require_once 'php/autorun/blacklist.php';
+require_once 'autorun/blacklist.php';
 
 // Зчитування JSON-вхідних даних
 $input = json_decode(file_get_contents('php://input'), true);
@@ -84,7 +84,7 @@ echo json_encode([
  * Функція оформлення замовлення через API (адаптовано для декількох товарів)
  */
 function createOrderAPI($db, $orderData) {
-    require_once 'php/mysql.php'; /* Підключення до БД */
+    require_once 'functions/mysql.php'; /* Підключення до БД */
     // Перевірка обов'язкових полів
     $requiredFields = ['full_name', 'phone', 'email', 'post_type', 'city', 'post_number', 'cart'];
     foreach ($requiredFields as $field) {
@@ -160,8 +160,6 @@ function createOrderAPI($db, $orderData) {
                 $db->update('products', ['count' => $newCount], ['id' => $productId]);
             }
         }
-        unset($_SESSION['cart']); // Очищення кошика
-        header("location: ../index.php"); // Перехід на головну сторінку
     } else {
         return ['error' => 'Помилка: Не вдалося додати замовлення. Зверніться до адміністратора'];
     }

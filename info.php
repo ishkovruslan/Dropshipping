@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-require_once 'php/api.php';
-require_once 'php/info.php';
+require_once 'functions/api.php';
+require_once 'functions/info.php';
 define('SOURCE_TYPE', 'API');
-require_once 'php/autorun/blacklist.php';
+require_once 'autorun/blacklist.php';
 $input = json_decode(file_get_contents('php://input'), true);
 
 $login = $input['login'] ?? '';

@@ -1,15 +1,15 @@
 <?php
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
-require_once('../php/mysql.php'); /* Підключення до БД */
-require_once('../php/crud.php'); /* Модуль функцій */
+require_once('../functions/mysql.php'); /* Підключення до БД */
+require_once('../functions/crud.php'); /* Модуль функцій */
 
 $product = new Product($db);
 $categories = $product->getCategories();
 ?>
 
 <h1>Створення нового товару</h1>
-<form id="productForm" action="../php/crud.php" method="post" enctype="multipart/form-data">
+<form id="productForm" action="../functions/crud.php" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="category">Категорія:</label>
         <select name="category" id="category" required>
@@ -47,4 +47,4 @@ $categories = $product->getCategories();
     const categories = <?= json_encode($categories, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php'); ?>

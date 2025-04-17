@@ -65,5 +65,5 @@ if (!isset($_GET['state']) && !isset($_GET['search'])) {
     echo '</table>';
 }
 
-require_once('../php/footer.php'); // Нижня частина сайту
+require_once('footer.php'); // Нижня частина сайту
 ?>
