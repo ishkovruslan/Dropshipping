@@ -1,8 +1,6 @@
-<?php
+<?php /* Сторінка чатів */
 require_once('header.php'); /* Навігаційне меню */
-require_once('../functions/chat.php'); /* Функції для роботи чату */
 $accessControl->checkAccess(1); /* Спілкуватись можуть лише продавці та адміністратори */
-
 $currentUser = $_SESSION['login'] ?? null;
 $userLevel = $accessControl->getUserLevel($currentUser);
 
@@ -22,11 +20,13 @@ if ($userLevel < 2 && $targetUser !== 'administrator') {
 $messages = $db->readMessagesForRole($currentUser, $targetUser, $userLevel);
 
 /* Розшифрування повідомлень */
+require_once('../functions/crypto.php'); /* Функції для роботи чату */
+require_once('../functions/chat.php'); /* Функції для роботи чату */
 foreach ($messages as &$message) {
     $keyOwner = $message['receiver'] === 'administrator' ? $message['sender'] : $message['receiver'];
     $key = getEncryptionKey($db, $message['sender'], $keyOwner);
     $key = XORKey($key, $message['source_time']);
-    $message['message'] = decryptMessage($message['message'], $key);
+    $message['message'] = decrypt($message['message'], $key);
 }
 unset($message);
 ?>
@@ -47,4 +47,4 @@ unset($message);
         <button type="submit">Відправити</button>
     </form>
 </div>
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php');

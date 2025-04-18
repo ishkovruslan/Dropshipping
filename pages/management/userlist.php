@@ -6,7 +6,9 @@
             <th width="20%">Роль</th>
             <th width="40%">Керування користувачем</th>
         </tr>
-        <?php $userList = new UserList($db);
+        <?php
+        require_once('../class/userlist.php');
+        $userList = new UserList($db);
         $userList->loadUsersFromDB();
         $roles = ["user" => "Користувач", "seller" => "Продавець"];
         foreach ($userList->getUsers() as $user):

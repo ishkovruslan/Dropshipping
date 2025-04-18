@@ -8,4 +8,3 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 header("Location: authorization.php"); /* Перенаправлення на сторінку авторизації */
 exit;
-?>

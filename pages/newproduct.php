@@ -1,10 +1,10 @@
-<?php
+<?php /* Сторінка створення товарів */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 require_once('../functions/mysql.php'); /* Підключення до БД */
-require_once('../functions/crud.php'); /* Модуль функцій */
+require_once('../class/category.php'); /* Модуль функцій */
+require_once('../class/product.php'); /* Модуль функцій */
 
-$product = new Product($db);
 $categories = $product->getCategories();
 ?>
 
@@ -14,8 +14,8 @@ $categories = $product->getCategories();
         <label for="category">Категорія:</label>
         <select name="category" id="category" required>
             <option value="">Оберіть категорію</option>
-            <?php if (!empty($categories)) : ?>
-                <?php foreach ($categories as $row) : ?>
+            <?php if (!empty($categories)): ?>
+                <?php foreach ($categories as $row): ?>
                     <option value="<?= htmlspecialchars($row['category_name']) ?>">
                         <?= htmlspecialchars($row['category_name']) ?>
                     </option>
@@ -47,4 +47,4 @@ $categories = $product->getCategories();
     const categories = <?= json_encode($categories, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php');

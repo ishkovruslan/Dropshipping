@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка товару */
 require_once('header.php'); /* Навігаційне меню */
 require_once('../functions/mysql.php'); /* Підключення БД */
 
@@ -89,4 +89,3 @@ if ($id) { /* Виводимо інформації в разі наявност
 }
 
 require_once('footer.php');
-?>

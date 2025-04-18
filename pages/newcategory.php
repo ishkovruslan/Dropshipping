@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка створення категорій */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 ?>
@@ -11,4 +11,4 @@ $accessControl->checkAccess(2); /* Доступ лише у адміністра
     <textarea id="specifications" name="specifications" rows="4" cols="50"></textarea><br><br>
     <button type="submit" name="create_category">Створити категорію</button>
 </form>
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php');

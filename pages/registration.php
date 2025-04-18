@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка реєстрації */
 require_once('header.php'); /* Навігаційне меню */
 ?>
 
@@ -11,6 +11,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         echo "<p>" . htmlspecialchars($errorMessage) . "</p>";
     }
     echo "<p>Ви ще не авторизовані</p>";
+    require_once('../handler/authentication.php');
     ?> <!-- Форма реєстрації -->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="login">Логін:</label><br>
@@ -20,4 +21,4 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <input type="submit" name="register_submit" value="Зареєструватись">
     </form>
 <?php }
-require_once('footer.php'); ?>
+require_once('footer.php');

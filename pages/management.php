@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка керування */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 require_once('../functions/crud.php'); /* Необхідні функції */
@@ -35,4 +35,4 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) { ?> <!-- Якщо не
         require_once('management/products.php');
     }
 }
-require_once('footer.php'); ?>
+require_once('footer.php');

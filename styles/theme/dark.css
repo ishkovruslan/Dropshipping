@@ -1,5 +1,7 @@
 /* Стилі для теми "темна" */
-body, main, a {
+body,
+main,
+a {
     background-color: rgb(64, 64, 64);
     color: rgb(192, 192, 192);
 }

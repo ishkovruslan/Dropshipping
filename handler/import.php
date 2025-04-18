@@ -11,7 +11,7 @@ if ($conn->connect_error) { /* Перевірка з'єднання */
     die("Connection failed: " . $conn->connect_error);
 }
 
-function insertDataFromCSV($conn, $filename, $tablename) 
+function insertDataFromCSV($conn, $filename, $tablename)
 { /* Імпорт з .csv в БД */
     $countQuery = "SELECT COUNT(*) as count FROM $tablename";
     $result = $conn->query($countQuery);
@@ -42,7 +42,7 @@ function insertDataFromCSV($conn, $filename, $tablename)
             /* Парсинг замовлень */
             $login = $data[0];
             $time = $data[1];
-            $recordCount = (int)$data[2];
+            $recordCount = (int) $data[2];
             $group1 = implode(",", array_slice($data, 3, $recordCount));
             $group2 = implode(",", array_slice($data, 3 + $recordCount, $recordCount));
             $group3 = implode(",", array_slice($data, 3 + $recordCount * 2, $recordCount));
@@ -54,7 +54,7 @@ function insertDataFromCSV($conn, $filename, $tablename)
             $city = $data[7 + $recordCount * 4];
             $branch = $data[8 + $recordCount * 4];
             $id = $data[9 + $recordCount * 4];
-            
+
             /* Формування масиву */
             $data = [
                 $login,
@@ -127,4 +127,3 @@ foreach ($files as $file) {
 }
 /* Відправити на основну сторінку */
 header("Location: ../index.php");
-?>

@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка замовлень */
 require_once('header.php'); /* Навігаційне меню */
 
 /* Перевірка, чи є товари в кошику */
@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['submit_order'])) {
-        require_once('../functions/cart.php'); // Підключення файлу з функцією оформлення замовлення
-        createOrder($db); // Виклик функції оформлення замовлення
+        require_once('../functions/cart.php'); /* Підключення файлу з функцією оформлення замовлення */
+        createOrder($db); /* Виклик функції оформлення замовлення */
     }
 }
 
@@ -83,7 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <h3>Оформити замовлення</h3> <!-- Форма вводу кінцевого користувача -->
 <form method="POST" action="cart.php">
-    <label>Пошук споживача: <input type="text" id="searchConsumer" placeholder="Search by full name" /> <!-- Пошук за фрагментом ПІБ -->
+    <label>Пошук споживача: <input type="text" id="searchConsumer" placeholder="Search by full name" />
+        <!-- Пошук за фрагментом ПІБ -->
         <div id="searchResults"></div> <!-- Кінцеві користувачі, які мають такі фрагменти -->
         <datalist id="suggestions"></datalist>
         <label>ПІБ: <input type="text" id="full_name" name="full_name" required
@@ -107,4 +108,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php
 require_once('footer.php');
-?>

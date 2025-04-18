@@ -1,17 +1,15 @@
-<?php
+<?php /* Інформаційне API */
 header('Content-Type: application/json');
-
-require_once 'functions/api.php';
-require_once 'functions/info.php';
 define('SOURCE_TYPE', 'API');
-require_once 'autorun/blacklist.php';
 $input = json_decode(file_get_contents('php://input'), true);
-
 $login = $input['login'] ?? '';
 
-if($authentication->isBlocked($login, $_SERVER['REMOTE_ADDR'])){ 
-    // Блокування логіну шляхом зміни ключа
-    // Головна мета унеможливити брутфорс ключа
+require_once('functions/mysql.php'); /* Підключення до БД */
+require_once 'autorun/blacklist.php';
+require_once('class/authentication.php');
+if ($authentication->isBlocked($login, $_SERVER['REMOTE_ADDR'])) {
+    /* Блокування логіну шляхом зміни ключа */
+    /* Головна мета унеможливити брутфорс ключа */
     $newKey = $remoteAccess->changeKey("API", $login);
 }
 
@@ -24,10 +22,12 @@ if (!$login || !$encryptedTime || !$encryptedQuery) {
     exit;
 }
 
-// Отримуємо "старий" ключ для поточного запиту
+/* Отримуємо "старий" ключ для поточного запиту */
+require_once('class/remoteaccess.php');
 $key = $remoteAccess->manageRemoteAccess("API", $login);
 
-// Розшифровуємо час запиту
+/* Розшифровуємо час запиту */
+require_once 'functions/crypto.php';
 $decryptedTime = (int) decrypt($encryptedTime, $key);
 $microtime = microtime(true);
 $currentTime = (int) ($microtime * 1e9);
@@ -43,13 +43,13 @@ echo json_encode([
 ]);
 exit; */
 
-if (abs($currentTime - $decryptedTime) > 2.5 * 1000000000) { // Секунди * 9 знаків
+if (abs($currentTime - $decryptedTime) > 2.5 * 1000000000) {
     http_response_code(403);
     echo json_encode(['error' => 'Access denied']);
     exit;
 }
 
-// Розшифровуємо запит (параметр encrypted_query шифрувався часом, який клієнт передавав)
+/* Розшифровуємо запит (параметр encrypted_query шифрувався часом, який клієнт передавав) */
 $decryptedQuery = json_decode(decrypt($encryptedQuery, $key), true);
 
 if (!isset($decryptedQuery['operation'])) {
@@ -59,20 +59,20 @@ if (!isset($decryptedQuery['operation'])) {
 }
 
 $operation = $decryptedQuery['operation'];
+require_once 'functions/info.php';
 $result = operation($operation, $decryptedQuery);
 
-// Шифруємо результат за допомогою "старого" ключа
+/* Шифруємо результат за допомогою "старого" ключа */
 $encryptedResult = encrypt(json_encode($result), $key);
 
-// Генеруємо новий ключ для користувача
+/* Генеруємо новий ключ для користувача */
 $newKey = $remoteAccess->changeKey("API", $login);
 
-// Перетворюємо новий ключ в рядок і шифруємо його за допомогою "старого" ключа
-$encryptedNewKey = rtrim(encrypt((string)$newKey, $key), '=');
+/* Перетворюємо новий ключ в рядок і шифруємо його за допомогою "старого" ключа */
+$encryptedNewKey = rtrim(encrypt((string) $newKey, $key), '=');
 
 http_response_code(200);
 echo json_encode([
     'encrypted_result' => $encryptedResult,
     'new_key' => $encryptedNewKey
 ]);
-?>

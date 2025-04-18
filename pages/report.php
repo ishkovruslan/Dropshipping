@@ -1,7 +1,7 @@
-<?php
+<?php /* Сторінка звітів */
 require_once('header.php'); /* Меню навігації */
 $accessControl->checkAccess(1);
-require_once('..functions/order.php'); /* Необхідні функції */
+require_once('../functions/order.php'); /* Необхідні функції */
 ?>
 
 <div class="table-selection">
@@ -34,4 +34,3 @@ switch ($table) {
         break;
 }
 require_once('footer.php');
-?>

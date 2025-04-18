@@ -1,4 +1,4 @@
-<?php
+<?php /* Головна сторінка */
 require_once('header.php'); /* Навігаційне меню */
 $columns = ['uploadPath', 'news_title', 'news_description', 'start_date', 'end_date'];
 $newsData = array_unique($db->searchLike('news', $columns, 'news_title', ''), SORT_REGULAR);
@@ -24,7 +24,7 @@ $newsData = array_unique($db->searchLike('news', $columns, 'news_title', ''), SO
     </p>
 </div>
 
-<?php /* Діагностика: перевірка, чи є новини */
+<?php /* Вивід поточних новин */
 if (empty($newsData)) {
     echo "<p>Немає новин.</p>";
 } else {
@@ -46,4 +46,3 @@ if (empty($newsData)) {
 }
 
 require_once('footer.php');
-?>

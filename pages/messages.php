@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка повідомлень */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 $messages = $db->getMessagesForAdmin(); /* Повідомлення від адміністраторів */
@@ -29,4 +29,4 @@ $messages = $db->getMessagesForAdmin(); /* Повідомлення від ад�
         </tbody>
     </table>
 </div>
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php');

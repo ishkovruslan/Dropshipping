@@ -1,4 +1,4 @@
-<?php $accessControl->checkAccess(2); // Доступ лише у адміністраторів ?> <!-- Замовлення по користувачам -->
+<?php $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */ ?> <!-- Замовлення по користувачам -->
 <div class="orders">
     <h1>Замовлення за користувачем</h1>
     <form method="GET" action="">

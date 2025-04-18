@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => { /* Пошук по фра�
     searchInput.addEventListener('input', () => {
         const query = searchInput.value.trim();
         if (query.length > 2) {
-            fetch(`../../php/cart.php?action=search&query=${encodeURIComponent(query)}`)
+            fetch(`../../handler/cart.php?action=search&query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     resultsContainer.innerHTML = '';
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => { /* Пошук по фра�
     resultsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('result-item')) {
             const id = e.target.dataset.id;
-            fetch(`../../php/cart.php?action=details&id=${id}`)
+            fetch(`../../handler/cart.php?action=details&id=${id}`)
                 .then(response => response.json())
                 .then(data => {
                     document.querySelector('#full_name').value = data.full_name || '';
@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', () => { /* Пошук по фра�
                     document.querySelector('#post_type').value = data.post || '';
                     document.querySelector('#city').value = data.city || '';
                     document.querySelector('#post_number').value = data.post_number || '';
-                    
+
                     resultsContainer.innerHTML = '';
                 });
         }
-    });    
+    });
 });
 
-$(document).ready(function() {
-    $('form').on('submit', function(e) {
+$(document).ready(function () {
+    $('form').on('submit', function (e) {
         if ($('.error-message').length) {
             e.preventDefault();
             alert('Будь ласка, виправте помилки перед продовженням.');

@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка створення новин */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
 ?>
@@ -17,4 +17,4 @@ $accessControl->checkAccess(2); /* Доступ лише у адміністра
     <input type="date" id="end_date" name="end_date" min="0001-01-01" max="9999-12-31" required><br><br>
     <button type="submit" name="create_news">Створити новину</button>
 </form>
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php');

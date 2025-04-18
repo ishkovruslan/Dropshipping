@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка керування обліковим записом */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(1); /* Перевірка рівня */
 
@@ -7,6 +7,7 @@ if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'
     exit;
 }
 
+require_once('../class/remoteAccess.php'); /* Підключення до класу аутентифікації */
 $key = $remoteAccess->manageRemoteAccess("WEB", $_SESSION['login']);
 ?>
 
@@ -36,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
     $newPassword = $_POST['new_password'];
     $confirmPassword = $_POST['confirm_password'];
 
-    // Виклик методу для зміни паролю
+    /* Виклик методу для зміни паролю */
+    require_once('../class/authentication.php'); /* Підключення до класу аутентифікації */
     $result = $authentication->changePassword($_SESSION['login'], $currentPassword, $newPassword, $confirmPassword);
     if ($result['success']) {
         echo '<p style="color: green;">Пароль успішно змінено!</p>';
@@ -44,4 +46,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
         echo '<p style="color: red;">' . $result['message'] . '</p>';
     }
 }
-require_once('footer.php'); ?>
+require_once('footer.php');
