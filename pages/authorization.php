@@ -4,6 +4,7 @@ require_once('header.php'); /* Навігаційне меню */
 
 <h2>Форма авторизації</h2>
 <?php /* Якщо користувач вже авторизований -> відправити на index.php */
+require_once('../handler/authentication.php');
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     header("location: ../index.php");
 } else { /* В протилежному випадку запропонувати авторизуватись */
@@ -11,7 +12,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         echo "<p>" . htmlspecialchars($errorMessage) . "</p>";
     }
     echo "<p>Ви ще не авторизовані</p>";
-    require_once('../handler/authentication.php');
     ?><!-- Форма для авторизації -->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="login">Логін:</label><br>

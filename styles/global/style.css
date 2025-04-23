@@ -1,7 +1,7 @@
 body {
     max-width: 1280px;
     margin: 0 auto;
-    border: 0.25vw solid red;
+    /* border: 0.25vw solid red; */
 }
 
 header div {
@@ -13,7 +13,7 @@ header div {
     flex-wrap: wrap;
     /* Дозволяє елементам переноситися на новий рядок, якщо бракує місця */
     /* padding: 10px; */
-    border: 0.25vw solid yellow;
+    /* border: 0.25vw solid yellow; */
 }
 
 header a {
@@ -27,7 +27,7 @@ header a:hover {
 }
 
 main {
-    border: 0.25vw solid green;
+    /* border: 0.25vw solid green; */
     padding: 0.5vw;
 }
 

@@ -37,8 +37,11 @@
                 <th>Список товарів</th>
                 <th width="220px">Прибуток за замовлення</th>
               </tr>';
+                $dailyprice = 0;
+                $dailyrealization = 0;
                 $dailyProfit = 0;
                 foreach ($userOrders as $order) {
+                    $orderprofit = 0;
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($order['id']) . '</td>';
                     echo '<td>' . date('H:i:s', $order['record_time'] / 1000) . '</td>';
@@ -51,13 +54,18 @@
                     $productTexts = array_column($productDetails, 'text');
                     echo implode('<br>', $productTexts);
                     foreach ($productDetails as $detail) {
+                        $dailyprice += $detail['price'] * $detail['quantity'];
+                        $dailyrealization += $detail['realization'] * $detail['quantity'];
+                        $orderprofit += $detail['total'];
                         $dailyProfit += $detail['total'];
                     }
                     echo '</td>';
-                    echo '<td>' . htmlspecialchars($dailyProfit) . '</td>';
+                    echo '<td>' . htmlspecialchars($orderprofit) . '</td>';
                     echo '</tr>';
                 }
                 echo '</table>';
+                echo '<h3>Вартість товару у дропшипінгу за ' . htmlspecialchars($searchFilters['date']) . ': ' . $dailyprice . '</h3>';
+                echo '<h3>Реалізовано ' . htmlspecialchars($login) . ' за ' . htmlspecialchars($searchFilters['date']) . ': ' . $dailyrealization . '</h3>';
                 echo '<h3>Прибуток ' . htmlspecialchars($login) . ' за ' . htmlspecialchars($searchFilters['date']) . ': ' . $dailyProfit . '</h3>';
             }
         }
