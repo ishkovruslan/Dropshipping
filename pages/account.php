@@ -1,13 +1,15 @@
-<?php
+<?php /* Сторінка керування обліковим записом */
 require_once('header.php'); /* Навігаційне меню */
+require_once('../handler/account.php'); /* Навігаційне меню */
 $accessControl->checkAccess(1); /* Перевірка рівня */
 
 if (!$accessControl->isMostFrequentIp($_SESSION['login'], $_SERVER['REMOTE_ADDR'])) { /* Доступ має лише основний ip */
-    echo '<p style="color: red;">Зміна паролю доступна лише з вашої найчастішої IP-адреси.</p>';
+    echo '<p style="color: red;">Сторінка доступна лише з вашої найчастішої IP-адреси.</p>';
     exit;
 }
 
-$key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
+require_once('../class/remoteAccess.php'); /* Підключення до класу аутентифікації */
+$key = $remoteAccess->manageRemoteAccess("WEB", $_SESSION['login']);
 ?>
 
 <h1>Керування обліковим записом</h1>
@@ -31,17 +33,4 @@ $key = $remoteAccess->manageRemoteAccess($_SESSION['login']);
 </form>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
-    $currentPassword = $_POST['current_password'];
-    $newPassword = $_POST['new_password'];
-    $confirmPassword = $_POST['confirm_password'];
-
-    // Виклик методу для зміни паролю
-    $result = $authentication->changePassword($_SESSION['login'], $currentPassword, $newPassword, $confirmPassword);
-    if ($result['success']) {
-        echo '<p style="color: green;">Пароль успішно змінено!</p>';
-    } else {
-        echo '<p style="color: red;">' . $result['message'] . '</p>';
-    }
-}
-require_once('../php/footer.php'); ?>
+require_once('footer.php');

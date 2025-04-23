@@ -1,4 +1,4 @@
-<?php
+<?php /* Обробка замовлень */
 function orders($db, $userLogin, $filters = [])
 { /* Пошук замовлень з фрахуванням ролі */
     $userData = $db->read('userlist', ['role'], ['login' => $userLogin]);
@@ -24,7 +24,7 @@ function order($db, $products, $quantities, $prices, $realizations)
         $productId = $products[$i] ?? 0;
         $quantity = $quantities[$i] ?? 0;
         $price = $prices[$i] ?? 0;
-        $realization= $realizations[$i] ?? 0;
+        $realization = $realizations[$i] ?? 0;
         $productData = $db->read('products', ['product_name'], ['id' => $productId]);
         $productName = !empty($productData) ? $productData[0]['product_name'] : "Невідомий товар";
         $delta = $realization - $price;
@@ -41,4 +41,3 @@ function order($db, $products, $quantities, $prices, $realizations)
     }
     return $output;
 }
-?>

@@ -1,6 +1,6 @@
-<?php
+<?php /* Сторінка товару */
 require_once('header.php'); /* Навігаційне меню */
-require_once('../php/mysql.php'); /* Підключення БД */
+require_once('../functions/mysql.php'); /* Підключення БД */
 
 $id = $_GET['id'] ?? null; /* Отримання id товару з параметра URL */
 
@@ -88,5 +88,4 @@ if ($id) { /* Виводимо інформації в разі наявност
     echo "Невірний запит";
 }
 
-require_once('../php/footer.php');
-?>
+require_once('footer.php');

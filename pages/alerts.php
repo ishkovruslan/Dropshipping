@@ -1,4 +1,4 @@
-<?php
+<?php /* Сторінка сповіщень */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(1); /* Перевірка рівня */
 
@@ -22,12 +22,12 @@ $orderBy = ['date' => 'DESC'];
 
 $alertsData = $db->readWithSort('alerts', $columns, $conditions, $orderBy);
 
-// Інтерфейс вибору стану
+/* Інтерфейс вибору стану */
 echo '<div class="table-selection">';
 echo '<h1>Фільтрувати сповіщення за станом:</h1>';
 echo '<ul>';
 if ($userLevel >= 2) {
-    // Адміністратору доступні всі стани
+    /* Адміністратору доступні всі стани */
     echo '<li><a href="?state=Відсутність">Відсутність</a></li>';
     echo '<li><a href="?state=Обмежена кількість">Обмежена кількість</a></li>';
 }
@@ -36,13 +36,13 @@ echo '<li><a href="?state=Додано категорію">Додано кате
 echo '</ul>';
 echo '</div>';
 
-// Перевірка: чи є сповіщення
+/* Перевірка: чи є сповіщення */
 if (!isset($_GET['state']) && !isset($_GET['search'])) {
 } elseif (empty($alertsData)) {
-    // Якщо немає результатів за заданими фільтрами
+    /* Якщо немає результатів за заданими фільтрами */
     echo "<p>Немає сповіщень за вибраними умовами.</p>";
 } else {
-    // Вивід таблиці сповіщень
+    /* Вивід таблиці сповіщень */
     echo '<table>';
     echo '<thead>';
     echo '<tr>';
@@ -52,7 +52,7 @@ if (!isset($_GET['state']) && !isset($_GET['search'])) {
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
-    
+
     foreach ($alertsData as $alert) {
         echo '<tr>';
         echo '<td>' . htmlspecialchars($alert['operation']) . '</td>';
@@ -60,10 +60,9 @@ if (!isset($_GET['state']) && !isset($_GET['search'])) {
         echo '<td>' . htmlspecialchars($alert['date']) . '</td>';
         echo '</tr>';
     }
-    
+
     echo '</tbody>';
     echo '</table>';
 }
 
-require_once('../php/footer.php'); // Нижня частина сайту
-?>
+require_once('footer.php');

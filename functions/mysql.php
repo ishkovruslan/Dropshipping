@@ -2,11 +2,11 @@
 if (!class_exists('Database')) { /* Запобіжник від подвійного використання */
     class Database
     { /* Клас взаємодії з БД */
-        public $conn;
+        private $conn;
 
-        public function __construct($servername, $username, $password, $dbname)
+        public function __construct()
         {
-            $this->conn = new mysqli($servername, $username, $password, $dbname);
+            $this->conn = new mysqli("localhost:3306", "root", "Kharkiv2024", "bacalavr");
             if ($this->conn->connect_error) {
                 die("Connection failed: " . $this->conn->connect_error);
             }
@@ -182,32 +182,56 @@ if (!class_exists('Database')) { /* Запобіжник від подвійно
         }
 
         public function readMessagesForRole($currentUser, $targetUser, $userLevel)
-        { /* Пошук повідомлень з врахуванням ролі */
-            $isAdmin = $userLevel >= 2;
-            if ($isAdmin) {
-                $sql = "SELECT 
-                    CASE WHEN sender = 'administrator' THEN 'administrator' ELSE sender END AS sender,
-                    CASE WHEN receiver = 'administrator' THEN 'administrator' ELSE receiver END AS receiver,
-                    message, 
-                    source_time 
-                FROM messages 
-                WHERE receiver = 'administrator' OR sender = 'administrator' 
-                ORDER BY source_time ASC";
-                $stmt = $this->conn->prepare($sql);
+        { /* Визначаємо цільового співрозмовника */
+            if ($this->isAdmin($currentUser)) {
+                $target = $targetUser;
+            } elseif ($this->isAdmin($targetUser)) {
+                $target = $currentUser;
             } else {
-                $sql = "SELECT sender, receiver, message, source_time 
-                FROM messages 
-                WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?) 
-                ORDER BY source_time ASC";
+                $target = $targetUser;
+            }
+
+            /* Адміністратор може бачити всі повідомлення лише між собою та цільовим користувачем */
+            if ($userLevel >= 2 && $currentUser) {
+                $sql = "
+            SELECT
+                sender,
+                receiver,
+                message,
+                source_time
+            FROM messages
+            WHERE
+                (sender = 'administrator' AND receiver = ?)
+                OR (sender = ? AND receiver = 'administrator')
+            ORDER BY source_time ASC
+        ";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ss", $target, $target);
+            } else {
+                /* Звичайний користувач – тільки повідомлення, де він приймає участь */
+                $sql = "
+            SELECT
+                sender,
+                receiver,
+                message,
+                source_time
+            FROM messages
+            WHERE
+                (sender = ? AND receiver = ?)
+                OR (sender = ? AND receiver = ?)
+            ORDER BY source_time ASC
+        ";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ssss", $currentUser, $targetUser, $targetUser, $currentUser);
             }
+
             $stmt->execute();
             $result = $stmt->get_result();
             $messages = [];
             while ($row = $result->fetch_assoc()) {
                 $messages[] = $row;
             }
+
             return $messages;
         }
 
@@ -257,7 +281,6 @@ if (!class_exists('Database')) { /* Запобіжник від подвійно
         public function saveMessage($sender, $receiver, $message, $time)
         { /* Збереження повідомлення */
             $adminAlias = 'administrator';
-            require_once('mysql.php');
             if ($this->isAdmin($sender)) {
                 $sender = $adminAlias;
             }
@@ -291,14 +314,9 @@ if (!class_exists('Database')) { /* Запобіжник від подвійно
             return isset($userData['role']) && $userData['role'] === 'administrator';
         }
     }
-
-    $servername = "localhost:3306";
-    $username = "root";
-    $password = "Kharkiv2024";
-    $dbname = "bacalavr";
-
-    $db = new Database($servername, $username, $password, $dbname);
+    $db = new Database();
 }
+
 function logAction($db, $operation, $login, $sourceIp, $sourceType, $sourceResult)
 { /* Логування */
     $sourceTime = round(microtime(true) * 1000);
@@ -315,4 +333,3 @@ $columns = ['*'];
 $filter = $_GET['filter'] ?? null;
 $conditions = $filter ? ['login' => $filter] : ['login'];
 $logs = $db->read($table, $columns, $conditions);
-?>

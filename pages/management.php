@@ -1,7 +1,7 @@
-<?php
+<?php /* Сторінка керування */
 require_once('header.php'); /* Навігаційне меню */
 $accessControl->checkAccess(2); /* Доступ лише у адміністраторів */
-require_once('../php/crud.php'); /* Необхідні функції */
+require_once('../functions/crud.php'); /* Необхідні функції */
 if (!isset($_GET['table']) && !isset($_GET['category'])) { ?> <!-- Якщо не вибрано жодної таблиці -> показати форму вибору -->
     <div class="table-selection">
         <h1>Виберіть таблицю для перегляду:</h1>
@@ -35,4 +35,4 @@ if (!isset($_GET['table']) && !isset($_GET['category'])) { ?> <!-- Якщо не
         require_once('management/products.php');
     }
 }
-require_once('../php/footer.php'); ?>
+require_once('footer.php');

@@ -1,9 +1,10 @@
-<?php
+<?php /* Сторінка реєстрації */
 require_once('header.php'); /* Навігаційне меню */
 ?>
 
 <h2>Форма реєстрації</h2>
 <?php /* Якщо користувач вже авторизований -> відправити на index.php */
+    require_once('../handler/authentication.php');
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     header("location: ../index.php");
 } else { /* В протилежному випадку запропонувати зареєструватись */
@@ -20,4 +21,4 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <input type="submit" name="register_submit" value="Зареєструватись">
     </form>
 <?php }
-require_once('../php/footer.php'); ?>
+require_once('footer.php');

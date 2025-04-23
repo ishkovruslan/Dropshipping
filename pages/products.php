@@ -1,6 +1,6 @@
-<?php
+<?php /* Сторінка товарів */
 require_once('header.php'); /* Навігаційне меню */
-require_once('../php/mysql.php'); /* Підключення БД */
+require_once('../functions/mysql.php'); /* Підключення БД */
 /* Ініціалізація змінних фільтрів */
 $minPrice = !empty($_GET['minPrice']) ? $_GET['minPrice'] : null;
 $maxPrice = !empty($_GET['maxPrice']) ? $_GET['maxPrice'] : null;
@@ -80,4 +80,4 @@ $result = $db->readWithSort('products', ['*'], $conditions, $orderBy); /* Отр
     </table>
 </div>
 
-<?php require_once('../php/footer.php'); ?>
+<?php require_once('footer.php');

@@ -43,7 +43,7 @@
     <div id="editProductModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeEditProductModal()">&times;</span>
-            <form id="editProductForm" method="post" action="../php/crud.php" enctype="multipart/form-data">
+            <form id="editProductForm" method="post" action="../functions/crud.php" enctype="multipart/form-data">
                 <input type="hidden" name="entity" value="products">
                 <input type="hidden" name="id" id="product_id">
                 <label for="product_image">Зображення:</label>
@@ -60,7 +60,7 @@
                 <input type="text" name="characteristics" id="characteristics" placeholder="Характеристики">
                 <button type="submit">Зберегти</button>
             </form>
-            <form id="deleteProductForm" method="post" action="../php/crud.php"
+            <form id="deleteProductForm" method="post" action="../functions/crud.php"
                 onsubmit="return confirm('Ви впевнені, що хочете видалити цей товар?');" style="margin-top: 10px;">
                 <input type="hidden" name="entity" value="products">
                 <input type="hidden" name="id" id="delete_product_id">

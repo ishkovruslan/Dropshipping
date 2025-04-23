@@ -1,6 +1,7 @@
 <?php
 session_start(); /* Початок сессії */
-require_once('../php/access.php'); /* Модуль безпеки */
+require_once('../functions/mysql.php'); /* З'єднання з БД */
+require_once('../class/accesscontrol.php'); /* Перевірка  */
 $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація про поточну сторінку */
 ?>
 
@@ -10,9 +11,9 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курсова робота</title>
+    <title>Бакалаврська робота</title>
     <link rel="stylesheet" type="text/css" href="../styles/global/style.css">
-    <?php require_once('../php/theme.php'); ?> <!-- Робота з темами -->
+    <?php require_once('../handler/theme.php'); ?> <!-- Робота з темами -->
     <!-- Автоматичні стилі з врахування назви сторінки -->
     <link rel="stylesheet" type="text/css" href="../styles/pages/<?= htmlspecialchars($current_page); ?>.css">
     <link rel="stylesheet" type="text/css" href="../styles/theme/<?= htmlspecialchars($theme); ?>.css">
@@ -34,7 +35,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
                 if ($accessControl->getUserLevel($_SESSION['login']) >= 1) { /* Якщо користувач має роль адміністратора або продавця - надати доступ до сторінки керування */
                     ?>
                     <p>
-                        <a href="report.php">Звіти</a>
+                        <a href="report">Звіти</a>
                     </p>
                     <p>
                         <a href="alerts.php">Сповіщення</a>
@@ -56,7 +57,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
                     }
                 } ?>
                 <p> <!-- Усі авторизовані користувачі мають можливість вийти з облікового запису -->
-                    <a href="../php/logout.php">Вийти</a>
+                    <a href="logout.php">Вийти</a>
                 </p>
             <?php } else { ?>
                 <!-- Якщо користувач не авторизований - запропонувати показати кнопки авторизації та реєстрації -->
@@ -73,8 +74,8 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
             </p>
         </div>
         <?php
-        /* Адміністратор має додаткове навігаційне меню */
         if (isset($_SESSION['loggedin']) === true && $accessControl->getUserLevel($_SESSION['login']) == 2) { ?>
+            <!-- Адміністратор має додаткове навігаційне меню -->
             <div>
                 <p>
                     <a href="newnews.php">Додати новину</a>
@@ -91,13 +92,9 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php'); /* Інформація 
                 <p>
                     <a href="messages.php">Зв'язок з користувачами</a>
                 </p>
-                <p>
-                    <?php $hostname = gethostname(); /* Отримуємо ім'я хоста */
-                    $local_ip = gethostbyname($hostname); /* Отримуємо IP-адресу за ім'ям хоста */
-                    echo $local_ip; ?> <!-- Вивід адреси сервера для адміністраторів -->
-                </p>
             </div>
         <?php } ?>
     </header>
 </body>
 <main> <!-- Відкриття контейнеру main для наповнення -->
+    

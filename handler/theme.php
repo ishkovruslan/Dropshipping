@@ -9,4 +9,3 @@ if (isset($_GET['theme'])) {
     $theme = $_GET['theme'];
     $_SESSION['theme'] = $theme;
 }
-?>

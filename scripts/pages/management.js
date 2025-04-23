@@ -47,3 +47,20 @@ window.onclick = function (event) {
         editProductModal.style.display = "none";
     }
 }
+
+function openEditCategoryModal(id, name, specifications) {
+    document.getElementById('category_id').value = id;
+    document.getElementById('delete_category_id').value = id;
+    document.getElementById('category_name').value = name;
+    document.getElementById('category_specifications').value = specifications;
+    document.getElementById('editCategoryModal').style.display = "block";
+}
+function closeEditCategoryModal() {
+    document.getElementById('editCategoryModal').style.display = "none";
+}
+window.onclick = function (event) {
+    var modal = document.getElementById('editCategoryModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
